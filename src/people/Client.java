@@ -12,18 +12,29 @@ public class Client {
 	private Specialiste Specialiste;
 	Personne Personne;
 	
-	public Client(Personne Personne, String Date_Naissance,String Numero_Secu) {
+	public Client(Personne Personne, String Date_Naissance,String Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
 		
 		this.Personne = Personne;
 		this.Date_Naissance = Date_Naissance;
 		this.Numero_Secu = Numero_Secu;
-//		this.Mutuelle = Mutuelle;
+		this.Mutuelle = Mutuelle;
+		this.Medecin_Traitant = Medecin_Traitant;
+		this.Specialiste = Specialiste;
+		
 		
 	}
 
 	
 	
+	public Mutuelle getMutuelle() {
+		return Mutuelle;
+	}
+
+	public void setMutuelle(Mutuelle mutuelle) {
+		Mutuelle = mutuelle;
+	}
+
 	public Personne getPersonne() {
 		return Personne;
 	}
@@ -47,14 +58,6 @@ public class Client {
 	public void setNumero_Secu(String numero_Secu) {
 		Numero_Secu = numero_Secu;
 	}
-
-//	public String getMutuelle() {
-//		return Mutuelle;
-//	}
-//
-//	public void setMutuelle(String mutuelle) {
-//		Mutuelle = mutuelle;
-//	}
 
 	public Medecin getMedecin_Traitant() {
 		return Medecin_Traitant;

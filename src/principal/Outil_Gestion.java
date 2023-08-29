@@ -102,6 +102,11 @@ public class Outil_Gestion {
 		menuBar.add(Menu_Client);
 		
 		JMenuItem Liste_Client = new JMenuItem("Afficher Liste Client");
+		Liste_Client.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AfficherListe(e);
+			}
+		});
 		Menu_Client.add(Liste_Client);
 		
 		JMenu mnNewMenu_3 = new JMenu("Adej");
@@ -112,7 +117,7 @@ public class Outil_Gestion {
 		Achat achat = new Achat();
 		achat.Achat.setVisible(true);
 	}
-	private void Quitter(ActionEvent e) {{
+	private void Quitter(ActionEvent e) {
 			System.out.println(e.getActionCommand().toString());
 			System.out.println(e.getSource().toString());
 			
@@ -123,6 +128,9 @@ public class Outil_Gestion {
 				System.exit(0);
 			}
 		}
+	private void AfficherListe(ActionEvent e) {
+		Liste liste = new Liste();
+		liste.setVisible(true);
+		
 	}
-
 }
