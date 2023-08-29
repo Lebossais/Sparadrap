@@ -119,7 +119,7 @@ Outil_Interne_Gestion <|-- Pharmacien
 Outil_Interne_Gestion --|> Pharmacien
 
 Pharmacien <|-- Client
-Client <|- Medecin
+Medecin <|- Client
 Client <|-- Specialiste
 Client <|-- Mutuelle
 
