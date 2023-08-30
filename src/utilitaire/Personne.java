@@ -35,8 +35,8 @@ public class Personne {
 
 	@Override
 	public String toString() {
-		return "Personne [prenom=" + prenom + ", name=" + name + ", Adresse=" + Adresse + ", telephone=" + telephone
-				+ ", email=" + email + "]";
+		return " Prénom : " + prenom +"\n Nom : " + name + "\n Adresse : " + Adresse + "\n N°Telephone : " + telephone
+				+ "\n Email : " + email ;
 	}
 
 	public void setName(String name) {

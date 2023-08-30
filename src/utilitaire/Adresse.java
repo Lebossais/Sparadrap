@@ -43,8 +43,7 @@ public class Adresse {
 
 	@Override
 	public String toString() {
-		return "Adresse [numero_rue=" + numero_rue + ", nom_rue=" + nom_rue + ", codePostal=" + codePostal + ", ville="
-				+ ville + "]";
+		return numero_rue + ", " + nom_rue + ", " + codePostal + ", "+ ville;
 	}	
 	
 }

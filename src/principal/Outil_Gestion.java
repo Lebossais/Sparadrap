@@ -48,7 +48,7 @@ public class Outil_Gestion {
 	private void initialize() {
 		PageDacceuil = new JFrame();
 		PageDacceuil.setTitle("Page d'acceuil");
-		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview-removebg-preview.png"));
+		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
 		PageDacceuil.setBounds(100, 100, 437, 288);
 		PageDacceuil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -88,6 +88,11 @@ public class Outil_Gestion {
 		menuBar.add(Menu_Historique);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Historique Ordonnances");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AfficherHistoOrdo(e);
+			}
+		});
 		mntmNewMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
 		Menu_Historique.add(mntmNewMenuItem);
 		
@@ -129,5 +134,9 @@ public class Outil_Gestion {
 		Liste liste = new Liste();
 		liste.setVisible(true);
 		
+	}
+	private void AfficherHistoOrdo(ActionEvent e) {
+		HistoriqueOrdonnances listed = new HistoriqueOrdonnances();
+		listed.setVisible(true);
 	}
 }

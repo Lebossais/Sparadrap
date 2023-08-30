@@ -35,10 +35,8 @@ public class Client {
 			c = "Aucun";
 		}
 		
-		return "Client [Date_Naissance=" + Date_Naissance + ", Numero_Secu=" + Numero_Secu + ", Mutuelle=" + Mutuelle.getPersonne().getPrenom()
-				+ ", Medecin_Traitant=" + Medecin_Traitant.getPersonne().getPrenom() + ", Specialiste=" + c +
-				", Personne=" + Personne.toString()
-				+ "]";
+		return  "\n" + Personne.toString() + "\n Date de Naissance : " + Date_Naissance + "\n Numero de Sécurité Sociale : " + Numero_Secu + "\n Mutuelle : " + Mutuelle.getPersonne().getPrenom()
+				+ " \n Medecin Traitant : " + Medecin_Traitant.getPersonne().getPrenom() + "\n Specialiste : " + c ;
 	}
 
 

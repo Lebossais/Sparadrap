@@ -63,61 +63,9 @@ public class Achat {
 	private void initialize() {
 		Achat = new JFrame();
 		Achat.setTitle("Achat");
-		Achat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-wtbg.png"));
+		Achat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
 		Achat.setBounds(100, 100, 438, 500);
 		Achat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		Achat.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		JMenuBar menuBar = new JMenuBar();
-		panel.add(menuBar, BorderLayout.NORTH);
-		
-		JMenu mnMenu = new JMenu("Menu");
-		mnMenu.setHorizontalAlignment(SwingConstants.LEFT);
-		menuBar.add(mnMenu);
-		
-		JMenuItem Sauvegarder = new JMenuItem("Sauvegarder");
-		mnMenu.add(Sauvegarder);
-		
-		JMenuItem Retour = new JMenuItem("Retour");
-		Retour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				retour(e);
-			}
-		});
-		mnMenu.add(Retour);
-		
-		JMenuItem Quitter = new JMenuItem("Quitter");
-		Quitter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Quitter(e);
-			}
-		});
-		mnMenu.add(Quitter);
-		
-		JMenu Menu_Historique = new JMenu("Historique");
-		Menu_Historique.setHorizontalAlignment(SwingConstants.LEFT);
-		menuBar.add(Menu_Historique);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Historique Ordonnances");
-		mntmNewMenuItem.setHorizontalAlignment(SwingConstants.LEFT);
-		Menu_Historique.add(mntmNewMenuItem);
-		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Historique Achat");
-		mntmNewMenuItem_2.setHorizontalAlignment(SwingConstants.LEFT);
-		Menu_Historique.add(mntmNewMenuItem_2);
-		
-		JMenu Menu_Client = new JMenu("Client");
-		menuBar.add(Menu_Client);
-		
-		JMenuItem Liste_Client = new JMenuItem("Afficher Liste Client");
-		Menu_Client.add(Liste_Client);
-		
-		JMenu mnNewMenu_3 = new JMenu("Adej");
-		menuBar.add(mnNewMenu_3);
 		
 		JPanel panel_1 = new JPanel();
 		Achat.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -212,11 +160,15 @@ public class Achat {
 		panel_1.add(Date);
 		
 		JButton btnNewButton = new JButton("Valider");
-		btnNewButton.setBounds(233, 397, 114, 29);
+		btnNewButton.setBounds(154, 397, 114, 29);
 		panel_1.add(btnNewButton);
 		
 		JButton btnReinitialiser = new JButton("Reinitialiser");
-		btnReinitialiser.setBounds(93, 397, 114, 29);
+		btnReinitialiser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnReinitialiser.setBounds(17, 397, 114, 29);
 		panel_1.add(btnReinitialiser);
 		
 		JLabel lblNewLabel_2 = new JLabel("MEDICAMEEEEEEEEEEEEEEEENTS");
@@ -228,24 +180,16 @@ public class Achat {
 		txtNomMedecin.setColumns(10);
 		txtNomMedecin.setBounds(17, 351, 100, 20);
 		panel_1.add(txtNomMedecin);
-	}
-
-	
-	private void retour(ActionEvent e) {
-		Achat.dispose();
-	}
-	
-	private void Quitter(ActionEvent e) {
-			System.out.println(e.getActionCommand().toString());
-			System.out.println(e.getSource().toString());
-			
-			int sortie = JOptionPane.showConfirmDialog(Achat, "Etes-vous sûr ?", 
-					"Quitter", JOptionPane.YES_NO_OPTION);
-			
-			if (sortie == JOptionPane.YES_OPTION) {
-				System.exit(0);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				retour(e);
 			}
-		}
+		});
+		btnRetour.setBounds(292, 397, 114, 29);
+		panel_1.add(btnRetour);
+	}
 	
 	private void AfficherOrdonnance(ActionEvent e) {
 		if (b == false) {
@@ -268,6 +212,9 @@ public class Achat {
 			txtNomSpecialiste.setEnabled(false);
 			
 		}
+	}
+	private void retour(ActionEvent e) {
+		Achat.dispose();
 	}
 }
 

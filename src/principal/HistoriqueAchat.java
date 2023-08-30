@@ -1,6 +1,7 @@
 package principal;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
@@ -12,31 +13,28 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import people.Client;
-import people.ListeClient;
-import utilitaire.Adresse;
-import utilitaire.Personne;
-import java.awt.Toolkit;
+import gestion.Ordonnance;
+import people.ListeAchat;
+import people.ListeOrdonnance;
 
-public class Liste extends JFrame {
+public class HistoriqueAchat extends JFrame {
 
 private static final long serialVersionUID = 1L;
-private ListeClient modele = new ListeClient();
+private ListeAchat modele = new ListeAchat();
 private JTable tableau = new JTable(modele);;
-static Liste liste = new Liste(); 
+private static HistoriqueAchat listeds = new HistoriqueAchat(); 
 public JFrame frame;
 
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 
-public Liste() {
+public HistoriqueAchat() {
     setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
 
-    setTitle("Liste des Clients");
+    setTitle("Historique des Achat");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
@@ -44,8 +42,6 @@ public Liste() {
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));
-    boutons.add(new JButton(new AddAction()));
-    boutons.add(new JButton(new RemoveAction()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
 
@@ -60,61 +56,7 @@ public Liste() {
 }
 
 public static void main(String[] args) {
-    liste.setVisible(true);
-}
-
-private class AddAction extends AbstractAction {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private AddAction() {
-        super("Ajouter");
-    }
-
-    public void actionPerformed(ActionEvent e) {
-    	Adresse adresse_Leonardo = new Adresse(48,"Rue des Musiciens", 59000,"Lille");
-    	Personne Leonardo = new Personne("Leonardo","Tortueli", adresse_Leonardo, "06.55.99.88.77", "Jean.Fouqueaut@gmail.com");
-    	
-    	
-        modele.addClient(new Client(Leonardo, "18/12/1958", "582 598 254 325 21",null, null,null ));
-    }
-}
-
-private class RemoveAction extends AbstractAction {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private RemoveAction() {
-        super("Supprimmer");
-    }
-
-//    public void actionPerformed(ActionEvent e) {
-//        int[] selection = tableau.getSelectedRows();
-//
-//        for(int i = selection.length - 1; i >= 0; i--){
-//            modele.removeClient(selection[i]);
-//        }
-//    }
- public void actionPerformed(ActionEvent e) {
-    int[] selection = tableau.getSelectedRows();
-    int[] modelIndexes = new int[selection.length];
-
-    for(int i = 0; i < selection.length; i++){
-        modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
-    }
-
-    Arrays.sort(modelIndexes);
-
-    for(int i = modelIndexes.length - 1; i >= 0; i--){
-        modele.removeClient(modelIndexes[i]);
-    }
- }
-	
-
+    listeds.setVisible(true);
 }
 
 class FilterAction extends AbstractAction {
@@ -132,10 +74,10 @@ private FilterAction() {
 
 
 public void actionPerformed(ActionEvent e) {
-    String regex = JOptionPane.showInputDialog("Regex de filtre : ");
+    String regex = JOptionPane.showInputDialog("Indiquer la Date : ");
     
 
-    sorter.setRowFilter(RowFilter.regexFilter(regex, 0, 1));
+    sorter.setRowFilter(RowFilter.regexFilter(regex, 4));
 }
 }
 class RetourAction extends AbstractAction {
@@ -165,7 +107,7 @@ private class InformationsAction extends AbstractAction {
         super("Informations");
     }
 
- public void actionPerformed(ActionEvent e) {
+ public void actionPerformed(ActionEvent e) { 
     int[] selection = tableau.getSelectedRows();
     int[] modelIndexes = new int[selection.length];
 
@@ -175,9 +117,9 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Client c : ListeClient.getClients()) {
-    	if (c.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
-    		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
+    for (Ordonnance c : ListeOrdonnance.getOrdonnances()) {
+    	if (c.Medecin.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+    		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
     	}
     }
 }

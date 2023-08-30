@@ -7,7 +7,7 @@ import utilitaire.Personne;
 
 public class Specialiste {
 
-	private Personne Personne;
+	Personne Personne;
 	private String Specialite;
 
 	public Specialiste(Personne Personne, String Specialite) {

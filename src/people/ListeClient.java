@@ -105,5 +105,6 @@ public class ListeClient extends AbstractTableModel {
 		public static List<Client> getClients() {
 			return clients;
 		}
+
 	    
 }

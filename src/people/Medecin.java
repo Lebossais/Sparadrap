@@ -8,7 +8,7 @@ import utilitaire.Personne;
 public class Medecin {
 	
 	
-	private Personne Personne;
+	public Personne Personne;
 	private int Aggrement;
 
 	public Medecin(Personne Personne, int Aggrement) {
