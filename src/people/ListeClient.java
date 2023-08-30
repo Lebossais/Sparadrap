@@ -15,7 +15,7 @@ public class ListeClient extends AbstractTableModel {
 
 		private static final long serialVersionUID = 5380417556060869746L;
 
-		private final List<Client> clients = new ArrayList<Client>();
+		private final static List<Client> clients = new ArrayList<Client>();
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Client.getModel()); 
 	 
 	    private final String[] entetes = {"Prenom", "Nom", "N° de Secu", "Telephone"};
@@ -97,4 +97,13 @@ public class ListeClient extends AbstractTableModel {
 	    public void Retour(JTable Liste) {
 	    	
 	    }
+	    
+	    public void InformationsClients() {
+	    	
+	    }
+
+		public static List<Client> getClients() {
+			return clients;
+		}
+	    
 }

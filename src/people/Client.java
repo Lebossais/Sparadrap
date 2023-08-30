@@ -10,7 +10,7 @@ public class Client {
 	private Mutuelle Mutuelle;
 	private Medecin Medecin_Traitant;
 	private Specialiste Specialiste;
-	Personne Personne;
+	public  Personne Personne;
 	
 	public Client(Personne Personne, String Date_Naissance,String Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
@@ -22,11 +22,27 @@ public class Client {
 		this.Medecin_Traitant = Medecin_Traitant;
 		this.Specialiste = Specialiste;
 		
-		
 	}
 
 	
 	
+	@Override
+	public String toString() {
+		String c = null;
+		if (Specialiste != null) {
+			c = Specialiste.getPersonne().getPrenom();
+		} else if (Specialiste == null) {
+			c = "Aucun";
+		}
+		
+		return "Client [Date_Naissance=" + Date_Naissance + ", Numero_Secu=" + Numero_Secu + ", Mutuelle=" + Mutuelle.getPersonne().getPrenom()
+				+ ", Medecin_Traitant=" + Medecin_Traitant.getPersonne().getPrenom() + ", Specialiste=" + c +
+				", Personne=" + Personne.toString()
+				+ "]";
+	}
+
+
+
 	public Mutuelle getMutuelle() {
 		return Mutuelle;
 	}

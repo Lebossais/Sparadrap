@@ -33,6 +33,12 @@ public class Personne {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return "Personne [prenom=" + prenom + ", name=" + name + ", Adresse=" + Adresse + ", telephone=" + telephone
+				+ ", email=" + email + "]";
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

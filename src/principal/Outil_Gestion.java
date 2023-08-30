@@ -1,7 +1,6 @@
 package principal;
 
 import java.awt.EventQueue;
-import java.awt .*;
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
@@ -11,10 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
