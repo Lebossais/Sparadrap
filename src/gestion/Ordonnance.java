@@ -1,5 +1,7 @@
 package gestion;
 
+import java.util.ArrayList;
+
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
@@ -12,16 +14,34 @@ public class Ordonnance {
 	private String Date_Ordonnance;
 	public people.Medecin Medecin;
 	public people.Specialiste Specialiste;
+	static ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
+	
 	
 	public Ordonnance(String Num_Ordonnance, Medecin Medecin, Specialiste Specialiste, String Date_Ordonnance) {
 		super();
 		this.Num_Ordonnance = Num_Ordonnance;
 		this.Medecin = Medecin;
 		this.Specialiste = Specialiste;
-		this.Date_Ordonnance = Date_Ordonnance;
-		
+		this.Date_Ordonnance = Date_Ordonnance;	
 	}
 	
+	public Ordonnance() {
+		initOrdonnance();
+	}
+	
+	void initOrdonnance() {
+		Ordonnance Ord1 = new Ordonnance ("183",people.Medecin.getMedecin(2) , people.Specialiste.getSpecialiste(0) ,"30/08/2023");
+		ordonnance.add(Ord1);
+	}
+	
+	
+	public static Ordonnance getOrdonnance(int i) {
+		return ordonnance.get(i);
+	}
+
+	public static void setOrdonnance(ArrayList<Ordonnance> ordonnance) {
+		Ordonnance.ordonnance = ordonnance;
+	}
 
 	public String getNum_Ordonnance() {
 		return Num_Ordonnance;

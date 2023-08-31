@@ -1,5 +1,7 @@
 package people;
 
+import java.util.ArrayList;
+
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
@@ -9,6 +11,7 @@ public class Specialiste {
 
 	Personne Personne;
 	private String Specialite;
+	static ArrayList<Specialiste> specialiste = new ArrayList<Specialiste>();
 
 	public Specialiste(Personne Personne, String Specialite) {
 		super();
@@ -16,9 +19,25 @@ public class Specialiste {
 		this.Personne = Personne;
 		this.Specialite = Specialite;
 	}
+	public Specialiste() {
+		initSpecialiste();
+	}
 	
+	void initSpecialiste() {
+		Specialiste Spe_Paul = new Specialiste(utilitaire.Personne.getPersonne(5), "Chiurgie");
+		specialiste.add(Spe_Paul);
+        Specialiste Spe_Jacqueline = new Specialiste(utilitaire.Personne.getPersonne(6), "Cardiologie");
+        specialiste.add(Spe_Jacqueline);
+	}
 	
-	
+	public static Specialiste getSpecialiste(int i) {
+		return specialiste.get(i);
+	}
+
+	public static void setSpecialiste(ArrayList<Specialiste> specialiste) {
+		Specialiste.specialiste = specialiste;
+	}
+
 	public Personne getPersonne() {
 		return Personne;
 	}

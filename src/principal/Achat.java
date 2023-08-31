@@ -12,6 +12,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+
+import people.Mutuelle;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,19 +22,19 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JComboBox;
 
 public class Achat {
 
 	JFrame Achat;
 	private JTextField txtPrenomClient;
 	private JTextField txtNomClient;
-	private JTextField txtMutuelle;
 	private JTextField txtNsecu;
-	private JTextField txtNomSpecialiste;
 	private JTextField txtDateOrdonnance;
 	private JTextField txtNumOrdonnance;
 	private JTextField txtDate;
-	private JTextField txtNomMedecin;
 	boolean b = false;
 
 	/**
@@ -98,11 +101,6 @@ public class Achat {
 		NomClient.setBounds(173, 11, 84, 20);
 		panel_1.add(NomClient);
 		
-		txtMutuelle = new JTextField();
-		txtMutuelle.setColumns(10);
-		txtMutuelle.setBounds(25, 104, 92, 20);
-		panel_1.add(txtMutuelle);
-		
 		JLabel Mutuelle = new JLabel("Mutuelle :");
 		Mutuelle.setBounds(27, 79, 84, 20);
 		panel_1.add(Mutuelle);
@@ -116,18 +114,12 @@ public class Achat {
 		Nsecu.setBounds(173, 79, 84, 20);
 		panel_1.add(Nsecu);
 		
-		JLabel NomMedecin = new JLabel("Nom Medecin :");
-		NomMedecin.setBounds(27, 326, 84, 20);
-		panel_1.add(NomMedecin);
+		JLabel nomMedecin = new JLabel("Medecin Traitant :");
+		nomMedecin.setBounds(25, 326, 103, 20);
+		panel_1.add(nomMedecin);
 		
-		txtNomSpecialiste = new JTextField();
-		txtNomSpecialiste.setEnabled(false);
-		txtNomSpecialiste.setColumns(10);
-		txtNomSpecialiste.setBounds(138, 351, 100, 20);
-		panel_1.add(txtNomSpecialiste);
-		
-		JLabel NomSpecialiste = new JLabel("Nom Specialiste :");
-		NomSpecialiste.setBounds(140, 326, 98, 20);
+		JLabel NomSpecialiste = new JLabel("Specialiste :");
+		NomSpecialiste.setBounds(153, 326, 65, 20);
 		panel_1.add(NomSpecialiste);
 		
 		txtDateOrdonnance = new JTextField();
@@ -160,6 +152,11 @@ public class Achat {
 		panel_1.add(Date);
 		
 		JButton btnNewButton = new JButton("Valider");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Validation(e);
+			}
+		});
 		btnNewButton.setBounds(154, 397, 114, 29);
 		panel_1.add(btnNewButton);
 		
@@ -172,14 +169,8 @@ public class Achat {
 		panel_1.add(btnReinitialiser);
 		
 		JLabel lblNewLabel_2 = new JLabel("MEDICAMEEEEEEEEEEEEEEEENTS");
-		lblNewLabel_2.setBounds(75, 168, 257, 47);
+		lblNewLabel_2.setBounds(82, 172, 257, 47);
 		panel_1.add(lblNewLabel_2);
-		
-		txtNomMedecin = new JTextField();
-		txtNomMedecin.setEnabled(false);
-		txtNomMedecin.setColumns(10);
-		txtNomMedecin.setBounds(17, 351, 100, 20);
-		panel_1.add(txtNomMedecin);
 		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
@@ -189,6 +180,20 @@ public class Achat {
 		});
 		btnRetour.setBounds(292, 397, 114, 29);
 		panel_1.add(btnRetour);
+		
+		JComboBox comboBoxMutuelle = new JComboBox();
+		comboBoxMutuelle.setBounds(25, 103, 92, 22);
+		panel_1.add(comboBoxMutuelle);
+		comboBoxMutuelle.addItem(new Mutuelle());
+		
+		JComboBox comboBoxMed = new JComboBox();
+		comboBoxMed.setBounds(25, 350, 92, 22);
+		
+		panel_1.add(comboBoxMed);
+		
+		JComboBox comboBoxSpe = new JComboBox();
+		comboBoxSpe.setBounds(146, 350, 92, 22);
+		panel_1.add(comboBoxSpe);
 	}
 	
 	private void AfficherOrdonnance(ActionEvent e) {
@@ -201,20 +206,19 @@ public class Achat {
 	}
 	private void InitializeOrdonnance(boolean b) {
 		if (b == true) {
-			txtNomMedecin.setEnabled(true);
 			txtNumOrdonnance.setEnabled(true);
 			txtDateOrdonnance.setEnabled(true);
-			txtNomSpecialiste.setEnabled(true);
 		} else if (b == false) {
-			txtNomMedecin.setEnabled(false);
 			txtNumOrdonnance.setEnabled(false);
 			txtDateOrdonnance.setEnabled(false);
-			txtNomSpecialiste.setEnabled(false);
 			
 		}
 	}
 	private void retour(ActionEvent e) {
 		Achat.dispose();
+	}
+	private void Validation(ActionEvent e) {
+		
 	}
 }
 

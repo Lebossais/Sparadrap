@@ -17,19 +17,19 @@ public class ListeAchat extends AbstractTableModel {
 
 	private static final long serialVersionUID = 5380417556060869746L;
 
-	private final static List<Ordonnance> ordonnances = new ArrayList<Ordonnance>();
-	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(gestion.Ordonnance.getModel()); 
+	private final static List<Achats> achats = new ArrayList<Achats>();
+	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Achats.getModel()); 
  
-    private final String[] entetes = {}; // Les différentes entêtes
+    private final String[] entetes = {"Prénom du Client", "N° de Sécu", "N° Ordonnance", "Date"}; // Les différentes entêtes
     
     public ListeAchat() {
         super();
-       
+        achats.add(new Achats(Personne.getPersonne(0),Mutuelle.getMutuelle(0),"582 158 598 325 21","31/08/2023", Ordonnance.getOrdonnance(0)));
         }
 
 	@Override
 	public int getRowCount() {
-        return ordonnances.size();
+        return achats.size();
     }
  
     public int getColumnCount() {
@@ -46,26 +46,26 @@ public class ListeAchat extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return ordonnances.get(rowIndex).getNum_Ordonnance();
+        	return achats.get(rowIndex).Personne.getPersonne(0).getPrenom();
         case 1:
-            return ordonnances.get(rowIndex).Medecin.Personne.getPrenom();
+            return achats.get(rowIndex).getNum_Secu();
         case 2:
-            return ordonnances.get(rowIndex).Specialiste.Personne.getPrenom();
+            return achats.get(rowIndex).Ordonnance.getOrdonnance(0);
         case 3 :
-        	return ordonnances.get(rowIndex).getDate_Ordonnance();
+        	return achats.get(rowIndex).getDate();
         default:
             return null; //Ne devrait jamais arriver
 	}
 }
-	  public void addOrdonnance(Ordonnance Ordonnances) {
-	        ordonnances.add(Ordonnances);
+	  public void addAchats(Achats Achats) {
+	        achats.add(Achats);
 	 
-	        fireTableRowsInserted(ordonnances.size() -1, ordonnances.size() -1);
+	        fireTableRowsInserted(achats.size() -1, achats.size() -1);
 
 	  }
 
-	public static List<Ordonnance> getOrdonnances() {
-		return ordonnances;
+	public static List<Achats> getAchats() {
+		return achats;
 	}
 	  
 	  

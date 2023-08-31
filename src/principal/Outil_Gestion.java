@@ -8,6 +8,14 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
+
+import gestion.Ordonnance;
+import people.Medecin;
+import people.Mutuelle;
+import people.Specialiste;
+import utilitaire.Adresse;
+import utilitaire.Personne;
+
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
@@ -39,6 +47,12 @@ public class Outil_Gestion {
 	 * Create the application.
 	 */
 	public Outil_Gestion() {
+		Adresse adr = new Adresse();
+		Personne test = new Personne();
+		Mutuelle mut = new Mutuelle();
+		Ordonnance ord = new Ordonnance();
+		Specialiste spe = new Specialiste();
+		Medecin med = new Medecin();
 		initialize();
 	}
 
@@ -48,7 +62,7 @@ public class Outil_Gestion {
 	private void initialize() {
 		PageDacceuil = new JFrame();
 		PageDacceuil.setTitle("Page d'acceuil");
-		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
+		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
 		PageDacceuil.setBounds(100, 100, 437, 288);
 		PageDacceuil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
