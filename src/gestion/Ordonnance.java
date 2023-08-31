@@ -29,12 +29,26 @@ public class Ordonnance {
 		initOrdonnance();
 	}
 	
-	void initOrdonnance() {
-		Ordonnance Ord1 = new Ordonnance ("183",people.Medecin.getMedecin(2) , people.Specialiste.getSpecialiste(0) ,"30/08/2023");
+	public static void initOrdonnance() {
+		Ordonnance Ord0 = new Ordonnance ("183",people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(0) ,"30/08/2023");
+		ordonnance.add(Ord0);
+		Ordonnance Ord1 = (new Ordonnance("184", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
 		ordonnance.add(Ord1);
+		Ordonnance Ord2 = (new Ordonnance("185", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
+		ordonnance.add(Ord2);
+        Ordonnance Ord3 = (new Ordonnance("181", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(0) ,"30/08/2023"));
+		ordonnance.add(Ord3);
+        Ordonnance Ord4 = (new Ordonnance("186", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
+		ordonnance.add(Ord4);
+        Ordonnance Ord5 = (new Ordonnance("187", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
+		ordonnance.add(Ord5);
+        Ordonnance Ord6 = (new Ordonnance("182", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(0) ,"30/08/2023"));
+		ordonnance.add(Ord6);
+        Ordonnance Ord7 = (new Ordonnance("180", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
+		ordonnance.add(Ord7);
 	}
-	
-	
+
+
 	public static Ordonnance getOrdonnance(int i) {
 		return ordonnance.get(i);
 	}

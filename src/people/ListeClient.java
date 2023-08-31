@@ -24,11 +24,11 @@ public class ListeClient extends AbstractTableModel {
 	        
 	        // Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste
 	        
-	        clients.add(new Client(Personne.getPersonne(0), "05/05/1998", "582 158 598 325 21", Mutuelle.getMutuelle(0),Medecin.getMedecin(0),Specialiste.getSpecialiste(0)));
-	        clients.add(new Client(Personne.getPersonne(1),"09/09/1986", "582 256 584 235 21",Mutuelle.getMutuelle(0),Medecin.getMedecin(0),Specialiste.getSpecialiste(1) ));
-	        clients.add(new Client(Personne.getPersonne(2), "15/12/2000","582 698 874 236 21",Mutuelle.getMutuelle(1),Medecin.getMedecin(1),null ));
+	        clients.add(new Client(utilitaire.Personne.getPersonne(0), "05/05/1998", "582 158 598 325 21", Mutuelle.getMutuelle(0),Medecin.getMedecin(0),Specialiste.getSpecialiste(0)));
+	        clients.add(new Client(utilitaire.Personne.getPersonne(1),"09/09/1986", "582 256 584 235 21",Mutuelle.getMutuelle(0),Medecin.getMedecin(0),Specialiste.getSpecialiste(1) ));
+	        clients.add(new Client(utilitaire.Personne.getPersonne(2), "15/12/2000","582 698 874 236 21",Mutuelle.getMutuelle(1),Medecin.getMedecin(1),null ));
 	    }
-	 
+
 	    public int getRowCount() {
 	        return clients.size();
 	    }

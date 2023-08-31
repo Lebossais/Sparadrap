@@ -27,14 +27,13 @@ public class Liste extends JFrame {
 private static final long serialVersionUID = 1L;
 private ListeClient modele = new ListeClient();
 private JTable tableau = new JTable(modele);;
-static Liste liste = new Liste(); 
 public JFrame frame;
 
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 
 public Liste() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
+    setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
 
     setTitle("Liste des Clients");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +43,6 @@ public Liste() {
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));
-    boutons.add(new JButton(new AddAction()));
     boutons.add(new JButton(new RemoveAction()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
@@ -55,13 +53,9 @@ public Liste() {
     sorter.setSortable(2, false);
     sorter.setSortsOnUpdates(true);
   
-
     pack();
 }
 
-public static void main(String[] args) {
-    liste.setVisible(true);
-}
 
 private class AddAction extends AbstractAction {
     /**
@@ -128,7 +122,6 @@ class FilterAction extends AbstractAction {
 private FilterAction() {
     super("Filtrer");
 }
-
 
 
 public void actionPerformed(ActionEvent e) {

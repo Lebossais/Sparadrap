@@ -30,8 +30,6 @@ public class Medecin {
         medecin.add(Med_Gaeten);
 	}
 	
-	
-	
 	public static Medecin getMedecin(int i) {
 		return medecin.get(i);
 	}

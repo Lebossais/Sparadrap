@@ -24,12 +24,9 @@ public class HistoriqueAchat extends JFrame {
 
 private static final long serialVersionUID = 1L;
 private ListeAchat modele = new ListeAchat();
-private JTable tableau = new JTable(modele);;
-private static HistoriqueAchat listeds = new HistoriqueAchat(); 
+private JTable tableau = new JTable(modele);
 public JFrame frame;
-
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
-
 
 public HistoriqueAchat() {
     setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
@@ -52,10 +49,6 @@ public HistoriqueAchat() {
   
 
     pack();
-}
-
-public static void main(String[] args) {
-    listeds.setVisible(true);
 }
 
 class FilterAction extends AbstractAction {

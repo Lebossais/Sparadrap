@@ -9,7 +9,7 @@ import utilitaire.Personne;
 
 public class Mutuelle {
 	
-	private Personne Personne;
+	public Personne Personne;
 	private int Departement;
 	private int Prise_En_Charge;
 	static ArrayList<Mutuelle> mutuelle = new ArrayList<Mutuelle>();
@@ -25,7 +25,7 @@ public class Mutuelle {
 	public Mutuelle() {
 		initMutuelle();
 	}
-	
+
 	void initMutuelle() {
         Mutuelle Acoris_Mutuelle = new Mutuelle(utilitaire.Personne.getPersonne(7), 59, 85);
         mutuelle.add(Acoris_Mutuelle);

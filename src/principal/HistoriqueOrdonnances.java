@@ -23,12 +23,10 @@ public class HistoriqueOrdonnances extends JFrame {
 
 private static final long serialVersionUID = 1L;
 private ListeOrdonnance modele = new ListeOrdonnance();
-private JTable tableau = new JTable(modele);;
-private static HistoriqueOrdonnances listed = new HistoriqueOrdonnances(); 
+private JTable tableau = new JTable(modele);; 
 public JFrame frame;
 
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
-
 
 public HistoriqueOrdonnances() {
     setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
@@ -37,7 +35,6 @@ public HistoriqueOrdonnances() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));
@@ -50,12 +47,7 @@ public HistoriqueOrdonnances() {
     sorter.setSortable(2, false);
     sorter.setSortsOnUpdates(true);
   
-
     pack();
-}
-
-public static void main(String[] args) {
-    listed.setVisible(true);
 }
 
 class FilterAction extends AbstractAction {

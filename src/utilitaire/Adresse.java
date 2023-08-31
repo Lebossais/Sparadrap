@@ -8,7 +8,7 @@ public class Adresse {
 	 String nom_rue ;
 	 int codePostal ;
 	 String ville ;
-	 ArrayList<Adresse> adresse = new ArrayList<Adresse>();
+	 static ArrayList<Adresse> adresse = new ArrayList<Adresse>();
 		
 	public Adresse (int numero_rue, String nom_rue, int codePostal, String ville) {
 		super();
@@ -36,10 +36,10 @@ public class Adresse {
      
 	}
 	
-	public  Adresse getAdresse(int i) {
+	public static  Adresse getAdresse(int i) {
 			return adresse.get(i);
 		}
-
+	
 		public void setAdresse(ArrayList<Adresse> adresse) {
 			this.adresse = adresse;
 		}

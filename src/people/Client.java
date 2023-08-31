@@ -24,7 +24,7 @@ public class Client {
 		
 	}
 
-	
+
 	
 	@Override
 	public String toString() {

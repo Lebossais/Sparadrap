@@ -17,7 +17,7 @@ public class ListeAchat extends AbstractTableModel {
 
 	private static final long serialVersionUID = 5380417556060869746L;
 
-	private final static List<Achats> achats = new ArrayList<Achats>();
+	public final static List<Achats> achats = new ArrayList<Achats>();
 	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Achats.getModel()); 
  
     private final String[] entetes = {"Prénom du Client", "N° de Sécu", "N° Ordonnance", "Date"}; // Les différentes entêtes
@@ -39,7 +39,7 @@ public class ListeAchat extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return entetes[columnIndex];
     }
- 
+
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
@@ -50,7 +50,7 @@ public class ListeAchat extends AbstractTableModel {
         case 1:
             return achats.get(rowIndex).getNum_Secu();
         case 2:
-            return achats.get(rowIndex).Ordonnance.getOrdonnance(0);
+            return achats.get(rowIndex).Ordonnance.getOrdonnance(0).getNum_Ordonnance();
         case 3 :
         	return achats.get(rowIndex).getDate();
         default:
@@ -69,5 +69,5 @@ public class ListeAchat extends AbstractTableModel {
 	}
 	  
 	  
-	  
+	 
 }

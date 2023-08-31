@@ -42,7 +42,6 @@ public class Outil_Gestion {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
@@ -50,9 +49,9 @@ public class Outil_Gestion {
 		Adresse adr = new Adresse();
 		Personne test = new Personne();
 		Mutuelle mut = new Mutuelle();
-		Ordonnance ord = new Ordonnance();
 		Specialiste spe = new Specialiste();
 		Medecin med = new Medecin();
+		Ordonnance ord = new Ordonnance();
 		initialize();
 	}
 
@@ -111,6 +110,11 @@ public class Outil_Gestion {
 		Menu_Historique.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Historique Achat");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AfficherHistoAchat(e);
+			}
+		});
 		mntmNewMenuItem_2.setHorizontalAlignment(SwingConstants.LEFT);
 		Menu_Historique.add(mntmNewMenuItem_2);
 		
@@ -152,5 +156,9 @@ public class Outil_Gestion {
 	private void AfficherHistoOrdo(ActionEvent e) {
 		HistoriqueOrdonnances listed = new HistoriqueOrdonnances();
 		listed.setVisible(true);
+	}
+	private void AfficherHistoAchat(ActionEvent e) {
+		HistoriqueAchat listeds = new HistoriqueAchat();
+		listeds.setVisible(true);
 	}
 }
