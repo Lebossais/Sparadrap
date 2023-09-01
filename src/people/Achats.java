@@ -24,6 +24,14 @@ public class Achats {
 		this.Ordonnance = Ordonnance;
 	}
 	
+	public Achats(Personne Personne, Mutuelle Mutuelle, String Num_Secu, String Date) {
+		super();
+		this.Personne = Personne;
+		this.Mutuelle = Mutuelle;
+		this.Num_Secu = Num_Secu;
+		this.Date = Date;
+	}
+	
 	
 	
 	public String getNum_Secu() {

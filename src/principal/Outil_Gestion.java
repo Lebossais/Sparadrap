@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
 import gestion.Ordonnance;
+import people.ListeOrdonnance;
 import people.Medecin;
 import people.Mutuelle;
 import people.Specialiste;
@@ -51,7 +52,7 @@ public class Outil_Gestion {
 		Mutuelle mut = new Mutuelle();
 		Specialiste spe = new Specialiste();
 		Medecin med = new Medecin();
-		Ordonnance ord = new Ordonnance();
+		ListeOrdonnance ord = new ListeOrdonnance();
 		initialize();
 	}
 
@@ -77,7 +78,7 @@ public class Outil_Gestion {
 		mnMenu.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mnMenu);
 		
-		JMenuItem Sauvegarder = new JMenuItem("Sauvegarder");
+		JMenuItem Sauvegarder = new JMenuItem("Sauvegarder_nodev");
 		mnMenu.add(Sauvegarder);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Effectuer un Achat");
@@ -128,9 +129,6 @@ public class Outil_Gestion {
 			}
 		});
 		Menu_Client.add(Liste_Client);
-		
-		JMenu mnNewMenu_3 = new JMenu("Adej");
-		menuBar.add(mnNewMenu_3);
 	}
 	
 	private void Achat (ActionEvent e) {

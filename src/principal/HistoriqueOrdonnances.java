@@ -109,7 +109,7 @@ private class InformationsAction extends AbstractAction {
     Arrays.sort(modelIndexes);
 
     for (Ordonnance c : ListeOrdonnance.getOrdonnances()) {
-    	if (c.Medecin.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+    	if (c.getNum_Ordonnance().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
     	}
     }

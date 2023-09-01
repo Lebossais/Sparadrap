@@ -16,6 +16,8 @@ import javax.swing.border.LineBorder;
 import gestion.Ordonnance;
 import people.Achats;
 import people.ListeAchat;
+import people.ListeOrdonnance;
+import people.Medecin;
 import people.Mutuelle;
 import people.Specialiste;
 import utilitaire.Personne;
@@ -41,6 +43,8 @@ public class Achat {
 	boolean b = false;
 	JComboBox comboBoxClient;
 	JComboBox comboBoxMutuelle;
+	JComboBox comboBoxSpe;
+	JComboBox comboBoxMed;
 	/**
 	 * Create the application.
 	 */
@@ -161,13 +165,15 @@ public class Achat {
 		comboBoxMutuelle.addItem(people.Mutuelle.getMutuelle(1).getPersonne().getPrenom());
 		comboBoxMutuelle.addItem(null);
 		
-		JComboBox comboBoxMed = new JComboBox ();
+		comboBoxMed = new JComboBox ();
+		comboBoxMed.setEnabled(false);
 		comboBoxMed.setBounds(25, 350, 92, 22);
 		panel_1.add(comboBoxMed);
 		comboBoxMed.addItem(people.Medecin.getMedecin(0).getPersonne().getPrenom());
 		comboBoxMed.addItem(people.Medecin.getMedecin(1).getPersonne().getPrenom());
 
-		JComboBox comboBoxSpe = new JComboBox();
+		comboBoxSpe = new JComboBox();
+		comboBoxSpe.setEnabled(false);
 		comboBoxSpe.setBounds(146, 350, 92, 22);
 		panel_1.add(comboBoxSpe);
 		comboBoxSpe.addItem(people.Specialiste.getSpecialiste(0).getPersonne().getPrenom());
@@ -194,9 +200,13 @@ public class Achat {
 		if (b == true) {
 			txtNumOrdonnance.setEnabled(true);
 			txtDateOrdonnance.setEnabled(true);
+			comboBoxSpe.setEnabled(true);
+			comboBoxMed.setEnabled(true);
 		} else if (b == false) {
 			txtNumOrdonnance.setEnabled(false);
 			txtDateOrdonnance.setEnabled(false);
+			comboBoxSpe.setEnabled(false);
+			comboBoxMed.setEnabled(false);
 			
 		}
 	}
@@ -209,23 +219,47 @@ public class Achat {
 		Mutuelle a = null;
 		String t = null;
 		String n = null;
+		Medecin o = null;
+		Specialiste s = null;
 		
 		for(i = 0; i < comboBoxClient.getItemCount();i++) {
 			 Object p = comboBoxClient.getSelectedItem();
-		if (p.equals(utilitaire.Personne.getPersonne(i)));
+		if (p.equals(utilitaire.Personne.getPersonne(i).getPrenom())) {
 		c = utilitaire.Personne.getPersonne(i);
 		break;
 		}
-		
+		}
 		for(i = 0; i < comboBoxMutuelle.getItemCount();i++) {
 			 Object p = comboBoxMutuelle.getSelectedItem();
-		if (p.equals(utilitaire.Personne.getPersonne(i)));
+		if (p.equals(people.Mutuelle.getMutuelle(i).getPersonne().getPrenom())) {
 		a = people.Mutuelle.getMutuelle(i);
+		}
 		break;
 		}
 		t = txtDate.getText();
 		n = txtNsecu.getText();
 		
-		ListeAchat.achats.add(new Achats(c, a ,n , t, Ordonnance.getOrdonnance(0)));
+		if( b == true) {
+			for(i =0; i<comboBoxMed.getItemCount();i++) {
+				Object p = comboBoxMed.getSelectedItem();
+				if (p.equals(people.Medecin.getMedecin(i).getPersonne().getPrenom())) {
+				o = people.Medecin.getMedecin(i);
+				break;
+				}
+			}
+			for(i =0; i<comboBoxSpe.getItemCount();i++) {
+				Object p = comboBoxSpe.getSelectedItem();
+				if (p.equals(people.Specialiste.getSpecialiste(i).getPersonne().getPrenom())) {
+				s = people.Specialiste.getSpecialiste(i);
+				break;
+				}
+			}
+		ListeOrdonnance.ordonnances.add(new Ordonnance(txtNumOrdonnance.getText(),o,s, txtDateOrdonnance.getText()));
+		}
+		if (b == false) {
+		ListeAchat.achats.add(new Achats(c, a ,n , t, null));
+		} else if ( b == true ) {
+			ListeAchat.achats.add(new Achats(c, a ,n , t, ListeOrdonnance.getOrdonnance(ListeOrdonnance.ordonnances.size()-1)));	
+		}
 	}
 }

@@ -57,24 +57,7 @@ public Liste() {
 }
 
 
-private class AddAction extends AbstractAction {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	private AddAction() {
-        super("Ajouter");
-    }
-
-    public void actionPerformed(ActionEvent e) {
-    	Adresse adresse_Leonardo = new Adresse(48,"Rue des Musiciens", 59000,"Lille");
-    	Personne Leonardo = new Personne("Leonardo","Tortueli", adresse_Leonardo, "06.55.99.88.77", "Jean.Fouqueaut@gmail.com");
-    	
-    	
-        modele.addClient(new Client(Leonardo, "18/12/1958", "582 598 254 325 21",null, null,null ));
-    }
-}
 
 private class RemoveAction extends AbstractAction {
     /**
@@ -128,7 +111,7 @@ public void actionPerformed(ActionEvent e) {
     String regex = JOptionPane.showInputDialog("Regex de filtre : ");
     
 
-    sorter.setRowFilter(RowFilter.regexFilter(regex, 0, 1));
+    sorter.setRowFilter(RowFilter.regexFilter(regex,0,1,2,3 ));
 }
 }
 class RetourAction extends AbstractAction {

@@ -6,6 +6,7 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
 import people.Medecin;
+import people.Mutuelle;
 import people.Specialiste;
 
 public class Ordonnance {
@@ -14,7 +15,7 @@ public class Ordonnance {
 	private String Date_Ordonnance;
 	public people.Medecin Medecin;
 	public people.Specialiste Specialiste;
-	static ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
+	public static ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
 	
 	
 	public Ordonnance(String Num_Ordonnance, Medecin Medecin, Specialiste Specialiste, String Date_Ordonnance) {
@@ -53,10 +54,10 @@ public class Ordonnance {
 		return ordonnance.get(i);
 	}
 
+
 	public static void setOrdonnance(ArrayList<Ordonnance> ordonnance) {
 		Ordonnance.ordonnance = ordonnance;
 	}
-
 	public String getNum_Ordonnance() {
 		return Num_Ordonnance;
 	}
@@ -102,4 +103,17 @@ public class Ordonnance {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	  
+	public String toString() {
+		String c = null;
+		if (Specialiste != null) {
+			c = Specialiste.getPersonne().getPrenom();
+		} else if (Specialiste == null) {
+			c = "Aucun";
+		}
+		//"Numéro Ordonnance", "Nom Médecin", "Nom Specialiste", "Date de l'ordonnance"
+		return  "\n" +"Numéro Ordonnance : " + Num_Ordonnance + "\n Nom Medecin : " + Medecin.getPersonne().getPrenom() + "\n Specialiste : " + c ;
+	}
+	  
 }

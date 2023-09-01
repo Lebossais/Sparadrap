@@ -11,10 +11,17 @@ import utilitaire.Adresse;
 import utilitaire.Personne;
 
 public class ListeOrdonnance extends AbstractTableModel {
+	private String Date_Naissance;
+	private String Numero_Secu;
+	private Mutuelle Mutuelle;
+	private Medecin Medecin_Traitant;
+	private Specialiste Specialiste;
+	public  Personne Personne;
+
 
 	private static final long serialVersionUID = 5380417556060869746L;
 
-	static ArrayList<Ordonnance> ordonnances = new ArrayList<Ordonnance>();
+	public static ArrayList<Ordonnance> ordonnances = new ArrayList<Ordonnance>();
 	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(gestion.Ordonnance.getModel()); 
  
     private final String[] entetes = {"Numéro Ordonnance", "Nom Médecin", "Nom Specialiste", "Date de l'ordonnance"};
@@ -88,11 +95,12 @@ public class ListeOrdonnance extends AbstractTableModel {
 	        fireTableRowsInserted(ordonnances.size() -1, ordonnances.size() -1);
 
 	  }
+	  public void InformationsClients() {
+	    	
+	    }
 
 	public static List<Ordonnance> getOrdonnances() {
 		return ordonnances;
 	}
-	  
-	  
 	  
 }

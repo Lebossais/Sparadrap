@@ -69,7 +69,7 @@ public void actionPerformed(ActionEvent e) {
     String regex = JOptionPane.showInputDialog("Indiquer la Date : ");
     
 
-    sorter.setRowFilter(RowFilter.regexFilter(regex, 4));
+    sorter.setRowFilter(RowFilter.regexFilter(regex, 3 ));
 }
 }
 class RetourAction extends AbstractAction {
@@ -116,4 +116,5 @@ private class InformationsAction extends AbstractAction {
     }
 }
 }
+
 }

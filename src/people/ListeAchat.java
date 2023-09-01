@@ -24,7 +24,7 @@ public class ListeAchat extends AbstractTableModel {
     
     public ListeAchat() {
         super();
-        achats.add(new Achats(Personne.getPersonne(0),Mutuelle.getMutuelle(0),"582 158 598 325 21","31/08/2023", Ordonnance.getOrdonnance(0)));
+        achats.add(new Achats(Personne.getPersonne(0),Mutuelle.getMutuelle(0),"582 158 598 325 21","31/08/2023", ListeOrdonnance.getOrdonnance(0)));
         }
 
 	@Override
@@ -46,11 +46,11 @@ public class ListeAchat extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return achats.get(rowIndex).Personne.getPersonne(0).getPrenom();
+        	return achats.get(rowIndex).Personne.getPrenom();
         case 1:
             return achats.get(rowIndex).getNum_Secu();
         case 2:
-            return achats.get(rowIndex).Ordonnance.getOrdonnance(0).getNum_Ordonnance();
+            return achats.get(rowIndex).Ordonnance.getNum_Ordonnance();
         case 3 :
         	return achats.get(rowIndex).getDate();
         default:
