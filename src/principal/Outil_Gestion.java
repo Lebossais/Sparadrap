@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
 
 import gestion.Ordonnance;
 import people.ListeOrdonnance;
@@ -26,6 +28,13 @@ import java.awt.event.ActionEvent;
 
 public class Outil_Gestion {
 
+	int i = 0;
+	int l = 0;
+	int m = 0;
+	Liste liste = null;
+	HistoriqueOrdonnances listed = null;
+	HistoriqueAchat listeds = null;
+	
 	private JFrame PageDacceuil;
 
 	/**
@@ -52,7 +61,6 @@ public class Outil_Gestion {
 		Mutuelle mut = new Mutuelle();
 		Specialiste spe = new Specialiste();
 		Medecin med = new Medecin();
-		ListeOrdonnance ord = new ListeOrdonnance();
 		initialize();
 	}
 
@@ -147,16 +155,33 @@ public class Outil_Gestion {
 			}
 		}
 	private void AfficherListe(ActionEvent e) {
-		Liste liste = new Liste();
-		liste.setVisible(true);
+			if (i == 0) {
+				liste = new Liste();
+				liste.setVisible(true);
+				i = 1;
+			}else if (i == 1) {
+				liste.setVisible(true);
+			}
+		}
 		
-	}
+
 	private void AfficherHistoOrdo(ActionEvent e) {
-		HistoriqueOrdonnances listed = new HistoriqueOrdonnances();
-		listed.setVisible(true);
+		if (l == 0 ) {
+			listed = new HistoriqueOrdonnances();
+			listed.setVisible(true);
+			l = 1;
+		} else if (l == 1) {
+			listed.setVisible(true);
+		}
+
 	}
 	private void AfficherHistoAchat(ActionEvent e) {
-		HistoriqueAchat listeds = new HistoriqueAchat();
-		listeds.setVisible(true);
+		if ( m == 0) {
+			listeds = new HistoriqueAchat();
+			listeds.setVisible(true);
+			m = 1;
+		} else if ( m == 1) {
+			listeds.setVisible(true);
+		}
 	}
 }

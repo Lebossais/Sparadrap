@@ -249,8 +249,11 @@ public class Achat {
 			}
 			for(i =0; i<comboBoxSpe.getItemCount();i++) {
 				Object p = comboBoxSpe.getSelectedItem();
-				if (p.equals(people.Specialiste.getSpecialiste(i).getPersonne().getPrenom())) {
-				s = people.Specialiste.getSpecialiste(i);
+				 if (p == null) {
+					s = null;
+					break;
+				 }else if (p.equals(people.Specialiste.getSpecialiste(i).getPersonne().getPrenom())) {
+						s = people.Specialiste.getSpecialiste(i);
 				break;
 				}
 			}

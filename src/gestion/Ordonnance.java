@@ -25,34 +25,6 @@ public class Ordonnance {
 		this.Specialiste = Specialiste;
 		this.Date_Ordonnance = Date_Ordonnance;	
 	}
-	
-	public Ordonnance() {
-		initOrdonnance();
-	}
-	
-	public static void initOrdonnance() {
-		Ordonnance Ord0 = new Ordonnance ("183",people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(0) ,"30/08/2023");
-		ordonnance.add(Ord0);
-		Ordonnance Ord1 = (new Ordonnance("184", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
-		ordonnance.add(Ord1);
-		Ordonnance Ord2 = (new Ordonnance("185", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
-		ordonnance.add(Ord2);
-        Ordonnance Ord3 = (new Ordonnance("181", people.Medecin.getMedecin(0) , people.Specialiste.getSpecialiste(0) ,"30/08/2023"));
-		ordonnance.add(Ord3);
-        Ordonnance Ord4 = (new Ordonnance("186", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
-		ordonnance.add(Ord4);
-        Ordonnance Ord5 = (new Ordonnance("187", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
-		ordonnance.add(Ord5);
-        Ordonnance Ord6 = (new Ordonnance("182", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(0) ,"30/08/2023"));
-		ordonnance.add(Ord6);
-        Ordonnance Ord7 = (new Ordonnance("180", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
-		ordonnance.add(Ord7);
-	}
-
-
-	public static Ordonnance getOrdonnance(int i) {
-		return ordonnance.get(i);
-	}
 
 
 	public static void setOrdonnance(ArrayList<Ordonnance> ordonnance) {
@@ -107,13 +79,16 @@ public class Ordonnance {
 	  
 	public String toString() {
 		String c = null;
+		String b = null;
 		if (Specialiste != null) {
 			c = Specialiste.getPersonne().getPrenom();
+			b = Specialiste.getSpecialite();
 		} else if (Specialiste == null) {
 			c = "Aucun";
+			b = null;
 		}
 		//"Numéro Ordonnance", "Nom Médecin", "Nom Specialiste", "Date de l'ordonnance"
-		return  "\n" +"Numéro Ordonnance : " + Num_Ordonnance + "\n Nom Medecin : " + Medecin.getPersonne().getPrenom() + "\n Specialiste : " + c ;
+		return  "\n" +"Numéro Ordonnance : " + Num_Ordonnance + "\n Nom Medecin : " + Medecin.getPersonne().getPrenom() + "\n Specialiste : " + c +" ( "+ b + " ) ";
 	}
 	  
 }

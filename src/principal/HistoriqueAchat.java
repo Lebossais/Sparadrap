@@ -35,7 +35,6 @@ public HistoriqueAchat() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));

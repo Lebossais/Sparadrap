@@ -8,8 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import utilitaire.Personne;
-
 public class ListeClient extends AbstractTableModel {
 
 		private static final long serialVersionUID = 5380417556060869746L;
@@ -29,6 +27,7 @@ public class ListeClient extends AbstractTableModel {
 	        clients.add(new Client(utilitaire.Personne.getPersonne(2), "15/12/2000","582 698 874 236 21",Mutuelle.getMutuelle(1),Medecin.getMedecin(1),null ));
 	    }
 
+	    
 	    public int getRowCount() {
 	        return clients.size();
 	    }
@@ -56,11 +55,6 @@ public class ListeClient extends AbstractTableModel {
 	        }
 	    }
 	 
-	    public void addClient(Client Client) {
-	        clients.add(Client);
-	 
-	        fireTableRowsInserted(clients.size() -1, clients.size() -1);
-	    }
 	 
 	    public void removeClient(int rowIndex) {
 	        clients.remove(rowIndex);

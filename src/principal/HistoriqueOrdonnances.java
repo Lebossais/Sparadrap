@@ -25,7 +25,6 @@ private static final long serialVersionUID = 1L;
 private ListeOrdonnance modele = new ListeOrdonnance();
 private JTable tableau = new JTable(modele);; 
 public JFrame frame;
-
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 public HistoriqueOrdonnances() {

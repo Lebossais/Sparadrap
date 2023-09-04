@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -28,7 +29,6 @@ private static final long serialVersionUID = 1L;
 private ListeClient modele = new ListeClient();
 private JTable tableau = new JTable(modele);;
 public JFrame frame;
-
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 
@@ -54,6 +54,7 @@ public Liste() {
     sorter.setSortsOnUpdates(true);
   
     pack();
+ 
 }
 
 

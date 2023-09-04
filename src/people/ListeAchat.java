@@ -1,16 +1,14 @@
 package people;
 
-import java.awt.EventQueue;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import gestion.Ordonnance;
-import utilitaire.Adresse;
 import utilitaire.Personne;
 
 public class ListeAchat extends AbstractTableModel {
