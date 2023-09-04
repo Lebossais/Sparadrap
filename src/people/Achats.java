@@ -1,7 +1,5 @@
 package people;
 
-import java.util.Date;
-
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
@@ -23,15 +21,6 @@ public class Achats {
 		this.Date = Date;
 		this.Ordonnance = Ordonnance;
 	}
-	
-	public Achats(Personne Personne, Mutuelle Mutuelle, String Num_Secu, String Date) {
-		super();
-		this.Personne = Personne;
-		this.Mutuelle = Mutuelle;
-		this.Num_Secu = Num_Secu;
-		this.Date = Date;
-	}
-	
 	
 	
 	public String getNum_Secu() {
@@ -86,5 +75,11 @@ public class Achats {
 	public static DefaultRowSorter<TableModel, Integer> getRowSorter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "\n Date de l'achat:" + Date  +"\n Personne : " + Personne + "\n Numéro de Securité Sociale : " + Num_Secu + "\n Mutuelle : " + Mutuelle.getPersonne().getPrenom()
+	 + "\n Numéro de Departement : " +Mutuelle.getDepartement() +" \n Prise en Charge :" + Mutuelle.getPrise_En_Charge()+ "%"+ "\n\n Ordonnance : " + Ordonnance;
 	}
 }

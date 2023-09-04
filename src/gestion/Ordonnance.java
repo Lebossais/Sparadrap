@@ -15,7 +15,6 @@ public class Ordonnance {
 	private String Date_Ordonnance;
 	public people.Medecin Medecin;
 	public people.Specialiste Specialiste;
-	public static ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
 	
 	
 	public Ordonnance(String Num_Ordonnance, Medecin Medecin, Specialiste Specialiste, String Date_Ordonnance) {
@@ -26,10 +25,6 @@ public class Ordonnance {
 		this.Date_Ordonnance = Date_Ordonnance;	
 	}
 
-
-	public static void setOrdonnance(ArrayList<Ordonnance> ordonnance) {
-		Ordonnance.ordonnance = ordonnance;
-	}
 	public String getNum_Ordonnance() {
 		return Num_Ordonnance;
 	}

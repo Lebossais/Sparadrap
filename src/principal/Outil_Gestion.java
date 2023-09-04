@@ -25,6 +25,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Outil_Gestion {
 
@@ -61,6 +63,8 @@ public class Outil_Gestion {
 		Mutuelle mut = new Mutuelle();
 		Specialiste spe = new Specialiste();
 		Medecin med = new Medecin();
+		listed = new HistoriqueOrdonnances();
+		listeds = new HistoriqueAchat();
 		initialize();
 	}
 
@@ -71,7 +75,7 @@ public class Outil_Gestion {
 		PageDacceuil = new JFrame();
 		PageDacceuil.setTitle("Page d'acceuil");
 		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
-		PageDacceuil.setBounds(100, 100, 437, 288);
+		PageDacceuil.setBounds(100, 100, 470, 330);
 		PageDacceuil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
@@ -137,6 +141,10 @@ public class Outil_Gestion {
 			}
 		});
 		Menu_Client.add(Liste_Client);
+		
+		JPanel panel_1 = new JPanel();
+		PageDacceuil.getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
 	}
 	
 	private void Achat (ActionEvent e) {
@@ -166,22 +174,11 @@ public class Outil_Gestion {
 		
 
 	private void AfficherHistoOrdo(ActionEvent e) {
-		if (l == 0 ) {
-			listed = new HistoriqueOrdonnances();
-			listed.setVisible(true);
-			l = 1;
-		} else if (l == 1) {
 			listed.setVisible(true);
 		}
 
-	}
 	private void AfficherHistoAchat(ActionEvent e) {
-		if ( m == 0) {
-			listeds = new HistoriqueAchat();
-			listeds.setVisible(true);
-			m = 1;
-		} else if ( m == 1) {
 			listeds.setVisible(true);
 		}
 	}
-}
+

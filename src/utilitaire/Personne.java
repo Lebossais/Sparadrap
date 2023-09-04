@@ -49,6 +49,8 @@ public class Personne {
 	     personne.add(France);
 	}
 	
+//	System.out.println(personne.getPersonne(0));
+	
 	
 	public static Personne getPersonne(int i) {
 		return personne.get(i);

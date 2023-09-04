@@ -17,6 +17,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Ordonnance;
+import people.Achats;
 import people.ListeAchat;
 import people.ListeOrdonnance;
 
@@ -108,8 +109,8 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Ordonnance c : ListeOrdonnance.getOrdonnances()) {
-    	if (c.Medecin.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+    for (Achats c : ListeAchat.getAchats()) {
+    	if (c.getNum_Secu().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
     	}
     }
