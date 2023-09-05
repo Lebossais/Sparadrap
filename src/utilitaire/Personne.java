@@ -12,7 +12,16 @@ public class Personne {
 	private Adresse Adresse;
 	private String telephone;
 	private String email;
-	 static ArrayList<Personne> personne = new ArrayList<Personne>();
+	static ArrayList<Personne> personne = new ArrayList<Personne>();
+	
+	/**
+	 * 
+	 * @param prenom
+	 * @param name
+	 * @param Adresse
+	 * @param telephone
+	 * @param email
+	 */
 	public Personne(String prenom, String name, Adresse Adresse, String telephone, String email) {
 		super();
 		this.prenom = prenom ;
@@ -21,11 +30,11 @@ public class Personne {
 		this.telephone = telephone;
 		this.email = email;
 	}
-	
 	public Personne() {
 		// TODO Auto-generated constructor stub
 		Personneinit();
 	}
+	
 	public void Personneinit() {
 		 Personne Jean = new Personne("Jean","Fouqueaut", utilitaire.Adresse.getAdresse(0) , "06.55.99.88.77", "Jean.Fouqueaut@gmail.com");
 		 personne.add(Jean);
@@ -49,25 +58,40 @@ public class Personne {
 	     personne.add(France);
 	}
 	
-//	System.out.println(personne.getPersonne(0));
-	
-	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public static Personne getPersonne(int i) {
 		return personne.get(i);
 	}
 
+	/**
+	 * 
+	 * @param personne
+	 */
 	public void setPersonne(ArrayList<Personne> personne) {
 		Personne.personne = personne;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
-
+/**
+ * 
+ * @param prenom
+ */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public String getName() {
 		return name;
 	}
@@ -78,42 +102,75 @@ public class Personne {
 				+ "\n Email : " + email ;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public Adresse getAdresse() {
 		return Adresse;
 	}
-
+	/**
+	 * 
+	 * @param adresse
+	 */
 	public void setAdresse(Adresse adresse) {
 		this.Adresse = adresse ;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public String getTelephone() {
 		return telephone;
 	}
-
+/**
+ * 
+ * @param telephone
+ */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public String getEmail() {
 		return email;
 	}
-
+/**
+ * 
+ * @param email
+ */
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static TableModel getModel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public static int[] getSelectedRows() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static DefaultRowSorter<TableModel, Integer> getRowSorter() {
 		// TODO Auto-generated method stub
 		return null;

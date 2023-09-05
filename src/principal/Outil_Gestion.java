@@ -8,11 +8,11 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.DefaultTableModel;
 
-import gestion.Ordonnance;
-import people.ListeOrdonnance;
+
+import gestion.AchatMedicament;
+import gestion.Medicament;
+
 import people.Medecin;
 import people.Mutuelle;
 import people.Specialiste;
@@ -25,8 +25,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 
 public class Outil_Gestion {
 
@@ -63,6 +61,9 @@ public class Outil_Gestion {
 		Mutuelle mut = new Mutuelle();
 		Specialiste spe = new Specialiste();
 		Medecin med = new Medecin();
+		Medicament medi = new Medicament();
+		AchatMedicament achatmedi = new AchatMedicament();
+		liste = new Liste();
 		listed = new HistoriqueOrdonnances();
 		listeds = new HistoriqueAchat();
 		initialize();
@@ -155,7 +156,7 @@ public class Outil_Gestion {
 			System.out.println(e.getActionCommand().toString());
 			System.out.println(e.getSource().toString());
 			
-			int sortie = JOptionPane.showConfirmDialog(PageDacceuil, "Etes-vous sûr ?", 
+			int sortie = JOptionPane.showConfirmDialog(null, "Etes-vous sûr ?", 
 					"Quitter", JOptionPane.YES_NO_OPTION);
 			
 			if (sortie == JOptionPane.YES_OPTION) {

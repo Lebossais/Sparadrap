@@ -12,15 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import people.Client;
 import people.ListeClient;
-import utilitaire.Adresse;
-import utilitaire.Personne;
 import java.awt.Toolkit;
 
 public class Liste extends JFrame {
@@ -46,6 +42,7 @@ public Liste() {
     boutons.add(new JButton(new RemoveAction()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
+    boutons.add(new JButton(new QuitterAction()));
 
     getContentPane().add(boutons, BorderLayout.SOUTH);
     tableau.setAutoCreateRowSorter(true); 
@@ -109,10 +106,12 @@ private FilterAction() {
 
 
 public void actionPerformed(ActionEvent e) {
+	try {
     String regex = JOptionPane.showInputDialog("Regex de filtre : ");
     
-
     sorter.setRowFilter(RowFilter.regexFilter(regex,0,1,2,3 ));
+	// capture sur le Boutton annuler
+	}catch (NullPointerException e2) {	}
 }
 }
 class RetourAction extends AbstractAction {
@@ -158,5 +157,27 @@ private class InformationsAction extends AbstractAction {
     	}
     }
 }
+}
+class QuitterAction extends AbstractAction {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private QuitterAction() {
+		super("Quitter");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.getActionCommand().toString());
+		System.out.println(e.getSource().toString());
+		
+		int sortie = JOptionPane.showConfirmDialog(frame, "Etes-vous sûr ?", 
+				"Quitter", JOptionPane.YES_NO_OPTION);
+		
+		if (sortie == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
 }
 }

@@ -28,10 +28,15 @@ public class ListeClient extends AbstractTableModel {
 	    }
 
 	    
+	    public static Client getClient(int i) {
+	    	return clients.get(i);
+	    }
+	    
 	    public int getRowCount() {
 	        return clients.size();
 	    }
 	 
+	    
 	    public int getColumnCount() {
 	        return entetes.length;
 	    }
@@ -55,21 +60,26 @@ public class ListeClient extends AbstractTableModel {
 	        }
 	    }
 	 
-	 
+	    /**
+	     * 
+	     * @param rowIndex
+	     */
 	    public void removeClient(int rowIndex) {
 	        clients.remove(rowIndex);
 	 
 	        fireTableRowsDeleted(rowIndex, rowIndex);
 	    }
-	    
+	    /**
+	     * 
+	     * @param Liste
+	     */
 	    public void Retour(JTable Liste) {
 	    	
 	    }
-	    
-	    public void InformationsClients() {
-	    	
-	    }
-
+	    /**
+	     * 
+	     * @return
+	     */
 		public static List<Client> getClients() {
 			return clients;
 		}

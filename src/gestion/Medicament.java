@@ -7,52 +7,105 @@ public class Medicament {
 	String Nom;
 	int Prix;
 	String Date_Mise_en_Service;
-	int Quantité;
-	public List<Medicament> medicament = new ArrayList<Medicament>();
+	Categorie_Medicament Categorie;
+	public static List<Medicament> medicament = new ArrayList<Medicament>();
+
 	
-	
-	public Medicament (String Nom, Categorie_Medicament Categorie, int Prix, String Date_Mise_en_Service, int Quantité) {
+	public Medicament() {
+		// TODO Auto-generated constructor stub
+		initMedicament();
+	}
+	/**
+	 * 
+	 * @param Nom
+	 * @param Categorie
+	 * @param Prix
+	 * @param Date_Mise_en_Service
+	 */
+	public Medicament (String Nom, Categorie_Medicament Categorie, int Prix, String Date_Mise_en_Service) {
+		super();
 		this.Nom = Nom;
 		this.Prix = Prix;
+		this.Categorie = Categorie;
 		this.Date_Mise_en_Service = Date_Mise_en_Service;
-		this.Quantité = Quantité;
-		
-		medicament.add(new Medicament("Doliprane", Categorie.Analgésique, 5 , "27/08/2001" , 2 ));
-		
+
 	}
 
+	
+	public void initMedicament() {
+	
+		medicament.add(new Medicament("Doliprane", Categorie_Medicament.Analgésique, 5 , "27/08/2001"));
+	}
+
+
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNom() {
 		return Nom;
 	}
+	/**
+	 * 
+	 * @param nom
+	 */
 	public void setNom(String nom) {
-		Nom = nom;
+		this.Nom = nom;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public int getPrix() {
 		return Prix;
 	}
+	/**
+	 * 
+	 * @param prix
+	 */
 	public void setPrix(int prix) {
 		Prix = prix;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDate_Mise_en_Service() {
 		return Date_Mise_en_Service;
 	}
+	/**
+	 * 
+	 * @param date_Mise_en_Service
+	 */
 	public void setDate_Mise_en_Service(String date_Mise_en_Service) {
 		Date_Mise_en_Service = date_Mise_en_Service;
 	}
-	public int getQuantité() {
-		return Quantité;
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
+	public static Medicament getMedicament(int i) {
+		return medicament.get(i);
 	}
-	public void setQuantité(int quantité) {
-		Quantité = quantité;
+	
+	/**
+	 * 
+	 * @param medicament
+	 */
+	public static void setMedicament(List<Medicament> medicament) {
+		Medicament.medicament = medicament;
 	}
-
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public Categorie_Medicament getCategorie() {
+		return Categorie;
+	}
 	@Override
 	public String toString() {
-		return "Medicament [Nom=" + Nom + ", Prix=" + Prix + ", Date_Mise_en_Service=" + Date_Mise_en_Service
-				+ ", Quantité=" + Quantité + "]";
+		return "\n Nom : " + Nom + "\n Catégorie : " + Categorie +"\n Prix unitaire : " + Prix + "€" + "\n Date_Mise_en_Service : " + Date_Mise_en_Service;
 	}
-	
-	
+
 }

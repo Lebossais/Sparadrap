@@ -33,11 +33,18 @@ public class ListeOrdonnance extends AbstractTableModel {
             ordonnances.add(new Ordonnance("180", people.Medecin.getMedecin(1) , people.Specialiste.getSpecialiste(1) ,"30/08/2023"));
     	}
 
-
+    	/**
+    	 * 
+    	 * @param i
+    	 * @return
+    	 */
     	public static Ordonnance getOrdonnance(int i) {
     		return ordonnances.get(i);
     	}
-
+    	/**
+    	 * 
+    	 * @param ListeOrdonnances
+    	 */
     	public static void setOrdonnance(ArrayList<Ordonnance> ListeOrdonnances) {
     		ListeOrdonnance.ordonnances = ListeOrdonnances;
     	}
@@ -70,12 +77,20 @@ public class ListeOrdonnance extends AbstractTableModel {
             return null; //Ne devrait jamais arriver
 	}
 }
+	/**
+	 * 
+	 * @param Ordonnances
+	 */
 	  public void addOrdonnance(Ordonnance Ordonnances) {
 	        ordonnances.add(Ordonnances);
 	 
 	        fireTableRowsInserted(ordonnances.size() -1, ordonnances.size() -1);
 
 	  }
+	  /**
+	   * 
+	   * @return
+	   */
 	public static List<Ordonnance> getOrdonnances() {
 		return ordonnances;
 	}

@@ -16,10 +16,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import gestion.Ordonnance;
 import people.Achats;
 import people.ListeAchat;
-import people.ListeOrdonnance;
 
 public class HistoriqueAchat extends JFrame {
 
@@ -41,6 +39,7 @@ public HistoriqueAchat() {
     boutons.add(new JButton(new InformationsAction()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
+    boutons.add(new JButton(new QuitterAction()));
 
     getContentPane().add(boutons, BorderLayout.SOUTH);
     tableau.setAutoCreateRowSorter(true); 
@@ -66,10 +65,13 @@ private FilterAction() {
 
 
 public void actionPerformed(ActionEvent e) {
+	try {
     String regex = JOptionPane.showInputDialog("Indiquer la Date : ");
     
-
     sorter.setRowFilter(RowFilter.regexFilter(regex, 3 ));
+	} 
+	// capture sur le Boutton annuler
+	catch (NullPointerException e2) {	}
 }
 }
 class RetourAction extends AbstractAction {
@@ -102,7 +104,8 @@ private class InformationsAction extends AbstractAction {
  public void actionPerformed(ActionEvent e) { 
     int[] selection = tableau.getSelectedRows();
     int[] modelIndexes = new int[selection.length];
-
+    
+    try {
     for(int i = 0; i < selection.length; i++){
         modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
     }
@@ -113,8 +116,34 @@ private class InformationsAction extends AbstractAction {
     	if (c.getNum_Secu().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
     	}
-    }
+     }
+    } catch (Exception e2) {
+			// TODO: handle exception
+    		e2.printStackTrace();
+    	}
 }
 }
 
+class QuitterAction extends AbstractAction {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private QuitterAction() {
+		super("Quitter");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(e.getActionCommand().toString());
+		System.out.println(e.getSource().toString());
+		
+		int sortie = JOptionPane.showConfirmDialog(frame, "Etes-vous sûr ?", 
+				"Quitter", JOptionPane.YES_NO_OPTION);
+		
+		if (sortie == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
+}
 }

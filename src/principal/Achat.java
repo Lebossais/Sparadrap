@@ -1,18 +1,15 @@
 package principal;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.SwingConstants;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
 
+
+import gestion.AchatMedicament;
+import gestion.Medicament;
 import gestion.Ordonnance;
 import people.Achats;
 import people.ListeAchat;
@@ -22,21 +19,20 @@ import people.Mutuelle;
 import people.Specialiste;
 import utilitaire.Personne;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
+
 import javax.swing.JComboBox;
 
 public class Achat {
 
 	JFrame Achat;
-	private JTextField txtNsecu;
 	private JTextField txtDateOrdonnance;
 	private JTextField txtNumOrdonnance;
 	private JTextField txtDate;
@@ -45,6 +41,8 @@ public class Achat {
 	JComboBox comboBoxMutuelle;
 	JComboBox comboBoxSpe;
 	JComboBox comboBoxMed;
+	JComboBox comboBoxMedicament;
+	private JTextField txtQuantite;
 	/**
 	 * Create the application.
 	 */
@@ -82,15 +80,6 @@ public class Achat {
 		Mutuelle.setBounds(27, 79, 84, 20);
 		panel_1.add(Mutuelle);
 		
-		txtNsecu = new JTextField();
-		txtNsecu.setColumns(10);
-		txtNsecu.setBounds(171, 104, 86, 20);
-		panel_1.add(txtNsecu);
-		
-		JLabel Nsecu = new JLabel("N° Secu :");
-		Nsecu.setBounds(173, 79, 84, 20);
-		panel_1.add(Nsecu);
-		
 		JLabel nomMedecin = new JLabel("Medecin Traitant :");
 		nomMedecin.setBounds(25, 326, 103, 20);
 		panel_1.add(nomMedecin);
@@ -100,6 +89,7 @@ public class Achat {
 		panel_1.add(NomSpecialiste);
 		
 		txtDateOrdonnance = new JTextField();
+		txtDateOrdonnance.setText("JJ/MM/AAAA");
 		txtDateOrdonnance.setEnabled(false);
 		txtDateOrdonnance.setColumns(10);
 		txtDateOrdonnance.setBounds(265, 351, 132, 20);
@@ -110,6 +100,7 @@ public class Achat {
 		panel_1.add(DateOrdonnance);
 		
 		txtNumOrdonnance = new JTextField();
+		txtNumOrdonnance.setText("XXX");
 		txtNumOrdonnance.setEnabled(false);
 		txtNumOrdonnance.setColumns(10);
 		txtNumOrdonnance.setBounds(313, 278, 98, 20);
@@ -120,6 +111,7 @@ public class Achat {
 		panel_1.add(NumOrdonnance);
 		
 		txtDate = new JTextField();
+		txtDate.setText("JJ/MM/AAAA");
 		txtDate.setColumns(10);
 		txtDate.setBounds(171, 43, 84, 20);
 		panel_1.add(txtDate);
@@ -145,10 +137,6 @@ public class Achat {
 		btnReinitialiser.setBounds(17, 397, 114, 29);
 		panel_1.add(btnReinitialiser);
 		
-		JLabel lblNewLabel_2 = new JLabel("MEDICAMEEEEEEEEEEEEEEEENTS");
-		lblNewLabel_2.setBounds(82, 172, 257, 47);
-		panel_1.add(lblNewLabel_2);
-		
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -163,7 +151,6 @@ public class Achat {
 		panel_1.add(comboBoxMutuelle);
 		comboBoxMutuelle.addItem(people.Mutuelle.getMutuelle(0).getPersonne().getPrenom());
 		comboBoxMutuelle.addItem(people.Mutuelle.getMutuelle(1).getPersonne().getPrenom());
-		comboBoxMutuelle.addItem(null);
 		
 		comboBoxMed = new JComboBox ();
 		comboBoxMed.setEnabled(false);
@@ -183,9 +170,27 @@ public class Achat {
 		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(25, 42, 92, 22);
 		panel_1.add(comboBoxClient);
-		comboBoxClient.addItem(utilitaire.Personne.getPersonne(0).getPrenom());
-		comboBoxClient.addItem(utilitaire.Personne.getPersonne(1).getPrenom());
-		comboBoxClient.addItem(utilitaire.Personne.getPersonne(2).getPrenom());
+		comboBoxClient.addItem(people.ListeClient.getClient(0).getPersonne().getPrenom());
+		comboBoxClient.addItem(people.ListeClient.getClient(1).getPersonne().getPrenom());
+		comboBoxClient.addItem(people.ListeClient.getClient(2).getPersonne().getPrenom());
+		
+		comboBoxMedicament = new JComboBox();
+		comboBoxMedicament.setBounds(46, 191, 130, 29);
+		panel_1.add(comboBoxMedicament);
+		comboBoxMedicament.addItem(gestion.Medicament.getMedicament(0).getNom());
+		
+		txtQuantite = new JTextField();
+		txtQuantite.setColumns(10);
+		txtQuantite.setBounds(201, 193, 97, 24);
+		panel_1.add(txtQuantite);
+		
+		JLabel lblMedicament = new JLabel("Medicament :");
+		lblMedicament.setBounds(46, 162, 84, 20);
+		panel_1.add(lblMedicament);
+		
+		JLabel lblQuantit = new JLabel("Quantité :");
+		lblQuantit.setBounds(197, 162, 84, 20);
+		panel_1.add(lblQuantit);
 	}
 	
 	private void AfficherOrdonnance(ActionEvent e) {
@@ -210,9 +215,11 @@ public class Achat {
 			
 		}
 	}
+	
 	private void retour(ActionEvent e) {
 		Achat.dispose();
 	}
+	
 	private void Validation(ActionEvent e) {
 		int i;
 		Personne c = null;
@@ -221,11 +228,13 @@ public class Achat {
 		String n = null;
 		Medecin o = null;
 		Specialiste s = null;
+		Medicament m = null;
 		
 		for(i = 0; i < comboBoxClient.getItemCount();i++) {
 			 Object p = comboBoxClient.getSelectedItem();
-		if (p.equals(utilitaire.Personne.getPersonne(i).getPrenom())) {
-		c = utilitaire.Personne.getPersonne(i);
+		if (p.equals(people.ListeClient.getClient(i).getPersonne().getPrenom())) {
+		c = people.ListeClient.getClient(i).getPersonne();
+		n = people.ListeClient.getClient(i).getNumero_Secu();
 		break;
 		}
 		}
@@ -233,11 +242,10 @@ public class Achat {
 			 Object p = comboBoxMutuelle.getSelectedItem();
 		if (p.equals(people.Mutuelle.getMutuelle(i).getPersonne().getPrenom())) {
 		a = people.Mutuelle.getMutuelle(i);
-		}
 		break;
 		}
+		}
 		t = txtDate.getText();
-		n = txtNsecu.getText();
 		
 		if( b == true) {
 			for(i =0; i<comboBoxMed.getItemCount();i++) {
@@ -259,10 +267,24 @@ public class Achat {
 			}
 		ListeOrdonnance.ordonnances.add(new Ordonnance(txtNumOrdonnance.getText(),o,s, txtDateOrdonnance.getText()));
 		}
-		if (b == false) {
-		ListeAchat.achats.add(new Achats(c, a ,n , t, null));
-		} else if ( b == true ) {
-			ListeAchat.achats.add(new Achats(c, a ,n , t, ListeOrdonnance.getOrdonnance(ListeOrdonnance.ordonnances.size()-1)));	
+		
+		for (i = 0; i<comboBoxMedicament.getItemCount();i++) {
+			Object p = comboBoxMedicament.getSelectedItem();
+			if (p.equals(gestion.Medicament.getMedicament(i).getNom()));
+			m = gestion.Medicament.getMedicament(i);
 		}
+		Integer nombre = Integer.valueOf(txtQuantite.getText());
+		AchatMedicament.achatMedicament.add(new AchatMedicament(m, nombre));
+		
+		if (b == false) {
+		ListeAchat.achats.add(new Achats(c, a ,n , t, null, AchatMedicament.getAchatMedicament(AchatMedicament.achatMedicament.size()-1)));
+		} else if ( b == true ) {
+			ListeAchat.achats.add(new Achats(c, a ,n , t, ListeOrdonnance.getOrdonnance(ListeOrdonnance.ordonnances.size()-1),AchatMedicament.getAchatMedicament(AchatMedicament.achatMedicament.size()-1) ));	
+		}
+	Achat.dispose();
+	int input = JOptionPane.showConfirmDialog(null, 
+            "Nouvel achat effectué", "Validation", JOptionPane.DEFAULT_OPTION);
+			
+		
 	}
-}
+	}

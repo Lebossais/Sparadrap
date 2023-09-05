@@ -12,6 +12,15 @@ public class Client {
 	private Specialiste Specialiste;
 	public  Personne Personne;
 	
+	/**
+	 * 
+	 * @param Personne
+	 * @param Date_Naissance
+	 * @param Numero_Secu
+	 * @param Mutuelle
+	 * @param Medecin_Traitant
+	 * @param Specialiste
+	 */
 	public Client(Personne Personne, String Date_Naissance,String Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
 		
@@ -40,64 +49,110 @@ public class Client {
 	}
 
 
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Mutuelle getMutuelle() {
 		return Mutuelle;
 	}
-
+	/**
+	 * 
+	 * @param mutuelle
+	 */
 	public void setMutuelle(Mutuelle mutuelle) {
 		Mutuelle = mutuelle;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Personne getPersonne() {
 		return Personne;
 	}
-
+	/**
+	 * 
+	 * @param personne
+	 */
 	public void setPersonne(Personne personne) {
 		Personne = personne;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDate_Naissance() {
 		return Date_Naissance;
 	}
-
+	/**
+	 * 
+	 * @param date_Naissance
+	 */
 	public void setDate_Naissance(String date_Naissance) {
 		Date_Naissance = date_Naissance;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNumero_Secu() {
 		return Numero_Secu;
 	}
-
+	/**
+	 * 
+	 * @param numero_Secu
+	 */
 	public void setNumero_Secu(String numero_Secu) {
 		Numero_Secu = numero_Secu;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Medecin getMedecin_Traitant() {
 		return Medecin_Traitant;
 	}
-
+	/**
+	 * 
+	 * @param medecin_Traitant
+	 */
 	public void setMedecin_Traitant(Medecin medecin_Traitant) {
 		Medecin_Traitant = medecin_Traitant;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Specialiste getSpecialiste() {
 		return Specialiste;
 	}
-
+	/**
+	 * 
+	 * @param specialiste
+	 */
 	public void setSpecialiste(Specialiste specialiste) {
 		Specialiste = specialiste;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public static TableModel getModel() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public static int[] getSelectedRows() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static DefaultRowSorter<TableModel, Integer> getRowSorter() {
 		// TODO Auto-generated method stub
 		return null;
