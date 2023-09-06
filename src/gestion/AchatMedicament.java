@@ -36,6 +36,14 @@ public class AchatMedicament {
 		double var1 = Quantite;
 		return var1 * var2;
 	}
+	
+	
+	public Medicament getMedicament() {
+		return Medicament;
+	}
+	public void setMedicament(Medicament medicament) {
+		Medicament = medicament;
+	}
 	/**
 	 * 
 	 * @return

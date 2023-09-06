@@ -48,7 +48,6 @@ public class Client {
 				+ " \n Medecin Traitant : " + Medecin_Traitant.getPersonne().getPrenom() + "\n Specialiste : " + c ;
 	}
 
-
 	/**
 	 * 
 	 * @return

@@ -34,7 +34,10 @@ public class Medicament {
 	
 	public void initMedicament() {
 	
-		medicament.add(new Medicament("Doliprane", Categorie_Medicament.Analgésique, 5 , "27/08/2001"));
+		medicament.add(new Medicament("Doliprane", Categorie_Medicament.Analgesique, 5 , "27/08/2001"));
+		medicament.add(new Medicament("Amoxicilline",Categorie_Medicament.Antibiotique ,3, "05/08/2010"));
+		medicament.add(new Medicament("Xydol",Categorie_Medicament.Antiinflammatoire ,6, "14/12/2008"));
+		medicament.add(new Medicament("Cortisol",Categorie_Medicament.Corticoides ,10, "01/01/1950"));
 	}
 
 

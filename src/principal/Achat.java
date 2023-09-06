@@ -25,7 +25,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 
 import javax.swing.JComboBox;
@@ -229,7 +228,7 @@ public class Achat {
 		Medecin o = null;
 		Specialiste s = null;
 		Medicament m = null;
-		
+		try {
 		for(i = 0; i < comboBoxClient.getItemCount();i++) {
 			 Object p = comboBoxClient.getSelectedItem();
 		if (p.equals(people.ListeClient.getClient(i).getPersonne().getPrenom())) {
@@ -284,7 +283,10 @@ public class Achat {
 	Achat.dispose();
 	int input = JOptionPane.showConfirmDialog(null, 
             "Nouvel achat effectué", "Validation", JOptionPane.DEFAULT_OPTION);
-			
+		}catch (java.lang.NumberFormatException e2){
+			JOptionPane.showConfirmDialog(null, "Achat non effectué","Erreur",JOptionPane.DEFAULT_OPTION);
+		}
+		
 		
 	}
 	}
