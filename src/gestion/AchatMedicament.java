@@ -7,13 +7,6 @@ public class AchatMedicament {
 
 	int Quantite;
 	Medicament Medicament;
-	
-	public static List<AchatMedicament> achatMedicament = new ArrayList<AchatMedicament>();
-	
-	
-	public AchatMedicament() {
-		initAchatMedicament();
-	}
 	/**
 	 * 
 	 * @param Medicament
@@ -22,10 +15,6 @@ public class AchatMedicament {
 	public AchatMedicament(Medicament Medicament, int Quantite) {
 		this.Medicament = Medicament;
 		this.Quantite = Quantite;
-	}
-	
-	public void initAchatMedicament() {
-		achatMedicament.add(new AchatMedicament(gestion.Medicament.getMedicament(0), 2));
 	}
 	/**
 	 * 
@@ -57,21 +46,6 @@ public class AchatMedicament {
 	 */
 	public void setQuantite(int quantite) {
 		Quantite = quantite;
-	}
-	/**
-	 * 
-	 * @param i
-	 * @return
-	 */
-	public static AchatMedicament getAchatMedicament(int i) {
-		return achatMedicament.get(i);
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public static List<AchatMedicament> getAchatMedicament() {
-		return achatMedicament;
 	}
 	
 

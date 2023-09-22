@@ -11,11 +11,11 @@ import javax.swing.border.LineBorder;
 
 
 import gestion.AchatMedicament;
+import gestion.Declaration;
+import gestion.Medecin;
 import gestion.Medicament;
-
-import people.Medecin;
-import people.Mutuelle;
-import people.Specialiste;
+import gestion.Mutuelle;
+import gestion.Specialiste;
 import utilitaire.Adresse;
 import utilitaire.Personne;
 
@@ -56,14 +56,7 @@ public class Outil_Gestion {
 	 * Create the application.
 	 */
 	public Outil_Gestion() {
-		Adresse adr = new Adresse();
-		Personne test = new Personne();
-		Mutuelle mut = new Mutuelle();
-		Specialiste spe = new Specialiste();
-		Medecin med = new Medecin();
-		Medicament medi = new Medicament();
-		AchatMedicament achatmedi = new AchatMedicament();
-		liste = new Liste();
+		Declaration decla = new Declaration();
 		listed = new HistoriqueOrdonnances();
 		listeds = new HistoriqueAchat();
 		initialize();

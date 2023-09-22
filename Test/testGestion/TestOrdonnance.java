@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import gestion.Medecin;
 import gestion.Ordonnance;
-import people.Medecin;
-import people.Specialiste;
+import gestion.Specialiste;
 import utilitaire.Adresse;
 import utilitaire.Personne;
 

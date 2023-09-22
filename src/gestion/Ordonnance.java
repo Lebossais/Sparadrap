@@ -4,15 +4,12 @@ package gestion;
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import people.Medecin;
-import people.Specialiste;
-
 public class Ordonnance {
 	
 	private String Num_Ordonnance;
 	private String Date_Ordonnance;
-	public people.Medecin Medecin;
-	public people.Specialiste Specialiste;
+	public gestion.Medecin Medecin;
+	public gestion.Specialiste Specialiste;
 	
 	/**
 	 * 
@@ -60,28 +57,28 @@ public class Ordonnance {
 	 * 
 	 * @return
 	 */
-	public people.Medecin getMedecin() {
+	public gestion.Medecin getMedecin() {
 		return Medecin;
 	}
 	/**
 	 * 
 	 * @param medecin
 	 */
-	public void setMedecin(people.Medecin medecin) {
+	public void setMedecin(gestion.Medecin medecin) {
 		Medecin = medecin;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public people.Specialiste getSpecialiste() {
+	public gestion.Specialiste getSpecialiste() {
 		return Specialiste;
 	}
 	/**
 	 * 
 	 * @param specialiste
 	 */
-	public void setSpecialiste(people.Specialiste specialiste) {
+	public void setSpecialiste(gestion.Specialiste specialiste) {
 		Specialiste = specialiste;
 	}
 	/**

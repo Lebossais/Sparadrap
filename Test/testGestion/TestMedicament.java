@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import gestion.Categorie_Medicament;
+import enumeration.Categorie_Medicament;
 import gestion.Medicament;
 
 class TestMedicament {

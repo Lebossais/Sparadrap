@@ -1,10 +1,8 @@
-package people;
+package gestion;
 
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import gestion.AchatMedicament;
-import gestion.Ordonnance;
 import utilitaire.Personne;
 
 public class Achats {
@@ -12,7 +10,7 @@ public class Achats {
 	Personne Personne;
 	private Mutuelle Mutuelle;
 	private String Date;
-	Ordonnance Ordonnance;
+	public Ordonnance Ordonnance;
 	AchatMedicament Medicament;
 
 	/**

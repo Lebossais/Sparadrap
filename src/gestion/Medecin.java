@@ -1,6 +1,4 @@
-package people;
-
-import java.util.ArrayList;
+package gestion;
 
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
@@ -10,7 +8,6 @@ import utilitaire.Personne;
 public class Medecin {
 	public Personne Personne;
 	private int Aggrement;
-	static ArrayList<Medecin> medecin = new ArrayList<Medecin>();
 
 	/**
 	 * 
@@ -22,32 +19,6 @@ public class Medecin {
 		
 		this.Personne = Personne;
 		this.Aggrement = Aggrement;
-	}
-	
-	public Medecin() {
-		initMedecin();
-	}
-	
-	void initMedecin() {
-		Medecin Med_Michel = new Medecin(utilitaire.Personne.getPersonne(3), 1);
-		medecin.add(Med_Michel);
-        Medecin Med_Gaeten = new Medecin(utilitaire.Personne.getPersonne(4), 2);
-        medecin.add(Med_Gaeten);
-	}
-	/**
-	 * 
-	 * @param i
-	 * @return
-	 */
-	public static Medecin getMedecin(int i) {
-		return medecin.get(i);
-	}
-	/**
-	 * 
-	 * @param medecin
-	 */
-	public static void setMedecin(ArrayList<Medecin> medecin) {
-		Medecin.medecin = medecin;
 	}
 	/**
 	 * 

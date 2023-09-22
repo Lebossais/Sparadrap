@@ -15,7 +15,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import people.Client;
+import gestion.Client;
+import gestion.Declaration;
 import people.ListeClient;
 import java.awt.Toolkit;
 
@@ -151,7 +152,7 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Client c : ListeClient.getClients()) {
+    for (Client c : Declaration.getClients()) {
     	if (c.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
     	}

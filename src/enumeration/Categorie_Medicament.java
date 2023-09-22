@@ -1,4 +1,4 @@
-package gestion;
+package enumeration;
 
 public enum Categorie_Medicament {
 	

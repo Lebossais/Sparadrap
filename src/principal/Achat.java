@@ -9,14 +9,15 @@ import java.awt.BorderLayout;
 
 
 import gestion.AchatMedicament;
+import gestion.Achats;
+import gestion.Declaration;
+import gestion.Medecin;
 import gestion.Medicament;
+import gestion.Mutuelle;
 import gestion.Ordonnance;
-import people.Achats;
+import gestion.Specialiste;
 import people.ListeAchat;
 import people.ListeOrdonnance;
-import people.Medecin;
-import people.Mutuelle;
-import people.Specialiste;
 import utilitaire.Personne;
 
 import java.awt.event.ActionListener;
@@ -148,35 +149,39 @@ public class Achat {
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(25, 103, 92, 22);
 		panel_1.add(comboBoxMutuelle);
-		comboBoxMutuelle.addItem(people.Mutuelle.getMutuelle(0).getPersonne().getPrenom());
-		comboBoxMutuelle.addItem(people.Mutuelle.getMutuelle(1).getPersonne().getPrenom());
+		comboBoxMutuelle.addItem(Declaration.getMutuelle(0).getPersonne().getPrenom());
+		comboBoxMutuelle.addItem(Declaration.getMutuelle(1).getPersonne().getPrenom());
 		
 		comboBoxMed = new JComboBox ();
 		comboBoxMed.setEnabled(false);
 		comboBoxMed.setBounds(25, 350, 92, 22);
 		panel_1.add(comboBoxMed);
-		comboBoxMed.addItem(people.Medecin.getMedecin(0).getPersonne().getPrenom());
-		comboBoxMed.addItem(people.Medecin.getMedecin(1).getPersonne().getPrenom());
+		comboBoxMed.addItem(Declaration.getMedecin(0).getPersonne().getPrenom());
+		comboBoxMed.addItem(Declaration.getMedecin(1).getPersonne().getPrenom());
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setEnabled(false);
 		comboBoxSpe.setBounds(146, 350, 92, 22);
 		panel_1.add(comboBoxSpe);
-		comboBoxSpe.addItem(people.Specialiste.getSpecialiste(0).getPersonne().getPrenom());
-		comboBoxSpe.addItem(people.Specialiste.getSpecialiste(1).getPersonne().getPrenom());
+		comboBoxSpe.addItem(Declaration.getSpecialiste(0).getPersonne().getPrenom());
+		comboBoxSpe.addItem(Declaration.getSpecialiste(1).getPersonne().getPrenom());
 		comboBoxSpe.addItem(null);
 		
 		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(25, 42, 92, 22);
 		panel_1.add(comboBoxClient);
-		comboBoxClient.addItem(people.ListeClient.getClient(0).getPersonne().getPrenom());
-		comboBoxClient.addItem(people.ListeClient.getClient(1).getPersonne().getPrenom());
-		comboBoxClient.addItem(people.ListeClient.getClient(2).getPersonne().getPrenom());
+		comboBoxClient.addItem(Declaration.getClient(0).getPersonne().getPrenom());
+		comboBoxClient.addItem(Declaration.getClient(1).getPersonne().getPrenom());
+		comboBoxClient.addItem(Declaration.getClient(2).getPersonne().getPrenom());
 		
 		comboBoxMedicament = new JComboBox();
 		comboBoxMedicament.setBounds(46, 191, 130, 29);
 		panel_1.add(comboBoxMedicament);
-		comboBoxMedicament.addItem(gestion.Medicament.getMedicament(0).getNom());
+		comboBoxMedicament.addItem(Declaration.getMedicament(0).getNom());
+		comboBoxMedicament.addItem(Declaration.getMedicament(1).getNom());
+		comboBoxMedicament.addItem(Declaration.getMedicament(2).getNom());
+		comboBoxMedicament.addItem(Declaration.getMedicament(3).getNom());
+		
 		
 		txtQuantite = new JTextField();
 		txtQuantite.setColumns(10);
@@ -231,16 +236,16 @@ public class Achat {
 		try {
 		for(i = 0; i < comboBoxClient.getItemCount();i++) {
 			 Object p = comboBoxClient.getSelectedItem();
-		if (p.equals(people.ListeClient.getClient(i).getPersonne().getPrenom())) {
-		c = people.ListeClient.getClient(i).getPersonne();
-		n = people.ListeClient.getClient(i).getNumero_Secu();
+		if (p.equals(Declaration.getClient(i).getPersonne().getPrenom())) {
+		c = Declaration.getClient(i).getPersonne();
+		n = Declaration.getClient(i).getNumero_Secu();
 		break;
 		}
 		}
 		for(i = 0; i < comboBoxMutuelle.getItemCount();i++) {
 			 Object p = comboBoxMutuelle.getSelectedItem();
-		if (p.equals(people.Mutuelle.getMutuelle(i).getPersonne().getPrenom())) {
-		a = people.Mutuelle.getMutuelle(i);
+		if (p.equals(Declaration.getMutuelle(i).getPersonne().getPrenom())) {
+		a = Declaration.getMutuelle(i);
 		break;
 		}
 		}
@@ -249,8 +254,8 @@ public class Achat {
 		if( b == true) {
 			for(i =0; i<comboBoxMed.getItemCount();i++) {
 				Object p = comboBoxMed.getSelectedItem();
-				if (p.equals(people.Medecin.getMedecin(i).getPersonne().getPrenom())) {
-				o = people.Medecin.getMedecin(i);
+				if (p.equals(Declaration.getMedecin(i).getPersonne().getPrenom())) {
+				o = Declaration.getMedecin(i);
 				break;
 				}
 			}
@@ -259,32 +264,32 @@ public class Achat {
 				 if (p == null) {
 					s = null;
 					break;
-				 }else if (p.equals(people.Specialiste.getSpecialiste(i).getPersonne().getPrenom())) {
-						s = people.Specialiste.getSpecialiste(i);
+				 }else if (p.equals(Declaration.getSpecialiste(i).getPersonne().getPrenom())) {
+						s = Declaration.getSpecialiste(i);
 				break;
 				}
 			}
-		ListeOrdonnance.ordonnances.add(new Ordonnance(txtNumOrdonnance.getText(),o,s, txtDateOrdonnance.getText()));
+			Declaration.ordonnances.add(new Ordonnance(txtNumOrdonnance.getText(),o,s, txtDateOrdonnance.getText()));
 		}
 		
 		for (i = 0; i<comboBoxMedicament.getItemCount();i++) {
 			Object p = comboBoxMedicament.getSelectedItem();
-			if (p.equals(gestion.Medicament.getMedicament(i).getNom()));
-			m = gestion.Medicament.getMedicament(i);
+			if (p.equals(Declaration.getMedicament(i).getNom()));
+			m = Declaration.getMedicament(i);
 		}
 		Integer nombre = Integer.valueOf(txtQuantite.getText());
-		AchatMedicament.achatMedicament.add(new AchatMedicament(m, nombre));
+		Declaration.achatMedicament.add(new AchatMedicament(m, nombre));
 		
 		if (b == false) {
-		ListeAchat.achats.add(new Achats(c, a ,n , t, null, AchatMedicament.getAchatMedicament(AchatMedicament.achatMedicament.size()-1)));
+		Declaration.achats.add(new Achats(c, a ,n , t, null, Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1)));
 		} else if ( b == true ) {
-			ListeAchat.achats.add(new Achats(c, a ,n , t, ListeOrdonnance.getOrdonnance(ListeOrdonnance.ordonnances.size()-1),AchatMedicament.getAchatMedicament(AchatMedicament.achatMedicament.size()-1) ));	
+			Declaration.achats.add(new Achats(c, a ,n , t, Declaration.getOrdonnance(Declaration.ordonnances.size()-1),Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1) ));	
 		}
 	Achat.dispose();
 	int input = JOptionPane.showConfirmDialog(null, 
             "Nouvel achat effectué", "Validation", JOptionPane.DEFAULT_OPTION);
 		}catch (java.lang.NumberFormatException e2){
-			JOptionPane.showConfirmDialog(null, "Achat non effectué","Erreur",JOptionPane.DEFAULT_OPTION);
+			JOptionPane.showConfirmDialog(null, "Achat non effectué ","Erreur",JOptionPane.DEFAULT_OPTION);
 		}
 		
 		

@@ -1,7 +1,8 @@
-package people;
+package gestion;
 
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
+
 import utilitaire.Personne;
 
 public class Client {
