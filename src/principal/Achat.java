@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 
 import gestion.AchatMedicament;
 import gestion.Achats;
+import gestion.Client;
 import gestion.Declaration;
 import gestion.Medecin;
 import gestion.Medicament;
@@ -149,38 +150,40 @@ public class Achat {
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(25, 103, 92, 22);
 		panel_1.add(comboBoxMutuelle);
-		comboBoxMutuelle.addItem(Declaration.getMutuelle(0).getPersonne().getPrenom());
-		comboBoxMutuelle.addItem(Declaration.getMutuelle(1).getPersonne().getPrenom());
+		for(Mutuelle mutuelle : Declaration.mutuelle) {
+		comboBoxMutuelle.addItem(mutuelle.getPersonne().getPrenom());
+		}
 		
 		comboBoxMed = new JComboBox ();
 		comboBoxMed.setEnabled(false);
 		comboBoxMed.setBounds(25, 350, 92, 22);
 		panel_1.add(comboBoxMed);
-		comboBoxMed.addItem(Declaration.getMedecin(0).getPersonne().getPrenom());
-		comboBoxMed.addItem(Declaration.getMedecin(1).getPersonne().getPrenom());
+		for(Medecin medecin : Declaration.medecin) {
+			comboBoxMed.addItem(medecin.getPersonne().getPrenom());
+		}
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setEnabled(false);
 		comboBoxSpe.setBounds(146, 350, 92, 22);
 		panel_1.add(comboBoxSpe);
-		comboBoxSpe.addItem(Declaration.getSpecialiste(0).getPersonne().getPrenom());
-		comboBoxSpe.addItem(Declaration.getSpecialiste(1).getPersonne().getPrenom());
+		for(Specialiste specialiste : Declaration.specialiste) {
+			comboBoxSpe.addItem(specialiste.getPersonne().getPrenom());
+		}
 		comboBoxSpe.addItem(null);
 		
 		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(25, 42, 92, 22);
 		panel_1.add(comboBoxClient);
-		comboBoxClient.addItem(Declaration.getClient(0).getPersonne().getPrenom());
-		comboBoxClient.addItem(Declaration.getClient(1).getPersonne().getPrenom());
-		comboBoxClient.addItem(Declaration.getClient(2).getPersonne().getPrenom());
+		for(Client clients : Declaration.clients) {
+			comboBoxClient.addItem(clients.getPersonne().getPrenom());
+		}
 		
 		comboBoxMedicament = new JComboBox();
 		comboBoxMedicament.setBounds(46, 191, 130, 29);
 		panel_1.add(comboBoxMedicament);
-		comboBoxMedicament.addItem(Declaration.getMedicament(0).getNom());
-		comboBoxMedicament.addItem(Declaration.getMedicament(1).getNom());
-		comboBoxMedicament.addItem(Declaration.getMedicament(2).getNom());
-		comboBoxMedicament.addItem(Declaration.getMedicament(3).getNom());
+		for(Medicament medicament : Declaration.medicament) {
+			comboBoxMedicament.addItem(medicament.getNom());
+		}
 		
 		
 		txtQuantite = new JTextField();

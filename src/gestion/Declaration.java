@@ -15,8 +15,8 @@ public class Declaration {
 	public static ArrayList<Adresse> adresse = new ArrayList<Adresse>();
 	public static ArrayList<Personne> personne = new ArrayList<Personne>();
 	public static ArrayList<Medecin> medecin = new ArrayList<Medecin>();
-	static ArrayList<Specialiste> specialiste = new ArrayList<Specialiste>();
-	static ArrayList<Mutuelle> mutuelle = new ArrayList<Mutuelle>();
+	public static ArrayList<Specialiste> specialiste = new ArrayList<Specialiste>();
+	public static ArrayList<Mutuelle> mutuelle = new ArrayList<Mutuelle>();
 	public static List<Medicament> medicament = new ArrayList<Medicament>();
 	public static List<AchatMedicament> achatMedicament = new ArrayList<AchatMedicament>();
 	public static List<Client> clients = new ArrayList<Client>();
@@ -62,9 +62,9 @@ public class Declaration {
 			
 	     achatMedicament.add(new AchatMedicament(getMedicament(0), 2));
 		
-		 getClients().add(new Client(getPersonne(0), "05/05/1998", "582 158 598 325 21", getMutuelle(0),getMedecin(0),getSpecialiste(0)));
-	     getClients().add(new Client(getPersonne(1),"09/09/1986", "582 256 584 235 21",getMutuelle(0),getMedecin(0),getSpecialiste(1) ));
-	     getClients().add(new Client(getPersonne(2), "15/12/2000","582 698 874 236 21",getMutuelle(1),getMedecin(1),null ));
+		 getClients().add(new Client(getPersonne(0), "05/05/1998", "2012345678", getMutuelle(0),getMedecin(0),getSpecialiste(0)));
+	     getClients().add(new Client(getPersonne(1),"09/09/1986", "2012345689",getMutuelle(0),getMedecin(0),getSpecialiste(1) ));
+	     getClients().add(new Client(getPersonne(2), "15/12/2000","2012345679",getMutuelle(1),getMedecin(1),null ));
 	     
 	  		ordonnances.add(new Ordonnance("183",Declaration.getMedecin(1) , Declaration.getSpecialiste(0) ,"30/08/2023"));
     		ordonnances.add(new Ordonnance("184", Declaration.getMedecin(0) , Declaration.getSpecialiste(1) ,"30/08/2023"));
@@ -75,7 +75,7 @@ public class Declaration {
             ordonnances.add(new Ordonnance("182", Declaration.getMedecin(1) , Declaration.getSpecialiste(0) ,"30/08/2023"));
             ordonnances.add(new Ordonnance("180", Declaration.getMedecin(1) , Declaration.getSpecialiste(1) ,"30/08/2023"));
             
-            achats.add(new Achats(Declaration.getPersonne(0),Declaration.getMutuelle(0),"582 158 598 325 21","31/08/2023", Declaration.getOrdonnance(0), Declaration.getAchatMedicament(0)));
+            achats.add(new Achats(Declaration.getPersonne(0),Declaration.getMutuelle(0),"2012345678","31/08/2023", Declaration.getOrdonnance(0), Declaration.getAchatMedicament(0)));
 	}
 	
 	
@@ -130,7 +130,6 @@ public class Declaration {
 	public static void setMedicament(List<Medicament> medicament) {
 		Declaration.medicament = medicament;
 	}
-	
 	
 	public static List<AchatMedicament> getAchatMedicament() {
 		return achatMedicament;

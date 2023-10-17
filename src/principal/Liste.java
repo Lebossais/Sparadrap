@@ -40,6 +40,7 @@ public Liste() {
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));
+    boutons.add(new JButton(new NouveauAction()));
     boutons.add(new JButton(new RemoveAction()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
@@ -67,14 +68,6 @@ private class RemoveAction extends AbstractAction {
 	private RemoveAction() {
         super("Supprimmer");
     }
-
-//    public void actionPerformed(ActionEvent e) {
-//        int[] selection = tableau.getSelectedRows();
-//
-//        for(int i = selection.length - 1; i >= 0; i--){
-//            modele.removeClient(selection[i]);
-//        }
-//    }
  public void actionPerformed(ActionEvent e) {
     int[] selection = tableau.getSelectedRows();
     int[] modelIndexes = new int[selection.length];
@@ -87,12 +80,14 @@ private class RemoveAction extends AbstractAction {
 
     for(int i = modelIndexes.length - 1; i >= 0; i--){
         modele.removeClient(modelIndexes[i]);
+        revalidate();
+        repaint();
     }
+    
  }
 	
 
 }
-
 class FilterAction extends AbstractAction {
 /**
 	 * 
@@ -131,7 +126,6 @@ class RetourAction extends AbstractAction {
 		
 	}	
 	}
-
 private class InformationsAction extends AbstractAction {
     /**
 	 * 
@@ -180,5 +174,18 @@ class QuitterAction extends AbstractAction {
 		}
 	}
 	
+}
+class NouveauAction extends AbstractAction {
+	private static final long serialVersionUID = 1L;
+	private NouveauAction() {
+		super("Nouveau Client");
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Template_Client template_client = new Template_Client();
+		Template_Client.template_frame.setVisible(true);
+		
+	}
 }
 }

@@ -1,9 +1,12 @@
 package gestion;
 
+import java.util.regex.Pattern;
+
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
 import utilitaire.Personne;
+import utilitaire.Regex;
 
 public class Client {
 	private String Date_Naissance;
@@ -25,13 +28,12 @@ public class Client {
 	public Client(Personne Personne, String Date_Naissance,String Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
 		
-		this.Personne = Personne;
+		setPersonne(Personne);
 		this.Date_Naissance = Date_Naissance;
-		this.Numero_Secu = Numero_Secu;
-		this.Mutuelle = Mutuelle;
-		this.Medecin_Traitant = Medecin_Traitant;
-		this.Specialiste = Specialiste;
-		
+		setNumero_Secu(Numero_Secu);
+		setMutuelle(Mutuelle);;
+		setMedecin_Traitant(Medecin_Traitant);
+		setSpecialiste(Specialiste);
 	}
 
 
@@ -61,7 +63,16 @@ public class Client {
 	 * @param mutuelle
 	 */
 	public void setMutuelle(Mutuelle mutuelle) {
-		Mutuelle = mutuelle;
+		try {
+            if (mutuelle == null) {
+                throw new NullPointerException("la mutuelle ne peut etre null");
+            } else {
+                this.Mutuelle = mutuelle;
+            }
+        }
+        catch(Exception exception){
+            
+        }
 	}
 	/**
 	 * 
@@ -75,7 +86,16 @@ public class Client {
 	 * @param personne
 	 */
 	public void setPersonne(Personne personne) {
-		Personne = personne;
+		try {
+            if (Personne == null) {
+                throw new NullPointerException("la Personne ne peut etre null");
+            } else {
+                this.Personne = personne;
+            }
+        }
+        catch(Exception exception){
+            
+        }
 	}
 	/**
 	 * 
@@ -102,8 +122,13 @@ public class Client {
 	 * 
 	 * @param numero_Secu
 	 */
-	public void setNumero_Secu(String numero_Secu) {
-		Numero_Secu = numero_Secu;
+	public void setNumero_Secu(String numero_Secu)throws IllegalArgumentException {
+		if (Pattern.matches(Regex.getRegexSecu, numero_Secu)) {
+		this.Numero_Secu = numero_Secu;
+		}
+		else {
+			throw new IllegalArgumentException("Numéro de Sécurité Sociale incorrecte");
+		}
 	}
 	/**
 	 * 
@@ -117,7 +142,16 @@ public class Client {
 	 * @param medecin_Traitant
 	 */
 	public void setMedecin_Traitant(Medecin medecin_Traitant) {
-		Medecin_Traitant = medecin_Traitant;
+		try {
+            if (Medecin_Traitant == null) {
+                throw new NullPointerException("le médecin Traitant ne peut etre null");
+            } else {
+                this.Medecin_Traitant = medecin_Traitant;
+            }
+        }
+        catch(Exception exception){
+            
+        }
 	}
 	/**
 	 * 
