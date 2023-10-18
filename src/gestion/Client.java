@@ -60,14 +60,14 @@ public class Client {
 	}
 	/**
 	 * 
-	 * @param mutuelle
+	 * @param Mutuelle
 	 */
-	public void setMutuelle(Mutuelle mutuelle) {
+	public void setMutuelle(Mutuelle Mutuelle) {
 		try {
-            if (mutuelle == null) {
-                throw new NullPointerException("la mutuelle ne peut etre null");
+            if (Mutuelle == null) {
+                throw new NullPointerException("la Mutuelle ne peut etre null");
             } else {
-                this.Mutuelle = mutuelle;
+                this.Mutuelle = Mutuelle;
             }
         }
         catch(Exception exception){
@@ -83,7 +83,7 @@ public class Client {
 	}
 	/**
 	 * 
-	 * @param personne
+	 * @param Personne
 	 */
 	public void setPersonne(Personne Personne) {
 		try {
@@ -139,7 +139,7 @@ public class Client {
 	}
 	/**
 	 * 
-	 * @param medecin_Traitant
+	 * @param Medecin_Traitant
 	 */
 	public void setMedecin_Traitant(Medecin Medecin_Traitant) {
 		try {
@@ -162,7 +162,7 @@ public class Client {
 	}
 	/**
 	 * 
-	 * @param specialiste
+	 * @param Specialiste
 	 */
 	public void setSpecialiste(Specialiste Specialiste) {
 		this.Specialiste = Specialiste;

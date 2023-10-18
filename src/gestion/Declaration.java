@@ -34,17 +34,17 @@ public class Declaration {
 	     adresse.add(new Adresse (17,"Rue des Soins", 59842, "Dunkerque"));
 	     adresse.add(new Adresse (25,"Rue des Concurrents", 62000, "Lens"));
 	     
-		 personne.add(new Personne("Jean","Fouqueaut", getAdresse(0) , "06.55.99.88.77", "Jean.Fouqueaut@gmail.com"));
-	     personne.add(new Personne("Sarah", "Dupond" , getAdresse(1) , "06.84.52.67.58", "Sarah.Dupont@hotmail.com"));
-	     personne.add(new Personne("Marie", "Petain", getAdresse(2), "06.52.14.58.96", "Marie.Durand@orange.fr"));
+		 personne.add(new Personne("Jean","Fouqueaut", getAdresse(0) , "0655998877", "Jean.Fouqueaut@gmail.com"));
+	     personne.add(new Personne("Sarah", "Dupond" , getAdresse(1) , "0684526758", "Sarah.Dupont@hotmail.com"));
+	     personne.add(new Personne("Marie", "Petain", getAdresse(2), "0652145896", "Marie.Durand@orange.fr"));
 	        
-	     personne.add(new Personne("Michel","Michel",getAdresse(3),"06.58.44.22.69","Michel.Michel@medecin.fr"));
-	     personne.add(new Personne("Gaeten","Mortis", getAdresse(3),"06.59.45.23.70","Gaeten.Mortis@medecin.fr"));
-	     personne.add(new Personne("Paul","Special", getAdresse(3), "06.60.46.24.71","Paul.Special@specialiste.fr"));
-	     personne.add(new Personne("Jacqueline","Speciale", getAdresse(3), "06.61.47.25.72","Jacequline.Speciale@specialiste.fr"));
+	     personne.add(new Personne("Michel","Michel",getAdresse(3),"0658442269","Michel.Michel@medecin.fr"));
+	     personne.add(new Personne("Gaeten","Mortis", getAdresse(3),"0659452370","Gaeten.Mortis@medecin.fr"));
+	     personne.add(new Personne("Paul","Special", getAdresse(3), "0660462471","Paul.Special@specialiste.fr"));
+	     personne.add(new Personne("Jacqueline","Speciale", getAdresse(3), "0661472572","Jacequline.Speciale@specialiste.fr"));
 	       
-	     personne.add(new Personne("Acoris","Mutuelle",getAdresse(4), "06.72.25.47.61","Acoris.Mutuelle@mutuelle.fr"));
-	     personne.add(new Personne("France","Mutuelle",getAdresse(4) , "06.73.26.48.62","France.Mutuelle@mutuelle.fr"));
+	     personne.add(new Personne("Acoris","Mutuelle",getAdresse(4), "0672254761","Acoris.Mutuelle@mutuelle.fr"));
+	     personne.add(new Personne("France","Mutuelle",getAdresse(4) , "0673264862","France.Mutuelle@mutuelle.fr"));
 	     
 	     medecin.add(new Medecin(getPersonne(3), 1));
 	     medecin.add(new Medecin(getPersonne(4), 2));

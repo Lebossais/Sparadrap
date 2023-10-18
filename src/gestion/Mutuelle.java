@@ -21,7 +21,7 @@ public class Mutuelle {
 	public Mutuelle(Personne Personne, int Departement, int Prise_En_Charge) {
 		super();
 		
-		this.Personne = Personne;
+		setPersonne(Personne);
 		this.Departement = Departement ;
 		this.Prise_En_Charge = Prise_En_Charge;
 	}
@@ -34,10 +34,17 @@ public class Mutuelle {
 	}
 	/**
 	 * 
-	 * @param personne
+	 * @param Personne
 	 */
-	public void setPersonne(Personne personne) {
-		Personne = personne;
+	public void setPersonne(Personne Personne) {
+		try {
+			if (Personne == null) {
+				throw new NullPointerException("la Personne ne peut etre null");
+			} else {
+				this.Personne = Personne;
+			}
+		} catch (Exception exception) {
+		}
 	}
 	/**
 	 * 

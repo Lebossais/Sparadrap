@@ -4,6 +4,9 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
 import utilitaire.Personne;
+import utilitaire.Regex;
+
+import java.util.regex.Pattern;
 
 public class Achats {
 	private String Num_Secu;
@@ -24,9 +27,9 @@ public class Achats {
 	 */
 	public Achats(Personne Personne, Mutuelle Mutuelle, String Num_Secu, String Date, Ordonnance Ordonnance, gestion.AchatMedicament Medicament) {
 		super();
-		this.Personne = Personne;
-		this.Mutuelle = Mutuelle;
-		this.Num_Secu = Num_Secu;
+		setPersonne(Personne);
+		setMutuelle(Mutuelle);
+		setNum_Secu(Num_Secu);
 		this.Date = Date;
 		this.Ordonnance = Ordonnance;
 		this.Medicament = Medicament;
@@ -40,10 +43,15 @@ public class Achats {
 	}
 /**
  * 
- * @param num_Secu
+ * @param Num_Secu
  */
-	public void setNum_Secu(String num_Secu) {
-		Num_Secu = num_Secu;
+	public void setNum_Secu(String Num_Secu) {
+		if (Pattern.matches(Regex.getRegexSecu, Num_Secu)) {
+			this.Num_Secu = Num_Secu;
+		}
+		else {
+			throw new IllegalArgumentException("Numéro de Sécurité Sociale incorrecte");
+		}
 	}
 /**
  * 
@@ -54,10 +62,19 @@ public class Achats {
 	}
 /**
  * 
- * @param personne
+ * @param Personne
  */
-	public void setPersonne(Personne personne) {
-		Personne = personne;
+	public void setPersonne(Personne Personne) {
+		try {
+			if (Personne == null) {
+				throw new NullPointerException("la Personne ne peut etre null");
+			} else {
+				this.Personne = Personne;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 /**
  * 
@@ -68,10 +85,19 @@ public class Achats {
 	}
 /**
  * 
- * @param mutuelle
+ * @param Mutuelle
  */
-	public void setMutuelle(Mutuelle mutuelle) {
-		Mutuelle = mutuelle;
+	public void setMutuelle(Mutuelle Mutuelle) {
+		try {
+			if (Mutuelle == null) {
+				throw new NullPointerException("la mutuelle ne peut etre null");
+			} else {
+				this.Mutuelle = Mutuelle;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 /**
  * 

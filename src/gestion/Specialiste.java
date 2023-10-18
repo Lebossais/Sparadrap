@@ -16,9 +16,9 @@ public class Specialiste {
 	 */
 	public Specialiste(Personne Personne, String Specialite) {
 		super();
-		
-		this.Personne = Personne;
-		this.Specialite = Specialite;
+
+		setPersonne(Personne);
+		setSpecialite(Specialite);
 	}
 
 	
@@ -31,10 +31,19 @@ public class Specialiste {
 	}
 	/**
 	 * 
-	 * @param personne
+	 * @param Personne
 	 */
-	public void setPersonne(Personne personne) {
-		Personne = personne;
+	public void setPersonne(Personne Personne) {
+		try {
+			if (Personne == null) {
+				throw new NullPointerException("la Personne ne peut etre null");
+			} else {
+				this.Personne = Personne;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 	/**
 	 * 
@@ -45,10 +54,19 @@ public class Specialiste {
 	}
 	/**
 	 * 
-	 * @param specialite
+	 * @param Specialite
 	 */
-	public void setSpecialite(String specialite) {
-		Specialite = specialite;
+	public void setSpecialite(String Specialite) {
+		try {
+			if (Personne == null) {
+				throw new NullPointerException("la Specialité ne peut etre null");
+			} else {
+				this.Specialite = Specialite;;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 	/**
 	 * 

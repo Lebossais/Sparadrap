@@ -8,17 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
-
-
-import gestion.AchatMedicament;
 import gestion.Declaration;
-import gestion.Medecin;
-import gestion.Medicament;
-import gestion.Mutuelle;
-import gestion.Specialiste;
-import utilitaire.Adresse;
-import utilitaire.Personne;
-
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
@@ -29,8 +19,6 @@ import java.awt.event.ActionEvent;
 public class Outil_Gestion {
 
 	int i = 0;
-	int l = 0;
-	int m = 0;
 	Liste liste = null;
 	HistoriqueOrdonnances listed = null;
 	HistoriqueAchat listeds = null;

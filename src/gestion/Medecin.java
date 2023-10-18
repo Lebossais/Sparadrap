@@ -17,7 +17,7 @@ public class Medecin {
 	public Medecin(Personne Personne, int Aggrement) {
 		super();
 		
-		this.Personne = Personne;
+		setPersonne(Personne);
 		this.Aggrement = Aggrement;
 	}
 	/**
@@ -29,10 +29,19 @@ public class Medecin {
 	}
 	/**
 	 * 
-	 * @param personne
+	 * @param Personne
 	 */
-	public void setPersonne(Personne personne) {
-		Personne = personne;
+	public void setPersonne(Personne Personne) {
+		try {
+			if (Personne == null) {
+				throw new NullPointerException("la Personne ne peut etre null");
+			} else {
+				this.Personne = Personne;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 	/**
 	 * 

@@ -13,7 +13,7 @@ public class AchatMedicament {
 	 * @param Quantite
 	 */
 	public AchatMedicament(Medicament Medicament, int Quantite) {
-		this.Medicament = Medicament;
+		setMedicament(Medicament);
 		this.Quantite = Quantite;
 	}
 	/**
@@ -31,7 +31,16 @@ public class AchatMedicament {
 		return Medicament;
 	}
 	public void setMedicament(Medicament medicament) {
-		Medicament = medicament;
+		try {
+			if (Medicament == null) {
+				throw new NullPointerException("Medicament ne peut etre null");
+			} else {
+				this.Medicament = Medicament;
+			}
+		}
+		catch(Exception exception){
+
+		}
 	}
 	/**
 	 * 
