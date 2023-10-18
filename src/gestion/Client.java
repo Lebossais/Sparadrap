@@ -85,12 +85,12 @@ public class Client {
 	 * 
 	 * @param personne
 	 */
-	public void setPersonne(Personne personne) {
+	public void setPersonne(Personne Personne) {
 		try {
             if (Personne == null) {
                 throw new NullPointerException("la Personne ne peut etre null");
             } else {
-                this.Personne = personne;
+                this.Personne = Personne;
             }
         }
         catch(Exception exception){
@@ -141,12 +141,12 @@ public class Client {
 	 * 
 	 * @param medecin_Traitant
 	 */
-	public void setMedecin_Traitant(Medecin medecin_Traitant) {
+	public void setMedecin_Traitant(Medecin Medecin_Traitant) {
 		try {
             if (Medecin_Traitant == null) {
                 throw new NullPointerException("le médecin Traitant ne peut etre null");
             } else {
-                this.Medecin_Traitant = medecin_Traitant;
+                this.Medecin_Traitant = Medecin_Traitant;
             }
         }
         catch(Exception exception){
@@ -164,8 +164,8 @@ public class Client {
 	 * 
 	 * @param specialiste
 	 */
-	public void setSpecialiste(Specialiste specialiste) {
-		Specialiste = specialiste;
+	public void setSpecialiste(Specialiste Specialiste) {
+		this.Specialiste = Specialiste;
 	}
 	/**
 	 * 

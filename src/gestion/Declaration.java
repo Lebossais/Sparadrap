@@ -98,6 +98,7 @@ public class Declaration {
 	public static Personne getPersonne(int i) {
 		return personne.get(i);
 	}
+	
 	public void setPersonne(ArrayList<Personne> personne) {
 		Declaration.personne = personne;
 	}
