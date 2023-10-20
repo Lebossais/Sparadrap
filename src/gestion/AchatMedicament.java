@@ -21,7 +21,7 @@ public class AchatMedicament {
 	 * @return
 	 */
 	public double prixtotal() {
-		double var2 = Medicament.getPrix();
+		double var2 = getMedicament().getPrix();
 		double var1 = Quantite;
 		return var1 * var2;
 	}
@@ -30,7 +30,7 @@ public class AchatMedicament {
 	public Medicament getMedicament() {
 		return Medicament;
 	}
-	public void setMedicament(Medicament medicament) {
+	public void setMedicament(Medicament Medicament) {
 		try {
 			if (Medicament == null) {
 				throw new NullPointerException("Medicament ne peut etre null");
@@ -60,7 +60,7 @@ public class AchatMedicament {
 
 	@Override
 	public String toString() {
-		return "\n Quantité : " + Quantite  + Medicament + "\n Prix total : " +prixtotal()+"€";
+		return "\n Quantité : " + Quantite  + Medicament + "\n Prix total : " + prixtotal()+"€";
 	}
 	
 	

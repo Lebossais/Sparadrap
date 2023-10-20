@@ -47,7 +47,7 @@ public Liste() {
     boutons.add(new JButton(new QuitterAction()));
 
     getContentPane().add(boutons, BorderLayout.SOUTH);
-    tableau.setAutoCreateRowSorter(true); 
+    tableau.setAutoCreateRowSorter(true);
     tableau.setRowSorter(sorter);
     sorter.setSortable(2, false);
     sorter.setSortsOnUpdates(true);
@@ -99,8 +99,6 @@ class FilterAction extends AbstractAction {
 private FilterAction() {
     super("Filtrer");
 }
-
-
 public void actionPerformed(ActionEvent e) {
 	try {
     String regex = JOptionPane.showInputDialog("Regex de filtre : ");

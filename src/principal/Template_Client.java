@@ -275,6 +275,7 @@ public class Template_Client {
 					}
 				}
 				Declaration.getClients().add(new Client(Declaration.personne.get(Declaration.personne.size() - 1), txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe));
+				//Client.getModel.ajouter(Client);
 				JOptionPane.showConfirmDialog(null, "Enregistrement  effectué ", "Validation - Création", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e2) {
 				JOptionPane.showConfirmDialog(null, "Enregistrement non effectué ", "Erreur - Client", JOptionPane.DEFAULT_OPTION);

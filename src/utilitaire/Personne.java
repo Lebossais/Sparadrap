@@ -25,7 +25,7 @@ public class Personne {
 		setName(Name);
 		this.Adresse = Adresse;
 		setTelephone(Telephone);
-		setAdresse(Adresse);
+		setEmail(Email);
 	}
 	/**
 	 * 

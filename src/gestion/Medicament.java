@@ -18,7 +18,7 @@ public class Medicament {
 	public Medicament (String Nom, Categorie_Medicament Categorie, int Prix, String Date_Mise_en_Service) {
 		super();
 		setNom(Nom);
-		this.Prix = Prix;
+		setPrix(Prix);
 		this.Categorie = Categorie;
 		this.Date_Mise_en_Service = Date_Mise_en_Service;
 	}
