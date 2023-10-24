@@ -20,12 +20,14 @@ import gestion.Declaration;
 import people.ListeClient;
 import java.awt.Toolkit;
 
+import static gestion.Declaration.clients;
+
 public class Liste extends JFrame {
 
 private static final long serialVersionUID = 1L;
-private ListeClient modele = new ListeClient();
+public static ListeClient modele = new ListeClient();
 private JTable tableau = new JTable(modele);;
-public JFrame frame;
+public static JFrame frame;
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 
@@ -68,7 +70,7 @@ private class RemoveAction extends AbstractAction {
 	private RemoveAction() {
         super("Supprimmer");
     }
- public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
     int[] selection = tableau.getSelectedRows();
     int[] modelIndexes = new int[selection.length];
 
@@ -80,12 +82,9 @@ private class RemoveAction extends AbstractAction {
 
     for(int i = modelIndexes.length - 1; i >= 0; i--){
         modele.removeClient(modelIndexes[i]);
-        revalidate();
-        repaint();
     }
-    
+	revalidate();
  }
-	
 
 }
 class FilterAction extends AbstractAction {
@@ -183,7 +182,7 @@ class NouveauAction extends AbstractAction {
 		// TODO Auto-generated method stub
 		Template_Client template_client = new Template_Client();
 		Template_Client.template_frame.setVisible(true);
-		
+
 	}
 }
 }
