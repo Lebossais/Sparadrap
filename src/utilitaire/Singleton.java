@@ -3,28 +3,28 @@ package utilitaire;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class Singleton {
 
-    private static final String PATHCONF = ".src/confDB.properties";
+    private static final String PATHCONF = "C:\\PROJET\\JAVA\\Sparadrap\\ressources\\confDB.properties";
     private static final Properties props = new Properties();
     private static Connection connection;
 
     private Singleton()
     {
-        try {
-            Class.forName( props.getProperty("jdbc.driver.class") );
 
-            FileInputStream file = new FileInputStream(PATHCONF) ;
+        try {
+              FileInputStream file = new FileInputStream(PATHCONF);
+
             props.load(file);
+            Class.forName( props.getProperty("jdbc.driver.class") );
             props.setProperty("user", props.getProperty("jdbc.login"));
             props.setProperty("password", props.getProperty("jdbc.password"));
 
             connection = DriverManager.getConnection(props.getProperty("jdbc.url"),props);
+            System.out.println("Connection établie");
 
         } catch (HeadlessException | IOException | SQLException | ClassNotFoundException e)
         {
@@ -36,7 +36,7 @@ public class Singleton {
         return connection;
     }
 
-    private static Connection getInstanceDB() {
+    public static Connection getInstanceDB() {
         if (getConnection() == null) {
             new Singleton();
             System.out.println("RelationWithDB infos : Connection etablished");
@@ -47,13 +47,28 @@ public class Singleton {
         return getConnection();
     }
 
-    private static void closeInstanceDB() {
+    public static void closeInstanceDB() {
         try {
             Singleton.getConnection().close();
             System.out.println("RelationWithDB infos : Connection terminated");
         }
         catch (SQLException sqle){
             System.out.println("RelationWithDB erreur : " + sqle.getMessage() + " [SQL errore code : " + sqle.getSQLState() + " ] " );
+        }
+    }
+
+    public static void RequeteTest(Connection con) {
+        try {
+            String test = "select * from Personne";
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(test);
+
+            while (resultSet.next()){
+                System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Erreur");
         }
     }
 }
