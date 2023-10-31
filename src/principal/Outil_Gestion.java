@@ -9,7 +9,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 import gestion.Declaration;
-import utilitaire.Singleton;
+import Configuration.SQL.Singleton;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -18,8 +18,6 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
-
-import utilitaire.Singleton;
 
 public class Outil_Gestion {
 

@@ -1,4 +1,4 @@
-package utilitaire;
+package Configuration.SQL;
 
 import java.awt.*;
 import java.io.FileInputStream;

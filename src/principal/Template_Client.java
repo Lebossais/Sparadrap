@@ -21,8 +21,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import static gestion.Declaration.clients;
-
 public class Template_Client {
 
 	static JFrame template_frame;
@@ -55,7 +53,7 @@ public class Template_Client {
 	private void initialize() {
 		template_frame = new JFrame();
 		template_frame.setTitle("Nouveau Client");
-		template_frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Template_Client.class.getResource("/swing/bank/Logo-removebg-preview.png")));
+		template_frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Template_Client.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
 		template_frame.setBounds(100, 100, 578, 458);
 		template_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		template_frame.getContentPane().setLayout(new BorderLayout(0, 0));
