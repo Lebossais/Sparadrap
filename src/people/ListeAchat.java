@@ -41,7 +41,11 @@ public class ListeAchat extends AbstractTableModel {
             return Declaration.achats.get(rowIndex).getNum_Secu();
         case 2 :
         	//Problème concernant une commande sans Ordonnance arrive. Essayer différentes choses mais impossible de remplacer.
-            return Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance();
+			if (Declaration.achats.get(rowIndex).getOrdonnance() == null) {
+				return null;
+			}else if (Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance() !=null) {
+				return Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance();
+			}
         case 3 :
         	return Declaration.achats.get(rowIndex).getDate();
         default:

@@ -17,8 +17,8 @@ public class Medicament {
 	 */
 	public Medicament (String Nom, Categorie_Medicament Categorie, int Prix, String Date_Mise_en_Service) {
 		super();
-		this.Nom = Nom;
-		this.Prix = Prix;
+		setNom(Nom);
+		setPrix(Prix);
 		this.Categorie = Categorie;
 		this.Date_Mise_en_Service = Date_Mise_en_Service;
 	}
@@ -32,10 +32,17 @@ public class Medicament {
 	}
 	/**
 	 * 
-	 * @param nom
+	 * @param Nom
 	 */
-	public void setNom(String nom) {
-		this.Nom = nom;
+	public void setNom(String Nom) {
+		try {
+			if (Nom == null) {
+				throw new NullPointerException("le Nom ne peut etre null");
+			} else {
+				this.Nom = Nom;
+			}
+		} catch (Exception exception) {
+		}
 	}
 	/**
 	 * 

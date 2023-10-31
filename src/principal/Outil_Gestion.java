@@ -8,16 +8,8 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
-
-
-import gestion.AchatMedicament;
 import gestion.Declaration;
-import gestion.Medecin;
-import gestion.Medicament;
-import gestion.Mutuelle;
-import gestion.Specialiste;
-import utilitaire.Adresse;
-import utilitaire.Personne;
+import utilitaire.Singleton;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -25,12 +17,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+
+import utilitaire.Singleton;
 
 public class Outil_Gestion {
 
 	int i = 0;
-	int l = 0;
-	int m = 0;
 	Liste liste = null;
 	HistoriqueOrdonnances listed = null;
 	HistoriqueAchat listeds = null;
@@ -46,6 +39,9 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
+					Connection con = Singleton.getInstanceDB();
+					Singleton.RequeteTest(con);
+					Singleton.closeInstanceDB();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

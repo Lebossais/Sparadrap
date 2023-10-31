@@ -1,65 +1,77 @@
 package utilitaire;
 
 import javax.swing.table.TableModel;
+import java.util.regex.Pattern;
 
 public class Personne {
 
-	private String prenom ;
-	private String name ;
+	private String Prenom ;
+	private String Name ;
 	private Adresse Adresse;
-	private String telephone;
-	private String email;
+	private String Telephone;
+	private String Email;
 	
 	/**
 	 * 
-	 * @param prenom
-	 * @param name
+	 * @param Prenom
+	 * @param Name
 	 * @param Adresse
-	 * @param telephone
-	 * @param email
+	 * @param Telephone
+	 * @param Email
 	 */
-	public Personne(String prenom, String name, Adresse Adresse, String telephone, String email) {
+	public Personne(String Prenom, String Name, Adresse Adresse, String Telephone, String Email) {
 		super();
-		this.prenom = prenom ;
-		this.name = name ;
+		setPrenom(Prenom);
+		setName(Name);
 		this.Adresse = Adresse;
-		this.telephone = telephone;
-		this.email = email;
+		setTelephone(Telephone);
+		setEmail(Email);
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getPrenom() {
-		return prenom;
+		return Prenom;
 	}
 /**
  * 
- * @param prenom
+ * @param Prenom
  */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setPrenom(String Prenom) {
+		if (Pattern.matches(Regex.getRegexPrenom, Prenom)) {
+			this.Prenom = Prenom;
+		}
+		else {
+			throw new IllegalArgumentException("Saisie du Prenom incorrecte");
+		}
 	}
 /**
  * 
  * @return
  */
 	public String getName() {
-		return name;
+		return Name;
 	}
 
 	@Override
 	public String toString() {
-		return " Prénom : " + prenom +"\n Nom : " + name + "\n Adresse : " + Adresse + "\n N°Telephone : " + telephone
-				+ "\n Email : " + email ;
+		return " Prénom : " + Prenom +"\n Nom : " + Name + "\n Adresse : " + Adresse + "\n N°Telephone : " + Telephone
+				+ "\n Email : " + Email ;
 	}
 
 	/**
 	 * 
-	 * @param name
+	 * @param Name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String Name) {
+		if (Pattern.matches(Regex.getRegexNom, Name)) {
+			this.Name = Name;
+		}
+		else {
+			throw new IllegalArgumentException("Saisie du Nom incorrecte");
+		}
+
 	}
 /**
  * 
@@ -70,38 +82,56 @@ public class Personne {
 	}
 	/**
 	 * 
-	 * @param adresse
+	 * @param Adresse
 	 */
-	public void setAdresse(Adresse adresse) {
-		this.Adresse = adresse ;
+	public void setAdresse(Adresse Adresse) {
+		try {
+			if (Adresse == null) {
+				throw new NullPointerException("l'Adresse ne peut etre null");
+			} else {
+				this.Adresse = Adresse;
+			}
+		}
+		catch(Exception exception){
+		}
 	}
 /**
  * 
  * @return
  */
 	public String getTelephone() {
-		return telephone;
+		return Telephone;
 	}
 /**
  * 
- * @param telephone
+ * @param Telephone
  */
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setTelephone(String Telephone) {
+		if (Pattern.matches(Regex.getRegexPhone, Telephone)) {
+			this.Telephone = Telephone;
+		}
+		else {
+			throw new IllegalArgumentException("Numéro de Téléphone incorrect");
+		}
 	}
 /**
  * 
  * @return
  */
 	public String getEmail() {
-		return email;
+		return Email;
 	}
 /**
  * 
- * @param email
+ * @param Email
  */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String Email) {
+		if (Pattern.matches(Regex.getRegexEmail, Email)) {
+			this.Email = Email ;
+		}
+		else {
+			throw new IllegalArgumentException("Saisie de l'E-mail incorrecte");
+		}
 	}
 	/**
 	 * 

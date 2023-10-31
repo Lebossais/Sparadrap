@@ -16,9 +16,9 @@ public class Adresse {
 	public Adresse (int numero_rue, String nom_rue, int codePostal, String ville) {
 		super();
 		this.numero_rue = numero_rue;
-		this.nom_rue = nom_rue;
+		setNom_rue(nom_rue);
 		this.codePostal = codePostal;
-		this.ville = ville;
+		setVille(ville);
 	}
 		/**
 		 * 
@@ -46,7 +46,16 @@ public class Adresse {
  * @param nom_rue
  */
 	public void setNom_rue(String nom_rue) {
-		this.nom_rue = nom_rue;
+		try {
+            if (nom_rue == null) {
+                throw new NullPointerException("la Rue ne peut etre null");
+            } else {
+                this.nom_rue = nom_rue;
+            }
+        }
+        catch(Exception exception){
+            
+        }
 	}
 /**
  * 
@@ -74,7 +83,16 @@ public class Adresse {
  * @param ville
  */
 	public void setVille(String ville) {
-		this.ville = ville;
+		try {
+            if (ville == null) {
+                throw new NullPointerException("la Ville ne peut etre null");
+            } else {
+                this.ville = ville;
+            }
+        }
+        catch(Exception exception){
+            
+        }
 	}
 
 

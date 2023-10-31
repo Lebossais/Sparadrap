@@ -219,7 +219,6 @@ public class Achat {
 			txtDateOrdonnance.setEnabled(false);
 			comboBoxSpe.setEnabled(false);
 			comboBoxMed.setEnabled(false);
-			
 		}
 	}
 	
@@ -237,24 +236,24 @@ public class Achat {
 		Specialiste s = null;
 		Medicament m = null;
 		try {
-		for(i = 0; i < comboBoxClient.getItemCount();i++) {
-			 Object p = comboBoxClient.getSelectedItem();
-		if (p.equals(Declaration.getClient(i).getPersonne().getPrenom())) {
-		c = Declaration.getClient(i).getPersonne();
-		n = Declaration.getClient(i).getNumero_Secu();
+			for(i = 0; i < comboBoxClient.getItemCount();i++) {
+				 Object p = comboBoxClient.getSelectedItem();
+			if (p.equals(Declaration.getClient(i).getPersonne().getPrenom())) {
+			c = Declaration.getClient(i).getPersonne();
+			n = Declaration.getClient(i).getNumero_Secu();
 		break;
 		}
 		}
-		for(i = 0; i < comboBoxMutuelle.getItemCount();i++) {
-			 Object p = comboBoxMutuelle.getSelectedItem();
-		if (p.equals(Declaration.getMutuelle(i).getPersonne().getPrenom())) {
-		a = Declaration.getMutuelle(i);
-		break;
+			for(i = 0; i < comboBoxMutuelle.getItemCount();i++) {
+				 Object p = comboBoxMutuelle.getSelectedItem();
+			if (p.equals(Declaration.getMutuelle(i).getPersonne().getPrenom())) {
+			a = Declaration.getMutuelle(i);
+			break;
 		}
 		}
-		t = txtDate.getText();
+			t = txtDate.getText();
 		
-		if( b == true) {
+		if(b == true) {
 			for(i =0; i<comboBoxMed.getItemCount();i++) {
 				Object p = comboBoxMed.getSelectedItem();
 				if (p.equals(Declaration.getMedecin(i).getPersonne().getPrenom())) {

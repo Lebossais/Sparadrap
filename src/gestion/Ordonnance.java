@@ -21,7 +21,7 @@ public class Ordonnance {
 	public Ordonnance(String Num_Ordonnance, Medecin Medecin, Specialiste Specialiste, String Date_Ordonnance) {
 		super();
 		this.Num_Ordonnance = Num_Ordonnance;
-		this.Medecin = Medecin;
+		setMedecin(Medecin);
 		this.Specialiste = Specialiste;
 		this.Date_Ordonnance = Date_Ordonnance;	
 	}
@@ -62,10 +62,18 @@ public class Ordonnance {
 	}
 	/**
 	 * 
-	 * @param medecin
+	 * @param Medecin
 	 */
-	public void setMedecin(gestion.Medecin medecin) {
-		Medecin = medecin;
+	public void setMedecin(gestion.Medecin Medecin) {
+		try {
+			if (Medecin == null) {
+				throw new NullPointerException("le Medecin ne peut etre null");
+			} else {
+				this.Medecin = Medecin;
+			}
+		}
+		catch(Exception exception) {
+		}
 	}
 	/**
 	 * 
