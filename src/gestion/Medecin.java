@@ -6,19 +6,21 @@ import javax.swing.table.TableModel;
 import utilitaire.Personne;
 
 public class Medecin {
+
+	private int Med_ID;
 	public Personne Personne;
-	private int Aggrement;
+	private int Med_Aggrement;
 
 	/**
-	 * 
+	 * @param Med_ID
 	 * @param Personne
-	 * @param Aggrement
+	 * @param Med_Aggrement
 	 */
-	public Medecin(Personne Personne, int Aggrement) {
+	public Medecin(int Med_ID, Personne Personne, int Med_Aggrement) {
 		super();
-		
+		this.Med_ID = Med_ID;
 		setPersonne(Personne);
-		this.Aggrement = Aggrement;
+		this.Med_Aggrement = Med_Aggrement;
 	}
 	/**
 	 * 
@@ -48,15 +50,20 @@ public class Medecin {
 	 * @return
 	 */
 	public int getAggrement() {
-		return Aggrement;
+		return Med_Aggrement;
 	}
 	/**
 	 * 
 	 * @param aggrement
 	 */
 	public void setAggrement(int aggrement) {
-		Aggrement = aggrement;
+		Med_Aggrement = aggrement;
 	}
+
+	public int getMed_ID() {
+		return Med_ID;
+	}
+
 	/**
 	 * 
 	 * @return

@@ -7,7 +7,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Client;
-import gestion.Declaration;
 
 public class ListeClient extends AbstractTableModel {
 

@@ -6,7 +6,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import gestion.Declaration;
 import gestion.Ordonnance;
 import utilitaire.Personne;
 

@@ -7,41 +7,42 @@ import javax.swing.table.TableModel;
 import utilitaire.Personne;
 
 public class Mutuelle {
-	
-	public Personne Personne;
-	private int Departement;
-	private int Prise_En_Charge;
+
+	private int Mut_ID;
+	public Entreprise  Entreprise ;
+	private int Mut_Departement;
+	private int Mut_Prise_En_Charge;
 
 	/**
-	 * 
-	 * @param Personne
-	 * @param Departement
-	 * @param Prise_En_Charge
+	 * @param Mut_ID
+	 * @param Entreprise
+	 * @param Mut_Departement
+	 * @param Mut_Prise_En_Charge
 	 */
-	public Mutuelle(Personne Personne, int Departement, int Prise_En_Charge) {
+	public Mutuelle(int Mut_ID, Entreprise Entreprise, int Mut_Departement, int Mut_Prise_En_Charge) {
 		super();
-		
-		setPersonne(Personne);
-		this.Departement = Departement ;
-		this.Prise_En_Charge = Prise_En_Charge;
+		this.Mut_ID = Mut_ID;
+		setEntreprise (Entreprise );
+		this.Mut_Departement = Mut_Departement ;
+		this.Mut_Prise_En_Charge = Mut_Prise_En_Charge;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public Personne getPersonne() {
-		return Personne;
+	public Entreprise  getEntreprise () {
+		return Entreprise ;
 	}
 	/**
 	 * 
-	 * @param Personne
+	 * @param Entreprise
 	 */
-	public void setPersonne(Personne Personne) {
+	public void setEntreprise (Entreprise  Entreprise ) {
 		try {
-			if (Personne == null) {
-				throw new NullPointerException("la Personne ne peut etre null");
+			if (Entreprise  == null) {
+				throw new NullPointerException("l'Entreprise  ne peut etre null");
 			} else {
-				this.Personne = Personne;
+				this.Entreprise  = Entreprise ;
 			}
 		} catch (Exception exception) {
 		}
@@ -51,29 +52,34 @@ public class Mutuelle {
 	 * @return
 	 */
 	public int getDepartement() {
-		return Departement;
+		return Mut_Departement;
 	}
 	/**
 	 * 
 	 * @param departement
 	 */
 	public void setDepartement(int departement) {
-		Departement = departement;
+		Mut_Departement = departement;
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public int getPrise_En_Charge() {
-		return Prise_En_Charge;
+		return Mut_Prise_En_Charge;
 	}
 	/**
 	 * 
 	 * @param prise_En_Charge
 	 */
 	public void setPrise_En_Charge(int prise_En_Charge) {
-		Prise_En_Charge = prise_En_Charge;
+		Mut_Prise_En_Charge = prise_En_Charge;
 	}
+
+	public int getMut_ID() {
+		return Mut_ID;
+	}
+
 	/**
 	 * 
 	 * @return

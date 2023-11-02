@@ -17,7 +17,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Achats;
-import gestion.Declaration;
 import people.ListeAchat;
 
 public class HistoriqueAchat extends JFrame {

@@ -5,7 +5,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Achats;
-import gestion.Declaration;
 
 public class ListeAchat extends AbstractTableModel {
 

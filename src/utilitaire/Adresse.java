@@ -2,44 +2,45 @@ package utilitaire;
 
 
 public class Adresse {
-	 int numero_rue ;
-	 String nom_rue ;
-	 int codePostal ;
-	 String ville ;
+	 int Adr_Numero_Rue ;
+	 String Adr_Nom_Rue ;
+	 int Adr_Code_Postal ;
+	 String Adr_Ville ;
+	 int Adr_ID;
 	 /**
 	  * 
-	  * @param numero_rue
-	  * @param nom_rue
-	  * @param codePostal
-	  * @param ville
+	  * @param Adr_Numero_Rue
+	  * @param adr_Nom_Rue
+	  * @param adr_Code_Postal
+	  * @param adr_Ville
 	  */
-	public Adresse (int numero_rue, String nom_rue, int codePostal, String ville) {
+	public Adresse (int Adr_Numero_Rue, String adr_Nom_Rue, int adr_Code_Postal, String adr_Ville, int Adr_ID) {
 		super();
-		this.numero_rue = numero_rue;
-		setNom_rue(nom_rue);
-		this.codePostal = codePostal;
-		setVille(ville);
+		this.Adr_Numero_Rue = Adr_Numero_Rue;
+		setNom_rue(adr_Nom_Rue);
+		this.Adr_Code_Postal = adr_Code_Postal;
+		setVille(Adr_Ville);
 	}
 		/**
 		 * 
 		 * @return
 		 */
 	public int getNumero_rue() {
-		return numero_rue;
+		return Adr_Numero_Rue;
 	}
 	/**
 	 * 
 	 * @param numero_rue
 	 */
 	public void setNumero_rue(int numero_rue) {
-		this.numero_rue = numero_rue;
+		this.Adr_Numero_Rue = numero_rue;
 	}
 /**
  * 
  * @return
  */
 	public String getNom_rue() {
-		return nom_rue;
+		return Adr_Nom_Rue;
 	}
 /**
  * 
@@ -50,7 +51,7 @@ public class Adresse {
             if (nom_rue == null) {
                 throw new NullPointerException("la Rue ne peut etre null");
             } else {
-                this.nom_rue = nom_rue;
+                this.Adr_Nom_Rue = nom_rue;
             }
         }
         catch(Exception exception){
@@ -62,21 +63,21 @@ public class Adresse {
  * @return
  */
 	public int getCodePostal() {
-		return codePostal;
+		return Adr_Code_Postal;
 	}
 /**
  * 
  * @param codePostal
  */
 	public void setCodePostal(int codePostal) {
-		this.codePostal = codePostal;
+		this.Adr_Code_Postal = codePostal;
 	}
 /**
  * 
  * @return
  */
 	public String getVille() {
-		return ville;
+		return Adr_Nom_Rue;
 	}
 /**
  * 
@@ -87,7 +88,7 @@ public class Adresse {
             if (ville == null) {
                 throw new NullPointerException("la Ville ne peut etre null");
             } else {
-                this.ville = ville;
+                this.Adr_Ville = ville;
             }
         }
         catch(Exception exception){
@@ -95,10 +96,13 @@ public class Adresse {
         }
 	}
 
+	public int getAdr_ID() {
+		return Adr_ID;
+	}
 
 	@Override
 	public String toString() {
-		return numero_rue + ", " + nom_rue + ", " + codePostal + ", "+ ville;
+		return Adr_Numero_Rue + ", " + Adr_Nom_Rue + ", " + Adr_Code_Postal + ", "+ Adr_Ville;
 	}	
 	
 }

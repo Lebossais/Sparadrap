@@ -2,7 +2,10 @@ package DAO;
 
 import Configuration.SQL.Singleton;
 
-public abstract class DAOStandard {
+import java.sql.Connection;
+import java.util.List;
+
+public abstract class DAO<T> {
 
     protected Connection connect = Singleton.getInstanceDB();
 

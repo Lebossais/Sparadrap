@@ -7,18 +7,19 @@ import utilitaire.Personne;
 
 public class Specialiste {
 
+	private int Spe_ID;
 	Personne Personne;
-	private String Specialite;
+	private String Spe_Specialite;
 	/**
 	 * 
 	 * @param Personne
-	 * @param Specialite
+	 * @param Spe_Specialite
 	 */
-	public Specialiste(Personne Personne, String Specialite) {
+	public Specialiste(int Spe_ID, String Spe_Specialite, Personne Personne) {
 		super();
-
+		this.Spe_ID = Spe_ID;
 		setPersonne(Personne);
-		setSpecialite(Specialite);
+		setSpecialite(Spe_Specialite);
 	}
 
 	
@@ -50,7 +51,7 @@ public class Specialiste {
 	 * @return
 	 */
 	public String getSpecialite() {
-		return Specialite;
+		return Spe_Specialite;
 	}
 	/**
 	 * 
@@ -61,13 +62,18 @@ public class Specialiste {
 			if (Personne == null) {
 				throw new NullPointerException("la Specialité ne peut etre null");
 			} else {
-				this.Specialite = Specialite;;
+				this.Spe_Specialite = Specialite;;
 			}
 		}
 		catch(Exception exception){
 
 		}
 	}
+
+	public int getSpe_ID() {
+		return Spe_ID;
+	}
+
 	/**
 	 * 
 	 * @return

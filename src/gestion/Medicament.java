@@ -1,12 +1,12 @@
 package gestion;
 
-import enumeration.Categorie_Medicament;
+import enumeration.Categorie;
 
 public class Medicament {
 	String Nom;
 	int Prix;
 	String Date_Mise_en_Service;
-	Categorie_Medicament Categorie;
+	Categorie Categorie;
 
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class Medicament {
 	 * @param Prix
 	 * @param Date_Mise_en_Service
 	 */
-	public Medicament (String Nom, Categorie_Medicament Categorie, int Prix, String Date_Mise_en_Service) {
+	public Medicament (String Nom, Categorie Categorie, int Prix, String Date_Mise_en_Service) {
 		super();
 		setNom(Nom);
 		setPrix(Prix);
@@ -76,9 +76,6 @@ public class Medicament {
 	 * 
 	 * @return
 	 */
-	public Categorie_Medicament getCategorie() {
-		return Categorie;
-	}
 	@Override
 	public String toString() {
 		return "\n Nom : " + Nom + "\n Catégorie : " + Categorie +"\n Prix unitaire : " + Prix + "€" + "\n Date_Mise_en_Service : " + Date_Mise_en_Service;

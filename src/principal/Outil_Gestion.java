@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
-import gestion.Declaration;
+
 import Configuration.SQL.Singleton;
 
 import java.awt.Color;
@@ -25,7 +25,8 @@ public class Outil_Gestion {
 	Liste liste = null;
 	HistoriqueOrdonnances listed = null;
 	HistoriqueAchat listeds = null;
-	
+	static Connection con = Singleton.getInstanceDB();
+
 	private JFrame PageDacceuil;
 
 	/**
@@ -37,9 +38,7 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
-					Connection con = Singleton.getInstanceDB();
 					Singleton.RequeteTest(con);
-					Singleton.closeInstanceDB();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,7 +61,7 @@ public class Outil_Gestion {
 	private void initialize() {
 		PageDacceuil = new JFrame();
 		PageDacceuil.setTitle("Page d'acceuil");
-		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
+		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\Configuration\\bank\\Logo-removebg-preview.png"));
 		PageDacceuil.setBounds(100, 100, 470, 330);
 		PageDacceuil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

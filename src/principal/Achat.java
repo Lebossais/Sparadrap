@@ -11,14 +11,11 @@ import java.awt.BorderLayout;
 import gestion.AchatMedicament;
 import gestion.Achats;
 import gestion.Client;
-import gestion.Declaration;
 import gestion.Medecin;
 import gestion.Medicament;
 import gestion.Mutuelle;
 import gestion.Ordonnance;
 import gestion.Specialiste;
-import people.ListeAchat;
-import people.ListeOrdonnance;
 import utilitaire.Personne;
 
 import java.awt.event.ActionListener;

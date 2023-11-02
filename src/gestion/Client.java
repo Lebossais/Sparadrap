@@ -47,8 +47,8 @@ public class Client {
 			c = "Aucun";
 		}
 		
-		return  "\n" + Personne.toString() + "\n Date de Naissance : " + Date_Naissance + "\n Numero de Sécurité Sociale : " + Numero_Secu + "\n Mutuelle : " + Mutuelle.getPersonne().getPrenom()
-				+ " \n Medecin Traitant : " + Medecin_Traitant.getPersonne().getPrenom() + "\n Specialiste : " + c ;
+		return  "\n" + Personne.toString() + "\n Date de Naissance : " + Date_Naissance + "\n Numero de Sécurité Sociale : " + Numero_Secu + "\n Mutuelle : "
+				+ Mutuelle.getEntreprise().getEnt_Raison_Sociale() + " \n Medecin Traitant : " + Medecin_Traitant.getPersonne().getPrenom() + "\n Specialiste : " + c ;
 	}
 
 	/**

@@ -5,34 +5,36 @@ import java.util.regex.Pattern;
 
 public class Personne {
 
-	private String Prenom ;
-	private String Name ;
+	private int Per_ID;
+	private String Per_Prenom ;
+	private String Per_Nom ;
 	private Adresse Adresse;
-	private String Telephone;
-	private String Email;
+	private String Per_Telephone;
+	private String Per_Email;
 	
 	/**
 	 * 
-	 * @param Prenom
-	 * @param Name
+	 * @param Per_Prenom
+	 * @param Per_Name
 	 * @param Adresse
-	 * @param Telephone
-	 * @param Email
+	 * @param Per_Telephone
+	 * @param Per_Email
 	 */
-	public Personne(String Prenom, String Name, Adresse Adresse, String Telephone, String Email) {
+	public Personne(int Per_ID, String Per_Prenom, String Per_Name, Adresse Adresse, String Per_Telephone, String Per_Email) {
 		super();
-		setPrenom(Prenom);
-		setName(Name);
+
+		setPrenom(Per_Prenom);
+		setName(Per_Name);
 		this.Adresse = Adresse;
-		setTelephone(Telephone);
-		setEmail(Email);
+		setTelephone(Per_Telephone);
+		setEmail(Per_Email);
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getPrenom() {
-		return Prenom;
+		return Per_Prenom;
 	}
 /**
  * 
@@ -40,7 +42,7 @@ public class Personne {
  */
 	public void setPrenom(String Prenom) {
 		if (Pattern.matches(Regex.getRegexPrenom, Prenom)) {
-			this.Prenom = Prenom;
+			this.Per_Prenom = Prenom;
 		}
 		else {
 			throw new IllegalArgumentException("Saisie du Prenom incorrecte");
@@ -51,22 +53,22 @@ public class Personne {
  * @return
  */
 	public String getName() {
-		return Name;
+		return Per_Nom;
 	}
 
 	@Override
 	public String toString() {
-		return " Prénom : " + Prenom +"\n Nom : " + Name + "\n Adresse : " + Adresse + "\n N°Telephone : " + Telephone
-				+ "\n Email : " + Email ;
+		return " Prénom : " + Per_Prenom +"\n Nom : " + Per_Nom + "\n Adresse : " + Adresse + "\n N°Telephone : " + Per_Telephone
+				+ "\n Email : " + Per_Email ;
 	}
 
 	/**
 	 * 
-	 * @param Name
+	 * @param Nom
 	 */
-	public void setName(String Name) {
-		if (Pattern.matches(Regex.getRegexNom, Name)) {
-			this.Name = Name;
+	public void setName(String Nom) {
+		if (Pattern.matches(Regex.getRegexNom, Nom)) {
+			this.Per_Nom = Nom;
 		}
 		else {
 			throw new IllegalArgumentException("Saisie du Nom incorrecte");
@@ -96,11 +98,10 @@ public class Personne {
 		}
 	}
 /**
- * 
  * @return
  */
 	public String getTelephone() {
-		return Telephone;
+		return Per_Telephone;
 	}
 /**
  * 
@@ -108,7 +109,7 @@ public class Personne {
  */
 	public void setTelephone(String Telephone) {
 		if (Pattern.matches(Regex.getRegexPhone, Telephone)) {
-			this.Telephone = Telephone;
+			this.Per_Telephone = Telephone;
 		}
 		else {
 			throw new IllegalArgumentException("Numéro de Téléphone incorrect");
@@ -119,7 +120,7 @@ public class Personne {
  * @return
  */
 	public String getEmail() {
-		return Email;
+		return Per_Email;
 	}
 /**
  * 
@@ -127,12 +128,17 @@ public class Personne {
  */
 	public void setEmail(String Email) {
 		if (Pattern.matches(Regex.getRegexEmail, Email)) {
-			this.Email = Email ;
+			this.Per_Email = Email ;
 		}
 		else {
 			throw new IllegalArgumentException("Saisie de l'E-mail incorrecte");
 		}
 	}
+
+	public int getPer_ID() {
+		return Per_ID;
+	}
+
 	/**
 	 * 
 	 * @return

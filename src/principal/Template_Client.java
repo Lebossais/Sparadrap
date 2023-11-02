@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import gestion.Client;
-import gestion.Declaration;
 import gestion.Medecin;
 import gestion.Mutuelle;
 import gestion.Specialiste;
