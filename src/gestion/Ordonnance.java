@@ -5,53 +5,56 @@ import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
 public class Ordonnance {
-	
-	private String Num_Ordonnance;
-	private String Date_Ordonnance;
+
+	private int Ord_ID;
+	private String Ord_Num;
+	private String Ord_Date;
 	public gestion.Medecin Medecin;
 	public gestion.Specialiste Specialiste;
+	public gestion.Client Client;
 	
 	/**
 	 * 
-	 * @param Num_Ordonnance
+	 * @param Ord_Num
 	 * @param Medecin
 	 * @param Specialiste
-	 * @param Date_Ordonnance
+	 * @param Ord_Date
 	 */
-	public Ordonnance(String Num_Ordonnance, Medecin Medecin, Specialiste Specialiste, String Date_Ordonnance) {
+	public Ordonnance(int Ord_ID, String Ord_Num,Client Client, Medecin Medecin, Specialiste Specialiste, String Ord_Date) {
 		super();
-		this.Num_Ordonnance = Num_Ordonnance;
+		this.Ord_ID = Ord_ID;
+		this.Ord_Num = Ord_Num;
 		setMedecin(Medecin);
 		this.Specialiste = Specialiste;
-		this.Date_Ordonnance = Date_Ordonnance;	
+		this.Ord_Date = Ord_Date;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getNum_Ordonnance() {
-		return Num_Ordonnance;
+	public String getOrd_Num() {
+		return Ord_Num;
 	}
 	/**
 	 * 
-	 * @param num_Ordonnance
+	 * @param Ord_Num
 	 */
-	public void setNum_Ordonnance(String num_Ordonnance) {
-		Num_Ordonnance = num_Ordonnance;
+	public void setOrd_Num(String Ord_Num) {
+		Ord_Num = Ord_Num;
 	}
 	/**
 	 * 
 	 * @return
 	 */
-	public String getDate_Ordonnance() {
-		return Date_Ordonnance;
+	public String getOrd_Date() {
+		return Ord_Date;
 	}
 	/**
 	 * 
-	 * @param date_Ordonnance
+	 * @param Ord_Date
 	 */
-	public void setDate_Ordonnance(String date_Ordonnance) {
-		Date_Ordonnance = date_Ordonnance;
+	public void setOrd_Date(String Ord_Date) {
+		Ord_Date = Ord_Date;
 	}
 	/**
 	 * 
@@ -89,6 +92,15 @@ public class Ordonnance {
 	public void setSpecialiste(gestion.Specialiste specialiste) {
 		Specialiste = specialiste;
 	}
+
+	public int getOrd_ID() {
+		return Ord_ID;
+	}
+
+	public gestion.Client getClient() {
+		return Client;
+	}
+
 	/**
 	 * 
 	 * @return
@@ -126,7 +138,7 @@ public class Ordonnance {
 			b = null;
 		}
 		//"Numéro Ordonnance", "Nom Médecin", "Nom Specialiste", "Date de l'ordonnance"
-		return  "\n" +"Numéro Ordonnance : " + Num_Ordonnance + "\n Nom Medecin : " + Medecin.getPersonne().getPrenom() + "\n Specialiste : " + c +" ( "+ b + " ) ";
+		return  "\n" +"Numéro Ordonnance : " + Ord_Num + "\n Nom Medecin : " + Medecin.getPersonne().getPrenom() + "\n Specialiste : " + c +" ( "+ b + " ) ";
 	}
 	  
 }

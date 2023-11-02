@@ -1,6 +1,6 @@
 package DAO;
 
-import enumeration.Categorie;
+import gestion.Categorie;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

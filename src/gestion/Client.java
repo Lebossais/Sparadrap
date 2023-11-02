@@ -9,8 +9,10 @@ import utilitaire.Personne;
 import utilitaire.Regex;
 
 public class Client {
-	private String Date_Naissance;
-	private String Numero_Secu;
+
+	private int Cli_ID;
+	private String Cli_Date_Naissance;
+	private String Cli_Numero_Secu;
 	private Mutuelle Mutuelle;
 	private Medecin Medecin_Traitant;
 	private Specialiste Specialiste;
@@ -19,18 +21,18 @@ public class Client {
 	/**
 	 * 
 	 * @param Personne
-	 * @param Date_Naissance
-	 * @param Numero_Secu
+	 * @param Cli_Date_Naissance
+	 * @param Cli_Numero_Secu
 	 * @param Mutuelle
 	 * @param Medecin_Traitant
 	 * @param Specialiste
 	 */
-	public Client(Personne Personne, String Date_Naissance,String Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
+	public Client(int Cli_ID, Personne Personne, String Cli_Date_Naissance,String Cli_Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
-		
+		this.Cli_ID = Cli_ID;
 		setPersonne(Personne);
-		this.Date_Naissance = Date_Naissance;
-		setNumero_Secu(Numero_Secu);
+		this.Cli_Date_Naissance = Cli_Date_Naissance;
+		setNumero_Secu(Cli_Numero_Secu);
 		setMutuelle(Mutuelle);;
 		setMedecin_Traitant(Medecin_Traitant);
 		setSpecialiste(Specialiste);
@@ -47,7 +49,7 @@ public class Client {
 			c = "Aucun";
 		}
 		
-		return  "\n" + Personne.toString() + "\n Date de Naissance : " + Date_Naissance + "\n Numero de Sécurité Sociale : " + Numero_Secu + "\n Mutuelle : "
+		return  "\n" + Personne.toString() + "\n Date de Naissance : " + Cli_Date_Naissance + "\n Numero de Sécurité Sociale : " + Cli_Numero_Secu + "\n Mutuelle : "
 				+ Mutuelle.getEntreprise().getEnt_Raison_Sociale() + " \n Medecin Traitant : " + Medecin_Traitant.getPersonne().getPrenom() + "\n Specialiste : " + c ;
 	}
 
@@ -102,21 +104,21 @@ public class Client {
 	 * @return
 	 */
 	public String getDate_Naissance() {
-		return Date_Naissance;
+		return Cli_Date_Naissance;
 	}
 	/**
 	 * 
 	 * @param date_Naissance
 	 */
 	public void setDate_Naissance(String date_Naissance) {
-		Date_Naissance = date_Naissance;
+		Cli_Date_Naissance = date_Naissance;
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getNumero_Secu() {
-		return Numero_Secu;
+		return Cli_Numero_Secu;
 	}
 	/**
 	 * 
@@ -124,7 +126,7 @@ public class Client {
 	 */
 	public void setNumero_Secu(String numero_Secu)throws IllegalArgumentException {
 		if (Pattern.matches(Regex.getRegexSecu, numero_Secu)) {
-		this.Numero_Secu = numero_Secu;
+		this.Cli_Numero_Secu = numero_Secu;
 		}
 		else {
 			throw new IllegalArgumentException("Numéro de Sécurité Sociale incorrecte");
@@ -167,6 +169,11 @@ public class Client {
 	public void setSpecialiste(Specialiste Specialiste) {
 		this.Specialiste = Specialiste;
 	}
+
+	public int getCli_ID() {
+		return Cli_ID;
+	}
+
 	/**
 	 * 
 	 * @return

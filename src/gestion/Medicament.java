@@ -1,26 +1,27 @@
 package gestion;
 
-import enumeration.Categorie;
-
 public class Medicament {
-	String Nom;
-	int Prix;
-	String Date_Mise_en_Service;
+
+	private int Medi_ID;
+	String Medi_Nom;
+	int Medi_Prix;
+	String Medi_Date_Mise_en_Service;
 	Categorie Categorie;
 
 	/**
-	 * 
-	 * @param Nom
+	 * @param Medi_ID
+	 * @param Medi_Nom
 	 * @param Categorie
-	 * @param Prix
-	 * @param Date_Mise_en_Service
+	 * @param Medi_Prix
+	 * @param Medi_Date_Mise_en_Service
 	 */
-	public Medicament (String Nom, Categorie Categorie, int Prix, String Date_Mise_en_Service) {
+	public Medicament (int Medi_ID, String Medi_Nom, Categorie Categorie, int Medi_Prix, String Medi_Date_Mise_en_Service) {
 		super();
-		setNom(Nom);
-		setPrix(Prix);
+		this.Medi_ID = Medi_ID;
+		setNom(Medi_Nom);
+		setPrix(Medi_Prix);
 		this.Categorie = Categorie;
-		this.Date_Mise_en_Service = Date_Mise_en_Service;
+		this.Medi_Date_Mise_en_Service = Medi_Date_Mise_en_Service;
 	}
 
 	/**
@@ -28,7 +29,7 @@ public class Medicament {
 	 * @return
 	 */
 	public String getNom() {
-		return Nom;
+		return Medi_Nom;
 	}
 	/**
 	 * 
@@ -39,7 +40,7 @@ public class Medicament {
 			if (Nom == null) {
 				throw new NullPointerException("le Nom ne peut etre null");
 			} else {
-				this.Nom = Nom;
+				this.Medi_Nom = Nom;
 			}
 		} catch (Exception exception) {
 		}
@@ -49,36 +50,45 @@ public class Medicament {
 	 * @return
 	 */
 	public int getPrix() {
-		return Prix;
+		return Medi_Prix;
 	}
 	/**
 	 * 
 	 * @param prix
 	 */
 	public void setPrix(int prix) {
-		Prix = prix;
+		Medi_Prix = prix;
 	}
 	/**
 	 * 
 	 * @return
 	 */
 	public String getDate_Mise_en_Service() {
-		return Date_Mise_en_Service;
+		return Medi_Date_Mise_en_Service;
 	}
 	/**
 	 * 
 	 * @param date_Mise_en_Service
 	 */
 	public void setDate_Mise_en_Service(String date_Mise_en_Service) {
-		Date_Mise_en_Service = date_Mise_en_Service;
+		Medi_Date_Mise_en_Service = date_Mise_en_Service;
 	}
+
+	public int getMedi_ID() {
+		return Medi_ID;
+	}
+
+	public Categorie getCategorie() {
+		return Categorie;
+	}
+
 	/**
 	 * 
 	 * @return
 	 */
 	@Override
 	public String toString() {
-		return "\n Nom : " + Nom + "\n Catégorie : " + Categorie +"\n Prix unitaire : " + Prix + "€" + "\n Date_Mise_en_Service : " + Date_Mise_en_Service;
+		return "\n Nom : " + Medi_Nom + "\n Catégorie : " + Categorie +"\n Prix unitaire : " + Medi_Prix + "€" + "\n Date_Mise_en_Service : " + Medi_Date_Mise_en_Service;
 	}
 
 }
