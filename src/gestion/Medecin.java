@@ -3,8 +3,6 @@ package gestion;
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import utilitaire.Personne;
-
 public class Medecin {
 
 	private int Med_ID;

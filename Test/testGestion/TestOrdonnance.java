@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import gestion.Medecin;
 import gestion.Ordonnance;
 import gestion.Specialiste;
-import utilitaire.Adresse;
-import utilitaire.Personne;
 
 class TestOrdonnance {
 

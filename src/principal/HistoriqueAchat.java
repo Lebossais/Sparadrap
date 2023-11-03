@@ -16,8 +16,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import gestion.Achats;
-import people.ListeAchat;
+import gestion.Compose;
+import Frame.ListeAchat;
 
 public class HistoriqueAchat extends JFrame {
 
@@ -112,7 +112,7 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Achats c : Declaration.getAchats()) {
+    for (Compose c : Declaration.getAchats()) {
     	if (c.getNum_Secu().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
     	}

@@ -1,4 +1,4 @@
-package people;
+package Frame;
 
 
 import javax.swing.JTable;
@@ -32,13 +32,13 @@ public class ListeClient extends AbstractTableModel {
 	    public Object getValueAt(int rowIndex, int columnIndex) {
 	        switch(columnIndex){
 	            case 0:
-	                return Declaration.clients.get(rowIndex).Personne.getPrenom();
+	                return gestion.Client.get(rowIndex).Personne.getPrenom();
 	            case 1:
-	                return Declaration.clients.get(rowIndex).Personne.getName();
+	                return gestion.Client.get(rowIndex).Personne.getName();
 	            case 2:
-	                return Declaration.clients.get(rowIndex).getNumero_Secu();
+	                return gestion.Client.get(rowIndex).getNumero_Secu();
 	            case 3 :
-	            	return Declaration.clients.get(rowIndex).Personne.getTelephone();
+	            	return gestion.Client.get(rowIndex).Personne.getTelephone();
 	            default:
 	                return null; //Ne devrait jamais arriver
 	        }

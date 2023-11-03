@@ -4,8 +4,6 @@ package gestion;
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import utilitaire.Personne;
-
 public class Mutuelle {
 
 	private int Mut_ID;

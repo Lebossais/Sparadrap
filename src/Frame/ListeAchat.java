@@ -1,16 +1,16 @@
-package people;
+package Frame;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import gestion.Achats;
+import gestion.Compose;
 
 public class ListeAchat extends AbstractTableModel {
 
 	private static final long serialVersionUID = 5380417556060869746L;
 	Object p = null;
-	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Achats.getModel()); 
+	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Compose.getModel());
  
     private final String[] entetes = {"Prénom du Client", "N° de Sécu", "N° Ordonnance", "Date"}; // Les différentes entêtes
 
@@ -55,7 +55,7 @@ public class ListeAchat extends AbstractTableModel {
 	 * 
 	 * @param Achats
 	 */
-	  public void addAchats(Achats Achats) {
+	  public void addAchats(Compose Achats) {
 	        Declaration.achats.add(Achats);
 	 
 	        fireTableRowsInserted(Declaration.achats.size() -1, Declaration.achats.size() -1);

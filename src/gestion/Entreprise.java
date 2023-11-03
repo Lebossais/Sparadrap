@@ -1,6 +1,5 @@
 package gestion;
 
-import utilitaire.Adresse;
 import utilitaire.Regex;
 
 import java.util.regex.Pattern;
@@ -11,9 +10,9 @@ public class Entreprise {
     private String Ent_Raison_Sociale;
     private String Ent_Telephone;
     private String Ent_Email;
-    private Adresse Adresse;
+    private Panier.Adresse Adresse;
 
-    public Entreprise (int Ent_ID, String Ent_Raison_Sociale, String Ent_Telephone, String Ent_Email, Adresse Adresse){
+    public Entreprise (int Ent_ID, String Ent_Raison_Sociale, String Ent_Telephone, String Ent_Email, Panier.Adresse Adresse){
         super();
 
     }
@@ -54,14 +53,14 @@ public class Entreprise {
             throw new IllegalArgumentException("Saisie de l'E-mail incorrecte");
         }
     }
-    public Adresse getAdresse() {
+    public Panier.Adresse getAdresse() {
         return Adresse;
     }
     /**
      *
      * @param Adresse
      */
-    public void setAdresse(Adresse Adresse) {
+    public void setAdresse(Panier.Adresse Adresse) {
         try {
             if (Adresse == null) {
                 throw new NullPointerException("l'Adresse ne peut etre null");

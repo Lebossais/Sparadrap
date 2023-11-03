@@ -49,7 +49,6 @@ public class Outil_Gestion {
 	 * Create the application.
 	 */
 	public Outil_Gestion() {
-		Declaration decla = new Declaration();
 		listed = new HistoriqueOrdonnances();
 		listeds = new HistoriqueAchat();
 		initialize();
@@ -135,7 +134,7 @@ public class Outil_Gestion {
 	}
 	
 	private void Achat (ActionEvent e) {
-		Achat achat = new Achat();
+		FrmAchat achat = new FrmAchat();
 		achat.Achat.setVisible(true);
 	}
 	private void Quitter(ActionEvent e) {

@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import gestion.Medecin;
-import utilitaire.Adresse;
-import utilitaire.Personne;
 
 class TestMedecin {
 

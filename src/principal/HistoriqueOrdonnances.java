@@ -17,7 +17,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Ordonnance;
-import people.ListeOrdonnance;
+import Frame.ListeOrdonnance;
 
 public class HistoriqueOrdonnances extends JFrame {
 

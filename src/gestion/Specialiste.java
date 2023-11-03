@@ -3,7 +3,9 @@ package gestion;
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import utilitaire.Personne;
+import utilitaire.Regex;
+
+import java.util.regex.Pattern;
 
 public class Specialiste {
 

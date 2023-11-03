@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 import javax.swing.DefaultRowSorter;
 import javax.swing.table.TableModel;
 
-import utilitaire.Personne;
 import utilitaire.Regex;
 
 public class Client {
@@ -16,7 +15,7 @@ public class Client {
 	private Mutuelle Mutuelle;
 	private Medecin Medecin_Traitant;
 	private Specialiste Specialiste;
-	public  Personne Personne;
+	public Personne Personne;
 	
 	/**
 	 * 
@@ -27,7 +26,7 @@ public class Client {
 	 * @param Medecin_Traitant
 	 * @param Specialiste
 	 */
-	public Client(int Cli_ID, Personne Personne, String Cli_Date_Naissance,String Cli_Numero_Secu,Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
+	public Client(int Cli_ID, Personne Personne, String Cli_Date_Naissance, String Cli_Numero_Secu, Mutuelle Mutuelle, Medecin Medecin_Traitant, Specialiste Specialiste) {
 		super();
 		this.Cli_ID = Cli_ID;
 		setPersonne(Personne);

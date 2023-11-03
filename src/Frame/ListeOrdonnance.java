@@ -1,4 +1,4 @@
-package people;
+package Frame;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Ordonnance;
-import utilitaire.Personne;
+import gestion.Specialiste;
 
 public class ListeOrdonnance extends AbstractTableModel {
 
-	public  Personne Personne;
+	public Specialiste.Personne Personne;
 
 	private static final long serialVersionUID = 5380417556060869746L;
 

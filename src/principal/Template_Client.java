@@ -7,12 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import gestion.Client;
-import gestion.Medecin;
-import gestion.Mutuelle;
-import gestion.Specialiste;
-import utilitaire.Adresse;
-import utilitaire.Personne;
+import gestion.*;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -246,9 +241,9 @@ public class Template_Client {
 			try {
 				Integer numRue = Integer.valueOf(txtNum.getText());
 				Integer CodePostal = Integer.valueOf(TxtCode.getText());
-				Declaration.adresse.add(new Adresse(numRue, txtRue.getText(), CodePostal, TxtVille.getText()));
+				Declaration.adresse.add(new Panier.Adresse(numRue, txtRue.getText(), CodePostal, TxtVille.getText()));
 
-				Declaration.personne.add(new Personne(txtPrenom.getText(), txtNom.getText(), Declaration.adresse.get(Declaration.adresse.size() - 1), txtPhone.getText(), txtMail.getText()));
+				Declaration.personne.add(new Specialiste.Personne(txtPrenom.getText(), txtNom.getText(), Declaration.adresse.get(Declaration.adresse.size() - 1), txtPhone.getText(), txtMail.getText()));
 
 				for (i = 0; i < comboBoxMutuelle.getItemCount(); i++) {
 					Object p = comboBoxMutuelle.getSelectedItem();

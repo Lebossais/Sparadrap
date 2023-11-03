@@ -1,6 +1,6 @@
 package DAO;
 
-import utilitaire.Personne;
+import gestion.Personne;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

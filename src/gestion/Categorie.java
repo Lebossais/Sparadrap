@@ -1,11 +1,6 @@
 package gestion;
 
 
-import utilitaire.Adresse;
-import utilitaire.Regex;
-
-import java.util.regex.Pattern;
-
 public class Categorie {
 	String Cat_Categorie;
 	int Cat_ID;

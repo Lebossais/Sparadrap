@@ -8,15 +8,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 
-import gestion.AchatMedicament;
-import gestion.Achats;
-import gestion.Client;
-import gestion.Medecin;
-import gestion.Medicament;
-import gestion.Mutuelle;
-import gestion.Ordonnance;
-import gestion.Specialiste;
-import utilitaire.Personne;
+import gestion.*;
+import gestion.Compose;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,7 +21,7 @@ import javax.swing.JButton;
 
 import javax.swing.JComboBox;
 
-public class Achat {
+public class FrmAchat {
 
 	JFrame Achat;
 	private JTextField txtDateOrdonnance;
@@ -44,7 +37,7 @@ public class Achat {
 	/**
 	 * Create the application.
 	 */
-	public Achat() {
+	public FrmAchat() {
 		initialize();
 	}
 	/**
@@ -225,7 +218,7 @@ public class Achat {
 	
 	private void Validation(ActionEvent e) {
 		int i;
-		Personne c = null;
+		Specialiste.Personne c = null;
 		Mutuelle a = null;
 		String t = null;
 		String n = null;
@@ -277,12 +270,12 @@ public class Achat {
 			m = Declaration.getMedicament(i);
 		}
 		Integer nombre = Integer.valueOf(txtQuantite.getText());
-		Declaration.achatMedicament.add(new AchatMedicament(m, nombre));
+		Declaration.achatMedicament.add(new Achat(m, nombre));
 		
 		if (b == false) {
-		Declaration.achats.add(new Achats(c, a ,n , t, null, Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1)));
+		Declaration.achats.add(new Compose(c, a ,n , t, null, Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1)));
 		} else if ( b == true ) {
-			Declaration.achats.add(new Achats(c, a ,n , t, Declaration.getOrdonnance(Declaration.ordonnances.size()-1),Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1) ));	
+			Declaration.achats.add(new Compose(c, a ,n , t, Declaration.getOrdonnance(Declaration.ordonnances.size()-1),Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1) ));
 		}
 	Achat.dispose();
 	int input = JOptionPane.showConfirmDialog(null, 

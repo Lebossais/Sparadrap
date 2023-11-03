@@ -1,28 +1,27 @@
 package DAO;
 
-import gestion.Panier;
+import gestion.Achat;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DAOAdresse extends DAO<Panier.Adresse> {
+public class DAOAchat extends DAO<Achat>{
     @Override
-    public boolean create(Panier.Adresse obj) {
+    public boolean create(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into adresse");
-        sqlInsertUtilisateur.append("Adr_Numero_Rue, Adr_Nom_Rue, Adr_Code_Postal, Adr_Ville, Adr_ID");
-        sqlInsertUtilisateur.append("values (?, ?, ?, ?, null)");
+        sqlInsertUtilisateur.append("insert into achat");
+        sqlInsertUtilisateur.append("Achat_ID, Achat_Date, Cli_ID, Ord_ID");
+        sqlInsertUtilisateur.append("values (null, ?, ?, ?)");
 
         boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
 
-            preparedStatement.setInt(1, obj.getNumero_rue());
-            preparedStatement.setString(2, obj.getNom_rue());
-            preparedStatement.setInt(3, obj.getCodePostal());
-            preparedStatement.setString(4, obj.getVille());
+            preparedStatement.setString(1, String.valueOf(obj.getAchat_Date()));
+            preparedStatement.setInt(2, obj.getClient().getCli_ID());
+            preparedStatement.setInt(3, obj.getOrdonnance().getOrd_ID());
 
             preparedStatement.executeUpdate();
             requeteok = true;
@@ -35,17 +34,17 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public boolean delete(Panier.Adresse obj) {
+    public boolean delete(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from adresse");
-        sqlInsertUtilisateur.append("where Adr_ID = ?");
+        sqlInsertUtilisateur.append("Delete from achat");
+        sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.setInt(1, obj.getAdr_ID());
+            preparedStatement.setInt(1, obj.getAchat_ID());
 
             preparedStatement.executeUpdate();
             requeteok = true;
@@ -53,31 +52,26 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-
-
         return requeteok;
     }
 
     @Override
-    public boolean update(Panier.Adresse obj) {
+    public boolean update(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update adresse");
-        sqlInsertUtilisateur.append("set Adr_Numero_Rue = ?");
-        sqlInsertUtilisateur.append(",Adr_Nom_Rue = ?");
-        sqlInsertUtilisateur.append(",Adr_Code_Postal = ?");
-        sqlInsertUtilisateur.append(",Adr_Ville = ?");
-        sqlInsertUtilisateur.append("where Cat_ID = ? ");
+        sqlInsertUtilisateur.append("Update achat");
+        sqlInsertUtilisateur.append("set Achat_Date = ?, Cli_ID = ?, Ord_ID = ?");
+        sqlInsertUtilisateur.append("where Achat_ID = ? ");
 
         boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.setInt(1,obj.getNumero_rue());
-            preparedStatement.setString(2, obj.getNom_rue());
-            preparedStatement.setInt(3,obj.getCodePostal());
-            preparedStatement.setString(4,obj.getVille());
-            preparedStatement.setInt(5,obj.getAdr_ID());
+            preparedStatement.setString(1, String.valueOf(obj.getAchat_Date()));
+            preparedStatement.setInt(2, obj.getClient().getCli_ID());
+            preparedStatement.setInt(3, obj.getOrdonnance().getOrd_ID());
+            preparedStatement.setInt(4, obj.getAchat_ID());
+
 
             preparedStatement.executeUpdate();
             requeteok = true;
@@ -90,10 +84,10 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public Panier.Adresse find(Integer pId) {
+    public Achat find(Integer pId) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from adresse");
-        sqlInsertUtilisateur.append("where Adr_ID = ?");
+        sqlInsertUtilisateur.append("select * from achat");
+        sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
@@ -110,9 +104,9 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public List<Panier.Adresse> findALL() {
+    public List<Achat> findALL() {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from adresse");
+        sqlInsertUtilisateur.append("select * from achat");
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
@@ -123,6 +117,7 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
+
         return null;
     }
 }

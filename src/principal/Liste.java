@@ -16,7 +16,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import gestion.Client;
-import people.ListeClient;
+import Frame.ListeClient;
 import java.awt.Toolkit;
 
 import static gestion.Declaration.clients;

@@ -118,3 +118,15 @@ public class DAOCategorie extends DAO<Categorie> {
         return null;
     }
 }
+
+ /*try {
+         String test = "select * from Personne";
+         Statement statement = con.createStatement();
+         ResultSet resultSet = statement.executeQuery(test);
+
+         while (resultSet.next()){
+         System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
+         }
+         } catch (Exception e) {
+         e.printStackTrace();
+         System.out.println("Erreur");*/
