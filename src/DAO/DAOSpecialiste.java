@@ -1,9 +1,10 @@
 package DAO;
 
 import gestion.Specialiste;
-
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOSpecialiste extends DAO<Specialiste> {
@@ -81,6 +82,7 @@ public class DAOSpecialiste extends DAO<Specialiste> {
 
     @Override
     public Specialiste find(Integer pId) {
+        DAOPersonne daoPersonne = new DAOPersonne();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from specialiste");
         sqlInsertUtilisateur.append("where Spe_ID = ?");
@@ -91,7 +93,14 @@ public class DAOSpecialiste extends DAO<Specialiste> {
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Specialiste s;
+            return new Specialiste(
+                    resultSet.getInt("Spe_ID"),
+                    resultSet.getString("Spe_Specialite"),
+                    daoPersonne.find(resultSet.getInt("Per_ID"))
+            );
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -101,6 +110,8 @@ public class DAOSpecialiste extends DAO<Specialiste> {
 
     @Override
     public List<Specialiste> findALL() {
+        DAOPersonne daoPersonne = new DAOPersonne();
+        ArrayList<Specialiste> specialiste = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from specialiste");
 
@@ -108,7 +119,14 @@ public class DAOSpecialiste extends DAO<Specialiste> {
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                specialiste.add(new Specialiste(
+                        resultSet.getInt("Spe_ID"),
+                        resultSet.getString("Spe_Specialite"),
+                        daoPersonne.find(resultSet.getInt("Per_ID"))
+                ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

@@ -1,9 +1,10 @@
 package DAO;
 
 import gestion.Medicament;
-
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOMedicament extends DAO<Medicament> {
@@ -87,6 +88,7 @@ public class DAOMedicament extends DAO<Medicament> {
 
     @Override
     public Medicament find(Integer pId) {
+        DAOCategorie daoCategorie = new DAOCategorie();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from medicament");
         sqlInsertUtilisateur.append("where Medi_ID = ?");
@@ -97,7 +99,16 @@ public class DAOMedicament extends DAO<Medicament> {
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Medicament m;
+            return new Medicament(
+                    resultSet.getInt("Medi_ID"),
+                    resultSet.getString("Medi_Nom"),
+                    daoCategorie.find(resultSet.getInt("Cat_ID")),
+                    resultSet.getInt("Medi_Prix"),
+                    resultSet.getString("Date_Mise_En_Service")
+            );
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -107,6 +118,8 @@ public class DAOMedicament extends DAO<Medicament> {
 
     @Override
     public List<Medicament> findALL() {
+        ArrayList<Medicament> medicament = new ArrayList<>();
+        DAOCategorie daoCategorie = new DAOCategorie();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from medicament");
 
@@ -114,7 +127,16 @@ public class DAOMedicament extends DAO<Medicament> {
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                medicament.add(new Medicament(
+                        resultSet.getInt("Medi_ID"),
+                        resultSet.getString("Medi_Nom"),
+                        daoCategorie.find(resultSet.getInt("Cat_ID")),
+                        resultSet.getInt("Medi_Prix"),
+                        resultSet.getString("Date_Mise_En_Service")
+                ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

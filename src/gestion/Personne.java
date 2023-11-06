@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
         private int Per_ID;
         private String Per_Prenom ;
         private String Per_Nom ;
-        private Panier.Adresse Adresse;
+        private Adresse Adresse;
         private String Per_Telephone;
         private String Per_Email;
 
@@ -22,9 +22,9 @@ import java.util.regex.Pattern;
          * @param Per_Telephone
          * @param Per_Email
          */
-        public Personne(int Per_ID, String Per_Prenom, String Per_Name, Panier.Adresse Adresse, String Per_Telephone, String Per_Email) {
+        public Personne(int Per_ID, String Per_Prenom, String Per_Name, gestion.Adresse Adresse, String Per_Telephone, String Per_Email) {
             super();
-
+            this.Per_ID = Per_ID;
             setPrenom(Per_Prenom);
             setName(Per_Name);
             this.Adresse = Adresse;
@@ -81,14 +81,14 @@ import java.util.regex.Pattern;
          *
          * @return
          */
-        public Panier.Adresse getAdresse() {
+        public Adresse getAdresse() {
             return Adresse;
         }
         /**
          *
          * @param Adresse
          */
-        public void setAdresse(Panier.Adresse Adresse) {
+        public void setAdresse(Adresse Adresse) {
             try {
                 if (Adresse == null) {
                     throw new NullPointerException("l'Adresse ne peut etre null");

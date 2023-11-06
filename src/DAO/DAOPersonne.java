@@ -3,7 +3,9 @@ package DAO;
 import gestion.Personne;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOPersonne extends DAO<Personne> {
@@ -92,6 +94,7 @@ public class DAOPersonne extends DAO<Personne> {
 
     @Override
     public Personne find(Integer pId) {
+        DAOAdresse daoAdresse = new DAOAdresse();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from personne");
         sqlInsertUtilisateur.append("where Cat_ID = ?");
@@ -102,6 +105,17 @@ public class DAOPersonne extends DAO<Personne> {
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Personne p;
+            return new Personne(
+                    resultSet.getInt("Per_ID"),
+                    resultSet.getString("Per_Prenom"),
+                    resultSet.getString("Per_Name"),
+                    daoAdresse.find(resultSet.getInt("Adr_ID")),
+                    resultSet.getString("Per_Telephone"),
+                    resultSet.getString("Per_Email")
+            );
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
@@ -112,6 +126,8 @@ public class DAOPersonne extends DAO<Personne> {
 
     @Override
     public List<Personne> findALL() {
+        DAOAdresse daoAdresse = new DAOAdresse();
+        ArrayList<Personne> personne = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from personne");
 
@@ -119,7 +135,17 @@ public class DAOPersonne extends DAO<Personne> {
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                personne.add(new Personne(
+                        resultSet.getInt("Per_ID"),
+                        resultSet.getString("Per_Prenom"),
+                        resultSet.getString("Per_Name"),
+                        daoAdresse.find(resultSet.getInt("Adr_ID")),
+                        resultSet.getString("Per_Telephone"),
+                        resultSet.getString("Per_Email")
+                ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

@@ -1,7 +1,6 @@
 package DAO;
 
 import gestion.Achat;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -120,4 +119,85 @@ public class DAOAchat extends DAO<Achat>{
 
         return null;
     }
+
+    public Achat findprenom() {
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Per_Prenom from client");
+        sqlInsertUtilisateur.append("inner join achat on client.Cli_ID = achat.Cli_ID");
+        sqlInsertUtilisateur.append("inner join personne on client.Per_ID = personne.Per_ID;");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return null;
+    }
+
+    public Achat findNumSecu(){
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select client.Cli_NumSecu from client");
+        sqlInsertUtilisateur.append("inner join achat on client.Cli_ID = achat.Cli_ID");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return null;
+    }
+
+    public Achat findOrdonnance(){
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Ord_ID from achat");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return null;
+    }
+
+    public Achat findNumOrdonnance(){
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Ord_Num from achat");
+        sqlInsertUtilisateur.append("inner join ordonnance on ordonnance.Ord_ID = achat.Ord_ID");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return null;
+    }
+
+    public Achat findDate(){
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Achat_Date from achat");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return null;
+    }
+
+
 }

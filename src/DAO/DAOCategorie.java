@@ -1,9 +1,10 @@
 package DAO;
 
 import gestion.Categorie;
-
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCategorie extends DAO<Categorie> {
@@ -87,29 +88,43 @@ public class DAOCategorie extends DAO<Categorie> {
         sqlInsertUtilisateur.append("where Cat_ID = ?");
 
         try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
 
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Categorie c;
+            return new Categorie(
+                    resultSet.getInt("Cat_ID"),
+                    resultSet.getString("Cat_Categorie")
+            );
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
+                    + "[SQL error code :" + sqle.getSQLState() + "]");
         }
         return null;
     }
 
     @Override
     public List findALL() {
+        ArrayList<Categorie> categorie = new ArrayList<>();
+
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from categorie");
 
         try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString()))
+        {
             preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+            categorie.add(new Categorie(
+                    resultSet.getInt("Cat_ID"),
+                    resultSet.getString("Cat_Categorie")
+            ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -118,15 +133,3 @@ public class DAOCategorie extends DAO<Categorie> {
         return null;
     }
 }
-
- /*try {
-         String test = "select * from Personne";
-         Statement statement = con.createStatement();
-         ResultSet resultSet = statement.executeQuery(test);
-
-         while (resultSet.next()){
-         System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
-         }
-         } catch (Exception e) {
-         e.printStackTrace();
-         System.out.println("Erreur");*/

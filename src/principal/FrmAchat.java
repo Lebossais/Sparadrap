@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 
+import DAO.*;
 import gestion.*;
 import gestion.Compose;
 
@@ -34,6 +35,12 @@ public class FrmAchat {
 	JComboBox comboBoxMed;
 	JComboBox comboBoxMedicament;
 	private JTextField txtQuantite;
+	private DAOMedecin daoMedecin = new DAOMedecin();
+	private DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
+	private DAOClient daoClient = new DAOClient();
+	private DAOMutuelle daoMutuelle = new DAOMutuelle();
+	private DAOMedicament daoMedicament = new DAOMedicament();
+
 	/**
 	 * Create the application.
 	 */
@@ -140,40 +147,30 @@ public class FrmAchat {
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(25, 103, 92, 22);
 		panel_1.add(comboBoxMutuelle);
-		for(Mutuelle mutuelle : Declaration.mutuelle) {
-		comboBoxMutuelle.addItem(mutuelle.getPersonne().getPrenom());
-		}
+		for(Mutuelle mutuelle : daoMutuelle.findALL());
 		
 		comboBoxMed = new JComboBox ();
 		comboBoxMed.setEnabled(false);
 		comboBoxMed.setBounds(25, 350, 92, 22);
 		panel_1.add(comboBoxMed);
-		for(Medecin medecin : Declaration.medecin) {
-			comboBoxMed.addItem(medecin.getPersonne().getPrenom());
-		}
+		for(Medecin medecin : daoMedecin.findALL());
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setEnabled(false);
 		comboBoxSpe.setBounds(146, 350, 92, 22);
 		panel_1.add(comboBoxSpe);
-		for(Specialiste specialiste : Declaration.specialiste) {
-			comboBoxSpe.addItem(specialiste.getPersonne().getPrenom());
-		}
+		for(Specialiste specialiste : daoSpecialiste.findALL());
 		comboBoxSpe.addItem(null);
 		
 		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(25, 42, 92, 22);
 		panel_1.add(comboBoxClient);
-		for(Client clients : Declaration.clients) {
-			comboBoxClient.addItem(clients.getPersonne().getPrenom());
-		}
+		for(Client clients : daoClient.findALL());
 		
 		comboBoxMedicament = new JComboBox();
 		comboBoxMedicament.setBounds(46, 191, 130, 29);
 		panel_1.add(comboBoxMedicament);
-		for(Medicament medicament : Declaration.medicament) {
-			comboBoxMedicament.addItem(medicament.getNom());
-		}
+		for(Medicament medicament : daoMedicament.findALL());
 		
 		
 		txtQuantite = new JTextField();
@@ -217,14 +214,16 @@ public class FrmAchat {
 	}
 	
 	private void Validation(ActionEvent e) {
+/*
 		int i;
-		Specialiste.Personne c = null;
+		Specialiste c = null;
 		Mutuelle a = null;
 		String t = null;
 		String n = null;
 		Medecin o = null;
 		Specialiste s = null;
 		Medicament m = null;
+
 		try {
 			for(i = 0; i < comboBoxClient.getItemCount();i++) {
 				 Object p = comboBoxClient.getSelectedItem();
@@ -283,7 +282,7 @@ public class FrmAchat {
 		}catch (java.lang.NumberFormatException e2){
 			JOptionPane.showConfirmDialog(null, "Achat non effectué ","Erreur",JOptionPane.DEFAULT_OPTION);
 		}
-		
+	*/
 		
 	}
 	}

@@ -7,6 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import DAO.DAOClient;
+import DAO.DAOMedecin;
+import DAO.DAOMutuelle;
+import DAO.DAOSpecialiste;
 import gestion.*;
 
 import javax.swing.JButton;
@@ -32,6 +36,11 @@ public class Template_Client {
 	JComboBox comboBoxMed;
 	public JFrame frame;
 	private JTextField txtDateNaissance;
+
+	private DAOMedecin daoMedecin = new DAOMedecin();
+	private DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
+	private DAOClient daoClient = new DAOClient();
+	private DAOMutuelle daoMutuelle = new DAOMutuelle();
 
 
 	/**
@@ -162,21 +171,18 @@ public class Template_Client {
 		comboBoxMed = new JComboBox();
 		comboBoxMed.setBounds(222, 318, 114, 22);
 		panel.add(comboBoxMed);
-		comboBoxMed.addItem(Declaration.getMedecin(0).getPersonne().getPrenom());
-		comboBoxMed.addItem(Declaration.getMedecin(1).getPersonne().getPrenom());
+		comboBoxMed.addItem(daoMedecin.findALL());
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setBounds(359, 318, 109, 22);
 		panel.add(comboBoxSpe);
-		comboBoxSpe.addItem(Declaration.getSpecialiste(0).getPersonne().getPrenom());
-		comboBoxSpe.addItem(Declaration.getSpecialiste(1).getPersonne().getPrenom());
+		comboBoxSpe.addItem(daoSpecialiste.findALL());
 
 
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(77, 318, 120, 22);
 		panel.add(comboBoxMutuelle);
-		comboBoxMutuelle.addItem(Declaration.getMutuelle(0).getPersonne().getPrenom());
-		comboBoxMutuelle.addItem(Declaration.getMutuelle(1).getPersonne().getPrenom());
+		comboBoxMutuelle.addItem(daoMutuelle.findALL());
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 386, 562, 33);
@@ -234,7 +240,7 @@ public class Template_Client {
 	}
 
 	private void Valider(ActionEvent e) {
-		int i;
+		/*int i;
 		Mutuelle mut = null;
 		Medecin med = null;
 		Specialiste spe = null;
@@ -273,6 +279,6 @@ public class Template_Client {
 				JOptionPane.showConfirmDialog(null, "Enregistrement  effectué ", "Validation - Création", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e2) {
 				JOptionPane.showConfirmDialog(null, "Enregistrement non effectué ", "Erreur - Client", JOptionPane.DEFAULT_OPTION);
-			}
+			}*/
 		}
 	}

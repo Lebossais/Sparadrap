@@ -1,9 +1,12 @@
 package DAO;
 
+import gestion.Client;
 import gestion.Ordonnance;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOOrdonnance extends DAO<Ordonnance> {
@@ -90,6 +93,9 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
 
     @Override
     public Ordonnance find(Integer pId) {
+        DAOClient daoClient = new DAOClient();
+        DAOMedecin daoMedecin = new DAOMedecin();
+        DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from ordonnance");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
@@ -100,7 +106,15 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Ordonnance o;
+            return new Ordonnance(resultSet.getInt("Ord_ID"),
+                    resultSet.getString("Ord_Num"),
+                    daoClient.find(resultSet.getInt("Cli_ID")),
+                    daoMedecin.find(resultSet.getInt("Med_ID")),
+                    daoSpecialiste.find(resultSet.getInt("Spe_ID")),
+                    resultSet.getString("Ord_Date"));
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -110,6 +124,10 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
 
     @Override
     public List<Ordonnance> findALL() {
+        DAOClient daoClient = new DAOClient();
+        DAOMedecin daoMedecin = new DAOMedecin();
+        DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
+        ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from ordonnance");
 
@@ -117,12 +135,78 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()) {
+            ordonnance.add(new Ordonnance(
+                    resultSet.getInt("Ord_ID"),
+                    resultSet.getString("Ord_Num"),
+                    daoClient.find(resultSet.getInt("Cli_ID")),
+                    daoMedecin.find(resultSet.getInt("Med_ID")),
+                    daoSpecialiste.find(resultSet.getInt("Spe_ID")),
+                    resultSet.getString("Ord_Date")));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-
         return null;
     }
+
+    /*ResultSet resultSet = statement.executeQuery(test);
+
+            while (resultSet.next()){
+                System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
+            }*/
+
+    public Client findNumOrdonnance() {
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Ord_Num from ordonnance");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() + "]");
+        }
+        return null;
+    }
+
+    public Client findDateordonnance() {
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select Ord_Date from ordonnance");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() + "]");
+        }
+        return null;
+    }
+
+    public Client findmedecinprenom() {
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select personne.Per_Prenom from ordonnance");
+        sqlInsertUtilisateur.append("inner join medecin on ordonnance.Med_ID = medecin.Med_ID");
+        sqlInsertUtilisateur.append("inner join personne on medecin.Per_ID = personne.Per_ID");
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() + "]");
+        }
+        return null;
+    }
+
 }

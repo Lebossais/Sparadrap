@@ -15,11 +15,10 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOClient;
 import gestion.Client;
 import Frame.ListeClient;
 import java.awt.Toolkit;
-
-import static gestion.Declaration.clients;
 
 public class Liste extends JFrame {
 
@@ -27,6 +26,7 @@ private static final long serialVersionUID = 1L;
 public static ListeClient modele = new ListeClient();
 private JTable tableau = new JTable(modele);;
 public static JFrame frame;
+public DAOClient daoclient = new DAOClient();
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 
@@ -80,7 +80,8 @@ private class RemoveAction extends AbstractAction {
     Arrays.sort(modelIndexes);
 
     for(int i = modelIndexes.length - 1; i >= 0; i--){
-        modele.removeClient(modelIndexes[i]);
+		daoclient.deletebyID(modelIndexes[i]);
+       // modele.removeClient(modelIndexes[i]);
     }
 	revalidate();
  }
@@ -142,7 +143,7 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Client c : Declaration.getClients()) {
+    for (Client c : daoclient.findALL()) {
     	if (c.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
     	}

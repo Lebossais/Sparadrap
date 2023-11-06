@@ -1,14 +1,15 @@
 package DAO;
 
-import gestion.Panier;
-
+import gestion.Adresse;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class DAOAdresse extends DAO<Panier.Adresse> {
+public class DAOAdresse extends DAO<Adresse> {
     @Override
-    public boolean create(Panier.Adresse obj) {
+    public boolean create(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("insert into adresse");
         sqlInsertUtilisateur.append("Adr_Numero_Rue, Adr_Nom_Rue, Adr_Code_Postal, Adr_Ville, Adr_ID");
@@ -35,7 +36,7 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public boolean delete(Panier.Adresse obj) {
+    public boolean delete(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("Delete from adresse");
         sqlInsertUtilisateur.append("where Adr_ID = ?");
@@ -59,7 +60,7 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public boolean update(Panier.Adresse obj) {
+    public boolean update(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("Update adresse");
         sqlInsertUtilisateur.append("set Adr_Numero_Rue = ?");
@@ -90,7 +91,7 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public Panier.Adresse find(Integer pId) {
+    public Adresse find(Integer pId) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from adresse");
         sqlInsertUtilisateur.append("where Adr_ID = ?");
@@ -101,7 +102,16 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Adresse a;
+            return new Adresse(
+                    resultSet.getInt("Adr_ID"),
+                    resultSet.getInt("Adr_Numero_Rue"),
+                    resultSet.getString("Adr_Nom_Rue"),
+                    resultSet.getInt("Adr_Code_Postal"),
+                    resultSet.getString("Adr_Ville")
+            );
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -110,7 +120,8 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
     }
 
     @Override
-    public List<Panier.Adresse> findALL() {
+    public List<Adresse> findALL() {
+        ArrayList<Adresse> adresse = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from adresse");
 
@@ -118,7 +129,16 @@ public class DAOAdresse extends DAO<Panier.Adresse> {
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                adresse.add(new Adresse(
+                        resultSet.getInt("Adr_ID"),
+                        resultSet.getInt("Adr_Numero_Rue"),
+                        resultSet.getString("Adr_Nom_Rue"),
+                        resultSet.getInt("Adr_Code_Postal"),
+                        resultSet.getString("Adr_Ville")
+                ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

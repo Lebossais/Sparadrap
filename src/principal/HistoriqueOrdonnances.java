@@ -16,6 +16,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOOrdonnance;
 import gestion.Ordonnance;
 import Frame.ListeOrdonnance;
 
@@ -25,6 +26,7 @@ private static final long serialVersionUID = 1L;
 private ListeOrdonnance modele = new ListeOrdonnance();
 private JTable tableau = new JTable(modele);; 
 public JFrame frame;
+private DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 public HistoriqueOrdonnances() {
@@ -111,8 +113,8 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Ordonnance c : ListeOrdonnance.getOrdonnances()) {
-    	if (c.getNum_Ordonnance().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+    for (Ordonnance c : daoOrdonnance.findALL()) {
+    	if (c.getOrd_Num().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
     	}
     }

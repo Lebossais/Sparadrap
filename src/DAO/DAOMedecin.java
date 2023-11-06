@@ -1,9 +1,10 @@
 package DAO;
 
 import gestion.Medecin;
-
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOMedecin extends DAO<Medecin>{
@@ -81,6 +82,7 @@ public class DAOMedecin extends DAO<Medecin>{
 
     @Override
     public Medecin find(Integer pId) {
+        DAOPersonne daoPersonne = new DAOPersonne();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from medecin");
         sqlInsertUtilisateur.append("where Med_ID = ?");
@@ -91,7 +93,14 @@ public class DAOMedecin extends DAO<Medecin>{
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Medecin m;
+            return new Medecin(
+                    resultSet.getInt("Med_ID"),
+                    daoPersonne.find(resultSet.getInt("Per_ID")),
+                    resultSet.getInt("Med_Aggrement")
+            );
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -101,6 +110,8 @@ public class DAOMedecin extends DAO<Medecin>{
 
     @Override
     public List<Medecin> findALL() {
+        DAOPersonne daoPersonne = new DAOPersonne();
+        ArrayList<Medecin> medecin = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from medecin");
 
@@ -108,6 +119,14 @@ public class DAOMedecin extends DAO<Medecin>{
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                medecin.add(new Medecin(
+                        resultSet.getInt("Med_ID"),
+                        daoPersonne.find(resultSet.getInt("Per_ID")),
+                        resultSet.getInt("Med_Aggrement")
+                ));
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()

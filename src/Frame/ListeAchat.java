@@ -4,9 +4,12 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOAchat;
 import gestion.Compose;
 
 public class ListeAchat extends AbstractTableModel {
+
+	private DAOAchat daoAchat = new DAOAchat();
 
 	private static final long serialVersionUID = 5380417556060869746L;
 	Object p = null;
@@ -16,7 +19,7 @@ public class ListeAchat extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-        return Declaration.achats.size();
+        return daoAchat.findALL().size();
     }
  
 	
@@ -35,29 +38,20 @@ public class ListeAchat extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return Declaration.achats.get(rowIndex).getPersonne().getPrenom();
+        	return daoAchat.findprenom();
         case 1:
-            return Declaration.achats.get(rowIndex).getNum_Secu();
+            return daoAchat.findNumSecu();
         case 2 :
         	//Problème concernant une commande sans Ordonnance arrive. Essayer différentes choses mais impossible de remplacer.
-			if (Declaration.achats.get(rowIndex).getOrdonnance() == null) {
+			if (daoAchat.findOrdonnance() == null) {
 				return null;
-			}else if (Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance() !=null) {
-				return Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance();
+			}else if (daoAchat.findOrdonnance() !=null) {
+				return daoAchat.findNumOrdonnance(); // Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance()
 			}
         case 3 :
-        	return Declaration.achats.get(rowIndex).getDate();
+        	return daoAchat.findDate();
         default:
             return null; //Ne devrait jamais arriver
 	}
 }
-	/**
-	 * 
-	 * @param Achats
-	 */
-	  public void addAchats(Compose Achats) {
-	        Declaration.achats.add(Achats);
-	 
-	        fireTableRowsInserted(Declaration.achats.size() -1, Declaration.achats.size() -1);
-	  }
 }

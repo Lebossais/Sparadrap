@@ -6,12 +6,14 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOOrdonnance;
+import DAO.DAOSpecialiste;
 import gestion.Ordonnance;
 import gestion.Specialiste;
 
 public class ListeOrdonnance extends AbstractTableModel {
 
-	public Specialiste.Personne Personne;
+	private DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
 
 	private static final long serialVersionUID = 5380417556060869746L;
 
@@ -27,7 +29,7 @@ public class ListeOrdonnance extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-        return Declaration.ordonnances.size();
+        return daoOrdonnance.findALL().size();
     }
  
     public int getColumnCount() {
@@ -44,11 +46,11 @@ public class ListeOrdonnance extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return Declaration.ordonnances.get(rowIndex).getNum_Ordonnance();
+        	return daoOrdonnance.findNumOrdonnance();
         case 1:
-            return Declaration.ordonnances.get(rowIndex).Medecin.Personne.getPrenom();
+            return daoOrdonnance.findDateordonnance();
         case 2 :
-        	return Declaration.ordonnances.get(rowIndex).getDate_Ordonnance();
+        	return daoOrdonnance.findmedecinprenom();
         default:
             return null; //Ne devrait jamais arriver
 	}
@@ -57,18 +59,9 @@ public class ListeOrdonnance extends AbstractTableModel {
 	 * 
 	 * @param Ordonnances
 	 */
-	  public void addOrdonnance(Ordonnance Ordonnances) {
-		  Declaration.ordonnances.add(Ordonnances);
-	 
-	        fireTableRowsInserted(Declaration.ordonnances.size() -1, Declaration.ordonnances.size() -1);
-
-	  }
-	  /**
-	   * 
-	   * @return
-	   */
-	public static List<Ordonnance> getOrdonnances() {
-		return Declaration.ordonnances;
-	}
-	  
+//	  public void addOrdonnance(Ordonnance Ordonnances) {
+//		  Declaration.ordonnances.add(Ordonnances);
+//
+//	        fireTableRowsInserted(Declaration.ordonnances.size() -1, Declaration.ordonnances.size() -1);
+	// }
 }

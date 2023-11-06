@@ -6,9 +6,12 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOClient;
 import gestion.Client;
 
 public class ListeClient extends AbstractTableModel {
+
+	private DAOClient daoClient = new DAOClient();
 
 		private static final long serialVersionUID = 5380417556060869746L;
 
@@ -17,7 +20,7 @@ public class ListeClient extends AbstractTableModel {
 	    private final String[] entetes = {"Prenom", "Nom", "N° de Secu", "Telephone"};
 	    
 	    public int getRowCount() {
-	        return Declaration.getClients().size();
+	        return daoClient.findALL().size();
 	    }
 	 
 	    
@@ -32,13 +35,13 @@ public class ListeClient extends AbstractTableModel {
 	    public Object getValueAt(int rowIndex, int columnIndex) {
 	        switch(columnIndex){
 	            case 0:
-	                return gestion.Client.get(rowIndex).Personne.getPrenom();
+	                return daoClient.findprenom();
 	            case 1:
-	                return gestion.Client.get(rowIndex).Personne.getName();
+	                return daoClient.findnom();
 	            case 2:
-	                return gestion.Client.get(rowIndex).getNumero_Secu();
+	                return daoClient.findnumsecu();
 	            case 3 :
-	            	return gestion.Client.get(rowIndex).Personne.getTelephone();
+	            	return daoClient.findtelephone();
 	            default:
 	                return null; //Ne devrait jamais arriver
 	        }
@@ -48,11 +51,11 @@ public class ListeClient extends AbstractTableModel {
 	     * 
 	     * @param rowIndex
 	     */
-	    public void removeClient(int rowIndex) {
-	        Declaration.clients.remove(rowIndex);
+	    /*public void removeClient(int rowIndex) {
+	        daoClient.delete(rowIndex);
 	 
 	        fireTableRowsDeleted(rowIndex, rowIndex);
-	    }
+	    }*/
 	    /**
 	     * 
 	     * @param Liste
@@ -60,6 +63,4 @@ public class ListeClient extends AbstractTableModel {
 	    public void Retour(JTable Liste) {
 	    	
 	    }
-
-	    
 }

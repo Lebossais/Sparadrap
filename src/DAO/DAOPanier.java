@@ -3,7 +3,9 @@ package DAO;
 import gestion.Panier;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOPanier extends DAO<Panier>{
@@ -83,6 +85,8 @@ public class DAOPanier extends DAO<Panier>{
 
     @Override
     public Panier find(Integer pId) {
+        DAOAchat daoAchat = new DAOAchat();
+        DAOMedicament daoMedicament = new DAOMedicament();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from panier");
         sqlInsertUtilisateur.append("where Achat_ID = ?");
@@ -93,6 +97,14 @@ public class DAOPanier extends DAO<Panier>{
             preparedStatement.setInt(1, pId);
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            Panier p;
+            return new Panier(
+                    daoAchat.find(resultSet.getInt("Achat_ID")),
+                    daoMedicament.find(resultSet.getInt("Medi_ID")),
+                    resultSet.getInt("Panier_Qte")
+            );
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
@@ -103,6 +115,9 @@ public class DAOPanier extends DAO<Panier>{
 
     @Override
     public List<Panier> findALL() {
+        DAOAchat daoAchat = new DAOAchat();
+        DAOMedicament daoMedicament = new DAOMedicament();
+        ArrayList<Panier> panier = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from panier");
 
@@ -110,6 +125,14 @@ public class DAOPanier extends DAO<Panier>{
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                panier.add(new Panier(
+                        daoAchat.find(resultSet.getInt("Achat_ID")),
+                        daoMedicament.find(resultSet.getInt("Medi_ID")),
+                        resultSet.getInt("Panier_Qte")
+                ));
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()

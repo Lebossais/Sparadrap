@@ -16,6 +16,8 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.DAOAchat;
+import gestion.Achat;
 import gestion.Compose;
 import Frame.ListeAchat;
 
@@ -25,6 +27,7 @@ private static final long serialVersionUID = 1L;
 private ListeAchat modele = new ListeAchat();
 private JTable tableau = new JTable(modele);
 public JFrame frame;
+private DAOAchat daoAchat = new DAOAchat();
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 public HistoriqueAchat() {
@@ -112,8 +115,8 @@ private class InformationsAction extends AbstractAction {
 
     Arrays.sort(modelIndexes);
 
-    for (Compose c : Declaration.getAchats()) {
-    	if (c.getNum_Secu().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
+    for (Achat c : daoAchat.findALL()) {
+    	if (c.getOrdonnance().getOrd_Num().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
     		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
     	}
      }
