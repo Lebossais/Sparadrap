@@ -12,8 +12,8 @@ public class DAOPanier extends DAO<Panier>{
     @Override
     public boolean create(Panier obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into panier");
-        sqlInsertUtilisateur.append("Achat_ID, Medi_ID, Panier_Qte");
+        sqlInsertUtilisateur.append("insert into panier ");
+        sqlInsertUtilisateur.append("Achat_ID, Medi_ID, Panier_Qte ");
         sqlInsertUtilisateur.append("values (?, ?, ?)");
 
         boolean requeteok = false;
@@ -38,7 +38,7 @@ public class DAOPanier extends DAO<Panier>{
     @Override
     public boolean delete(Panier obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from panier");
+        sqlInsertUtilisateur.append("Delete from panier ");
         sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         boolean requeteok = false;
@@ -60,8 +60,8 @@ public class DAOPanier extends DAO<Panier>{
     @Override
     public boolean update(Panier obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update panier");
-        sqlInsertUtilisateur.append("set Medi_ID = ?, Panier_Qte = ?");
+        sqlInsertUtilisateur.append("Update panier ");
+        sqlInsertUtilisateur.append("set Medi_ID = ?, Panier_Qte = ? ");
         sqlInsertUtilisateur.append("where Achat_ID = ? ");
 
         boolean requeteok = false;

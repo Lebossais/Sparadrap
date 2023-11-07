@@ -11,8 +11,8 @@ public class DAOAdresse extends DAO<Adresse> {
     @Override
     public boolean create(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into adresse");
-        sqlInsertUtilisateur.append("Adr_Numero_Rue, Adr_Nom_Rue, Adr_Code_Postal, Adr_Ville, Adr_ID");
+        sqlInsertUtilisateur.append("insert into adresse ");
+        sqlInsertUtilisateur.append("(Adr_Numero_Rue, Adr_Nom_Rue, Adr_Code_Postal, Adr_Ville, Adr_ID) ");
         sqlInsertUtilisateur.append("values (?, ?, ?, ?, null)");
 
         boolean requeteok = false;
@@ -38,7 +38,7 @@ public class DAOAdresse extends DAO<Adresse> {
     @Override
     public boolean delete(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from adresse");
+        sqlInsertUtilisateur.append("Delete from adresse ");
         sqlInsertUtilisateur.append("where Adr_ID = ?");
 
         boolean requeteok = false;
@@ -62,12 +62,12 @@ public class DAOAdresse extends DAO<Adresse> {
     @Override
     public boolean update(Adresse obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update adresse");
-        sqlInsertUtilisateur.append("set Adr_Numero_Rue = ?");
-        sqlInsertUtilisateur.append(",Adr_Nom_Rue = ?");
-        sqlInsertUtilisateur.append(",Adr_Code_Postal = ?");
-        sqlInsertUtilisateur.append(",Adr_Ville = ?");
-        sqlInsertUtilisateur.append("where Cat_ID = ? ");
+        sqlInsertUtilisateur.append("Update adresse ");
+        sqlInsertUtilisateur.append("set Adr_Numero_Rue = ? ");
+        sqlInsertUtilisateur.append(",Adr_Nom_Rue = ? ");
+        sqlInsertUtilisateur.append(",Adr_Code_Postal = ? ");
+        sqlInsertUtilisateur.append(",Adr_Ville = ? ");
+        sqlInsertUtilisateur.append("where Adr_ID = ?");
 
         boolean requeteok = false;
 

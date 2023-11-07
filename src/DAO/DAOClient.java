@@ -11,8 +11,8 @@ public class DAOClient extends DAO<Client> {
     @Override
     public boolean create(Client obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into client");
-        sqlInsertUtilisateur.append("Cli_ID, Cli_DateNaissance, Cli_NumSecu, Per_ID, Med_ID, Spe_ID, Mut_ID");
+        sqlInsertUtilisateur.append("insert into client ");
+        sqlInsertUtilisateur.append("(Cli_ID, Cli_DateNaissance, Cli_NumSecu, Per_ID, Med_ID, Spe_ID, Mut_ID) ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?, ?, ?)");
 
         boolean requeteok = false;
@@ -40,7 +40,7 @@ public class DAOClient extends DAO<Client> {
     @Override
     public boolean delete(Client obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from client");
+        sqlInsertUtilisateur.append("Delete from client ");
         sqlInsertUtilisateur.append("where Cli_ID = ?");
 
         boolean requeteok = false;
@@ -62,9 +62,9 @@ public class DAOClient extends DAO<Client> {
     @Override
     public boolean update(Client obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update client");
+        sqlInsertUtilisateur.append("Update client ");
         sqlInsertUtilisateur.append("set Cli_DateNaissance = ?, Cli_NumSecu = ?, " +
-                "Per_ID = ?, Med_ID = ?, Spe_ID = ?, Mut_ID = ?");
+                "Per_ID = ?, Med_ID = ?, Spe_ID = ?, Mut_ID = ? ");
         sqlInsertUtilisateur.append("where Cli_ID = ? ");
 
         boolean requeteok = false;

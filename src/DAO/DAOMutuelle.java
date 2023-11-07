@@ -13,8 +13,8 @@ public class DAOMutuelle extends DAO<Mutuelle> {
     @Override
     public boolean create(Mutuelle obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into mutuelle");
-        sqlInsertUtilisateur.append("Mut_ID, Mut_Departement, Mut_PriseEnCharge, Ent_ID");
+        sqlInsertUtilisateur.append("insert into mutuelle ");
+        sqlInsertUtilisateur.append("Mut_ID, Mut_Departement, Mut_PriseEnCharge, Ent_ID ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?)");
 
         boolean requeteok = false;
@@ -39,7 +39,7 @@ public class DAOMutuelle extends DAO<Mutuelle> {
     @Override
     public boolean delete(Mutuelle obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from mutuelle");
+        sqlInsertUtilisateur.append("Delete from mutuelle ");
         sqlInsertUtilisateur.append("where Mut_ID = ?");
 
         boolean requeteok = false;
@@ -61,8 +61,8 @@ public class DAOMutuelle extends DAO<Mutuelle> {
     @Override
     public boolean update(Mutuelle obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update Mutuelle");
-        sqlInsertUtilisateur.append("set Mut_Departement, Mut_PriseEnCharge,");
+        sqlInsertUtilisateur.append("Update Mutuelle ");
+        sqlInsertUtilisateur.append("set Mut_Departement, Mut_PriseEnCharge, ");
         sqlInsertUtilisateur.append("where Mut_ID = ? ");
 
         boolean requeteok = false;

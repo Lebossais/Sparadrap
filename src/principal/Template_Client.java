@@ -7,10 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import DAO.DAOClient;
-import DAO.DAOMedecin;
-import DAO.DAOMutuelle;
-import DAO.DAOSpecialiste;
+import DAO.*;
 import gestion.*;
 
 import javax.swing.JButton;
@@ -41,6 +38,8 @@ public class Template_Client {
 	private DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
 	private DAOClient daoClient = new DAOClient();
 	private DAOMutuelle daoMutuelle = new DAOMutuelle();
+	private DAOAdresse daoAdresse = new DAOAdresse();
+	private DAOPersonne daoPersonne = new DAOPersonne();
 
 
 	/**
@@ -171,18 +170,25 @@ public class Template_Client {
 		comboBoxMed = new JComboBox();
 		comboBoxMed.setBounds(222, 318, 114, 22);
 		panel.add(comboBoxMed);
-		comboBoxMed.addItem(daoMedecin.findALL());
+		for(int i =1; i<daoMedecin.findALL().size()+1; i++){
+			comboBoxMed.addItem(daoMedecin.find(i).getPersonne().getPrenom());
+		}
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setBounds(359, 318, 109, 22);
 		panel.add(comboBoxSpe);
-		comboBoxSpe.addItem(daoSpecialiste.findALL());
+		for(int i =1; i<daoSpecialiste.findALL().size()+1; i++){
+			comboBoxSpe.addItem(daoSpecialiste.find(i).getPersonne().getPrenom());
+		}
+		comboBoxSpe.addItem(null);
 
 
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(77, 318, 120, 22);
 		panel.add(comboBoxMutuelle);
-		comboBoxMutuelle.addItem(daoMutuelle.findALL());
+		for(int i =1; i<daoMutuelle.findALL().size()+1; i++){
+			comboBoxMutuelle.addItem(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale());
+		}
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 386, 562, 33);
@@ -240,28 +246,34 @@ public class Template_Client {
 	}
 
 	private void Valider(ActionEvent e) {
-		/*int i;
+		int i;
 		Mutuelle mut = null;
 		Medecin med = null;
 		Specialiste spe = null;
+		Adresse adr = null;
+		Personne pers = null;
+		Client cli = null;
 			try {
 				Integer numRue = Integer.valueOf(txtNum.getText());
 				Integer CodePostal = Integer.valueOf(TxtCode.getText());
-				Declaration.adresse.add(new Panier.Adresse(numRue, txtRue.getText(), CodePostal, TxtVille.getText()));
 
-				Declaration.personne.add(new Specialiste.Personne(txtPrenom.getText(), txtNom.getText(), Declaration.adresse.get(Declaration.adresse.size() - 1), txtPhone.getText(), txtMail.getText()));
+				adr = new Adresse(1, numRue, txtRue.getText(), CodePostal, TxtVille.getText());
+				daoAdresse.create(adr); // faut vérifier si elle existe pas
+
+				pers = new Personne(1, txtPrenom.getText(), txtNom.getText(), adr, txtPhone.getText(), txtMail.getText());
+				daoPersonne.create(pers); // faut verifier si elle existe pas
 
 				for (i = 0; i < comboBoxMutuelle.getItemCount(); i++) {
 					Object p = comboBoxMutuelle.getSelectedItem();
-					if (p.equals(Declaration.getMutuelle(i).getPersonne().getPrenom())) {
-						mut = Declaration.getMutuelle(i);
+					if (p.equals(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale())) {
+						mut = daoMutuelle.find(i);
 						break;
 					}
 				}
 				for (i = 0; i < comboBoxMed.getItemCount(); i++) {
 					Object p = comboBoxMed.getSelectedItem();
-					if (p.equals(Declaration.getMedecin(i).getPersonne().getPrenom())) {
-						med = Declaration.getMedecin(i);
+					if (p.equals(daoMedecin.find(i).getPersonne().getPrenom())) {
+						med = daoMedecin.find(i);
 						break;
 					}
 				}
@@ -270,15 +282,17 @@ public class Template_Client {
 					if (p == null) {
 						spe = null;
 						break;
-					} else if (p.equals(Declaration.getSpecialiste(i).getPersonne().getPrenom())) {
-						spe = Declaration.getSpecialiste(i);
+					} else if (p.equals(daoSpecialiste.find(i).getPersonne().getPrenom())) {
+						spe = daoSpecialiste.find(i);
 					}
 				}
-				Declaration.getClients().add(new Client(Declaration.personne.get(Declaration.personne.size() - 1), txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe));
+				cli = new Client(1, pers, txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe);
+				daoClient.create(cli);
+
 				Liste.modele.fireTableDataChanged();
 				JOptionPane.showConfirmDialog(null, "Enregistrement  effectué ", "Validation - Création", JOptionPane.DEFAULT_OPTION);
 			} catch (Exception e2) {
 				JOptionPane.showConfirmDialog(null, "Enregistrement non effectué ", "Erreur - Client", JOptionPane.DEFAULT_OPTION);
-			}*/
+			}
 		}
 	}

@@ -15,7 +15,7 @@ public class ListeAchat extends AbstractTableModel {
 	Object p = null;
 	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Compose.getModel());
  
-    private final String[] entetes = {"Prénom du Client", "N° de Sécu", "N° Ordonnance", "Date"}; // Les différentes entêtes
+    private final String[] entetes = {"N°Achat","Prénom du Client", "N° de Sécu", "N° Ordonnance", "Date"}; // Les différentes entêtes
 
 	@Override
 	public int getRowCount() {
@@ -37,18 +37,21 @@ public class ListeAchat extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
-        case 0:
-        	return daoAchat.find(rowIndex+1).getClient().getPersonne().getPrenom();
+
+			case 0:
+				return daoAchat.find(rowIndex+1).getAchat_ID();
         case 1:
+        	return daoAchat.find(rowIndex+1).getClient().getPersonne().getPrenom();
+        case 2:
             return daoAchat.find(rowIndex+1).getClient().getNumero_Secu();
-        case 2 :
+        case 3 :
         	//Problème concernant une commande sans Ordonnance arrive. Essayer différentes choses mais impossible de remplacer.
 			if (daoAchat.find(rowIndex+1).getOrdonnance() == null) {
 				return null;
 			}else if (daoAchat.find(rowIndex+1).getOrdonnance() !=null) {
 				return daoAchat.find(rowIndex+1).getOrdonnance().getOrd_Num(); // Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance()
 			}
-        case 3 :
+        case 4 :
         	return daoAchat.find(rowIndex+1).getAchat_Date();
         default:
             return null; //Ne devrait jamais arriver

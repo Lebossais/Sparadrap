@@ -11,8 +11,8 @@ public class DAOAchat extends DAO<Achat>{
     @Override
     public boolean create(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into achat");
-        sqlInsertUtilisateur.append("Achat_ID, Achat_Date, Cli_ID, Ord_ID");
+        sqlInsertUtilisateur.append("insert into achat ");
+        sqlInsertUtilisateur.append("Achat_ID, Achat_Date, Cli_ID, Ord_ID ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?)");
 
         boolean requeteok = false;
@@ -37,7 +37,7 @@ public class DAOAchat extends DAO<Achat>{
     @Override
     public boolean delete(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from achat");
+        sqlInsertUtilisateur.append("Delete from achat ");
         sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         boolean requeteok = false;
@@ -59,8 +59,8 @@ public class DAOAchat extends DAO<Achat>{
     @Override
     public boolean update(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update achat");
-        sqlInsertUtilisateur.append("set Achat_Date = ?, Cli_ID = ?, Ord_ID = ?");
+        sqlInsertUtilisateur.append("Update achat ");
+        sqlInsertUtilisateur.append("set Achat_Date = ?, Cli_ID = ?, Ord_ID = ? ");
         sqlInsertUtilisateur.append("where Achat_ID = ? ");
 
         boolean requeteok = false;

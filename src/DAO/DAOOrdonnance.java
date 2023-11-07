@@ -14,8 +14,8 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
     @Override
     public boolean create(Ordonnance obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into ordonnance");
-        sqlInsertUtilisateur.append("Ord_ID, Ord_Num, Ord_Date, Cli_ID, Med_ID, Spe_ID");
+        sqlInsertUtilisateur.append("insert into ordonnance ");
+        sqlInsertUtilisateur.append("Ord_ID, Ord_Num, Ord_Date, Cli_ID, Med_ID, Spe_ID ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?,? )");
 
         boolean requeteok = false;
@@ -43,7 +43,7 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
     @Override
     public boolean delete(Ordonnance obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from ordonnance");
+        sqlInsertUtilisateur.append("Delete from ordonnance ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         boolean requeteok = false;
@@ -65,8 +65,8 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
     @Override
     public boolean update(Ordonnance obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update ordonnance");
-        sqlInsertUtilisateur.append("set Ord_Num = ?, Ord_Date = ?, Cli_ID = ?, Med_ID = ?, Spe_ID = ?");
+        sqlInsertUtilisateur.append("Update ordonnance ");
+        sqlInsertUtilisateur.append("set Ord_Num = ?, Ord_Date = ?, Cli_ID = ?, Med_ID = ?, Spe_ID = ? ");
         sqlInsertUtilisateur.append("where Ord_ID = ? ");
 
         boolean requeteok = false;

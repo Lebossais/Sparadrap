@@ -13,8 +13,8 @@ public class DAOCategorie extends DAO<Categorie> {
     @Override
     public boolean create(Categorie obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into categorie");
-        sqlInsertUtilisateur.append("Cat_ID, Cat_Categorie");
+        sqlInsertUtilisateur.append("insert into categorie ");
+        sqlInsertUtilisateur.append("Cat_ID, Cat_Categorie ");
         sqlInsertUtilisateur.append("values (null,?)");
 
         boolean requeteok = false;
@@ -37,7 +37,7 @@ public class DAOCategorie extends DAO<Categorie> {
     @Override
     public boolean delete(Categorie obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from categorie");
+        sqlInsertUtilisateur.append("Delete from categorie ");
         sqlInsertUtilisateur.append("where cat_ID = ?");
 
         boolean requeteok = false;
@@ -59,8 +59,8 @@ public class DAOCategorie extends DAO<Categorie> {
     @Override
     public boolean update(Categorie obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update categorie");
-        sqlInsertUtilisateur.append("set Cat_Categorie = ?");
+        sqlInsertUtilisateur.append("Update categorie ");
+        sqlInsertUtilisateur.append("set Cat_Categorie = ? ");
         sqlInsertUtilisateur.append("where Cat_ID = ? ");
 
         boolean requeteok = false;

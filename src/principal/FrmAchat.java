@@ -147,30 +147,40 @@ public class FrmAchat {
 		comboBoxMutuelle = new JComboBox();
 		comboBoxMutuelle.setBounds(25, 103, 92, 22);
 		panel_1.add(comboBoxMutuelle);
-		for(Mutuelle mutuelle : daoMutuelle.findALL());
+		for(int i=1; i<daoMutuelle.findALL().size()+1; i++){
+			comboBoxMutuelle.addItem(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale());
+		};
 		
 		comboBoxMed = new JComboBox ();
 		comboBoxMed.setEnabled(false);
 		comboBoxMed.setBounds(25, 350, 92, 22);
 		panel_1.add(comboBoxMed);
-		for(Medecin medecin : daoMedecin.findALL());
+		for(int i =1; i<daoMedecin.findALL().size()+1; i++){
+			comboBoxMed.addItem(daoMedecin.find(i).getPersonne().getPrenom());
+		}
 
 		comboBoxSpe = new JComboBox();
 		comboBoxSpe.setEnabled(false);
 		comboBoxSpe.setBounds(146, 350, 92, 22);
 		panel_1.add(comboBoxSpe);
-		for(Specialiste specialiste : daoSpecialiste.findALL());
+		for(int i =1; i<daoSpecialiste.findALL().size()+1; i++){
+			comboBoxSpe.addItem(daoSpecialiste.find(i).getPersonne().getPrenom());
+		}
 		comboBoxSpe.addItem(null);
 		
 		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(25, 42, 92, 22);
 		panel_1.add(comboBoxClient);
-		for(Client clients : daoClient.findALL());
+		for(int i =1; i<daoClient.findALL().size()+1; i++){
+			comboBoxClient.addItem(daoClient.find(i).getPersonne().getPrenom());
+		}
 		
 		comboBoxMedicament = new JComboBox();
 		comboBoxMedicament.setBounds(46, 191, 130, 29);
 		panel_1.add(comboBoxMedicament);
-		for(Medicament medicament : daoMedicament.findALL());
+		for(int i =1; i<daoMedicament.findALL().size()+1; i++){
+			comboBoxMedicament.addItem(daoMedicament.find(i).getNom());
+		}
 		
 		
 		txtQuantite = new JTextField();

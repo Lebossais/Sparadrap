@@ -12,8 +12,8 @@ public class DAOPersonne extends DAO<Personne> {
     @Override
     public boolean create(Personne obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into categorie");
-        sqlInsertUtilisateur.append("Per_ID, Per_Prenom, Per_Nom, Per_Telephone, Per_Email, Adr_ID");
+        sqlInsertUtilisateur.append("insert into categorie ");
+        sqlInsertUtilisateur.append("(Per_ID, Per_Prenom, Per_Nom, Per_Telephone, Per_Email, Adr_ID) ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?, ?)");
 
         boolean requeteok = false;
@@ -41,7 +41,7 @@ public class DAOPersonne extends DAO<Personne> {
     @Override
     public boolean delete(Personne obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from personne");
+        sqlInsertUtilisateur.append("Delete from personne ");
         sqlInsertUtilisateur.append("where Per_ID = ?");
 
         boolean requeteok = false;
@@ -65,9 +65,9 @@ public class DAOPersonne extends DAO<Personne> {
     @Override
     public boolean update(Personne obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update personne");
+        sqlInsertUtilisateur.append("Update personne ");
         sqlInsertUtilisateur.append("set Per_Prenom = ?, Per_Nom = ?," +
-                " Per_Telephone = ?, Per_Email = ?, Adr_ID = ?");
+                " Per_Telephone = ?, Per_Email = ?, Adr_ID = ? ");
         sqlInsertUtilisateur.append("where Per_ID = ? ");
 
         boolean requeteok = false;

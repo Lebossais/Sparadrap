@@ -11,8 +11,8 @@ public class DAOEntreprise extends DAO<Entreprise> {
     @Override
     public boolean create(Entreprise obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into entreprise");
-        sqlInsertUtilisateur.append("Ent_ID, Ent_Raison_Sociale, Ent_Telephone, Ent_Email, Adr_ID");
+        sqlInsertUtilisateur.append("insert into entreprise ");
+        sqlInsertUtilisateur.append("Ent_ID, Ent_Raison_Sociale, Ent_Telephone, Ent_Email, Adr_ID ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?)");
 
         boolean requeteok = false;
@@ -38,7 +38,7 @@ public class DAOEntreprise extends DAO<Entreprise> {
     @Override
     public boolean delete(Entreprise obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from entreprise");
+        sqlInsertUtilisateur.append("Delete from entreprise ");
         sqlInsertUtilisateur.append("where Ent_ID = ?");
 
         boolean requeteok = false;
@@ -60,8 +60,8 @@ public class DAOEntreprise extends DAO<Entreprise> {
     @Override
     public boolean update(Entreprise obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update entreprise");
-        sqlInsertUtilisateur.append("set Ent_Raison_Sociale = ?, Ent_Telephone = ?, Ent_Email = ?");
+        sqlInsertUtilisateur.append("Update entreprise ");
+        sqlInsertUtilisateur.append("set Ent_Raison_Sociale = ?, Ent_Telephone = ?, Ent_Email = ? ");
         sqlInsertUtilisateur.append("where Ent_ID = ? ");
 
         boolean requeteok = false;

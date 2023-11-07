@@ -11,8 +11,8 @@ public class DAOSpecialiste extends DAO<Specialiste> {
     @Override
     public boolean create(Specialiste obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into specialiste");
-        sqlInsertUtilisateur.append("Spe_ID, Spe_Specialite, Per_ID");
+        sqlInsertUtilisateur.append("insert into specialiste ");
+        sqlInsertUtilisateur.append("Spe_ID, Spe_Specialite, Per_ID ");
         sqlInsertUtilisateur.append("values (null,?, ?)");
 
         boolean requeteok = false;
@@ -36,7 +36,7 @@ public class DAOSpecialiste extends DAO<Specialiste> {
     @Override
     public boolean delete(Specialiste obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from specialiste");
+        sqlInsertUtilisateur.append("Delete from specialiste ");
         sqlInsertUtilisateur.append("where Spe_ID = ?");
 
         boolean requeteok = false;
@@ -58,8 +58,8 @@ public class DAOSpecialiste extends DAO<Specialiste> {
     @Override
     public boolean update(Specialiste obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update specialiste");
-        sqlInsertUtilisateur.append("set Spe_Specialite = ?");
+        sqlInsertUtilisateur.append("Update specialiste ");
+        sqlInsertUtilisateur.append("set Spe_Specialite = ? ");
         sqlInsertUtilisateur.append("where Spe_ID = ? ");
 
         boolean requeteok = false;

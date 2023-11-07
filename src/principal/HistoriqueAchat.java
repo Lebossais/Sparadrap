@@ -116,10 +116,10 @@ private class InformationsAction extends AbstractAction {
     Arrays.sort(modelIndexes);
 
     for (Achat c : daoAchat.findALL()) {
-    	if (c.getOrdonnance().getOrd_Num().equals(tableau.getModel().getValueAt(modelIndexes[0], 1))){
-    		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
-    	}
-     }
+        if (c.getAchat_ID()==((int) tableau.getModel().getValueAt(modelIndexes[0], 0))) {
+            JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString()); // Tout les détails inscrite lors de l'achat
+        }
+    }
     } catch (Exception e2) {
 			// TODO: handle exception
     		e2.printStackTrace();

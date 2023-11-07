@@ -13,8 +13,8 @@ public class DAOCompose extends DAO<Compose>{
     @Override
     public boolean create(Compose obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into compose");
-        sqlInsertUtilisateur.append("Ord_ID, Medi_ID, Compose_Qte");
+        sqlInsertUtilisateur.append("insert into compose ");
+        sqlInsertUtilisateur.append("Ord_ID, Medi_ID, Compose_Qte ");
         sqlInsertUtilisateur.append("values (?, ?, ?)");
 
         boolean requeteok = false;
@@ -39,7 +39,7 @@ public class DAOCompose extends DAO<Compose>{
     @Override
     public boolean delete(Compose obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from compose");
+        sqlInsertUtilisateur.append("Delete from compose ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         boolean requeteok = false;
@@ -61,8 +61,8 @@ public class DAOCompose extends DAO<Compose>{
     @Override
     public boolean update(Compose obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Update update");
-        sqlInsertUtilisateur.append("set Medi_ID = ?, Compose_Qte = ?");
+        sqlInsertUtilisateur.append("Update update ");
+        sqlInsertUtilisateur.append("set Medi_ID = ?, Compose_Qte = ? ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         boolean requeteok = false;

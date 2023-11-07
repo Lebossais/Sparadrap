@@ -41,7 +41,6 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
-					System.out.println(daoClient.findALL());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
