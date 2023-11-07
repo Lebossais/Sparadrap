@@ -38,18 +38,18 @@ public class ListeAchat extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return daoAchat.findprenom();
+        	return daoAchat.find(rowIndex+1).getClient().getPersonne().getPrenom();
         case 1:
-            return daoAchat.findNumSecu();
+            return daoAchat.find(rowIndex+1).getClient().getNumero_Secu();
         case 2 :
         	//Problème concernant une commande sans Ordonnance arrive. Essayer différentes choses mais impossible de remplacer.
-			if (daoAchat.findOrdonnance() == null) {
+			if (daoAchat.find(rowIndex+1).getOrdonnance() == null) {
 				return null;
-			}else if (daoAchat.findOrdonnance() !=null) {
-				return daoAchat.findNumOrdonnance(); // Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance()
+			}else if (daoAchat.find(rowIndex+1).getOrdonnance() !=null) {
+				return daoAchat.find(rowIndex+1).getOrdonnance().getOrd_Num(); // Declaration.achats.get(rowIndex).getOrdonnance().getNum_Ordonnance()
 			}
         case 3 :
-        	return daoAchat.findDate();
+        	return daoAchat.find(rowIndex+1).getAchat_Date();
         default:
             return null; //Ne devrait jamais arriver
 	}

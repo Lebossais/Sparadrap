@@ -22,8 +22,6 @@ public class ListeClient extends AbstractTableModel {
 	    public int getRowCount() {
 	        return daoClient.findALL().size();
 	    }
-	 
-	    
 	    public int getColumnCount() {
 	        return entetes.length;
 	    }
@@ -35,13 +33,13 @@ public class ListeClient extends AbstractTableModel {
 	    public Object getValueAt(int rowIndex, int columnIndex) {
 	        switch(columnIndex){
 	            case 0:
-	                return daoClient.findprenom();
+	                return daoClient.find(rowIndex+1).getPersonne().getPrenom();
 	            case 1:
-	                return daoClient.findnom();
+	                return daoClient.find(rowIndex+1).getPersonne().getName();
 	            case 2:
-	                return daoClient.findnumsecu();
+	                return daoClient.find(rowIndex+1).getNumero_Secu();
 	            case 3 :
-	            	return daoClient.findtelephone();
+	            	return daoClient.find(rowIndex+1).getPersonne().getTelephone();
 	            default:
 	                return null; //Ne devrait jamais arriver
 	        }

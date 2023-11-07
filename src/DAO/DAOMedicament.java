@@ -90,7 +90,7 @@ public class DAOMedicament extends DAO<Medicament> {
     public Medicament find(Integer pId) {
         DAOCategorie daoCategorie = new DAOCategorie();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from medicament");
+        sqlInsertUtilisateur.append("select * from medicament ");
         sqlInsertUtilisateur.append("where Medi_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -98,17 +98,18 @@ public class DAOMedicament extends DAO<Medicament> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Medicament m;
-            return new Medicament(
-                    resultSet.getInt("Medi_ID"),
-                    resultSet.getString("Medi_Nom"),
-                    daoCategorie.find(resultSet.getInt("Cat_ID")),
-                    resultSet.getInt("Medi_Prix"),
-                    resultSet.getString("Date_Mise_En_Service")
-            );
+            while(resultSet.next()) {
+                return new Medicament(
+                        resultSet.getInt("Medi_ID"),
+                        resultSet.getString("Medi_Nom"),
+                        daoCategorie.find(resultSet.getInt("Cat_ID")),
+                        resultSet.getInt("Medi_Prix"),
+                        resultSet.getString("Medi_DateMiseService")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -126,7 +127,6 @@ public class DAOMedicament extends DAO<Medicament> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 medicament.add(new Medicament(
@@ -134,7 +134,7 @@ public class DAOMedicament extends DAO<Medicament> {
                         resultSet.getString("Medi_Nom"),
                         daoCategorie.find(resultSet.getInt("Cat_ID")),
                         resultSet.getInt("Medi_Prix"),
-                        resultSet.getString("Date_Mise_En_Service")
+                        resultSet.getString("Medi_DateMiseService")
                 ));
             }
         } catch (SQLException sqle) {
@@ -142,6 +142,6 @@ public class DAOMedicament extends DAO<Medicament> {
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
-        return null;
+        return medicament;
     }
 }

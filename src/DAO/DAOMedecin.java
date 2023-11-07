@@ -20,7 +20,7 @@ public class DAOMedecin extends DAO<Medecin>{
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
 
-            preparedStatement.setInt(1, obj.getAggrement());
+            preparedStatement.setString(1, obj.getAggrement());
             preparedStatement.setInt(2, obj.getPersonne().getPer_ID());
 
             preparedStatement.executeUpdate();
@@ -67,7 +67,7 @@ public class DAOMedecin extends DAO<Medecin>{
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.setInt(1, obj.getAggrement());
+            preparedStatement.setString(1, obj.getAggrement());
             preparedStatement.setInt(2, obj.getMed_ID());
 
             preparedStatement.executeUpdate();
@@ -84,7 +84,7 @@ public class DAOMedecin extends DAO<Medecin>{
     public Medecin find(Integer pId) {
         DAOPersonne daoPersonne = new DAOPersonne();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from medecin");
+        sqlInsertUtilisateur.append("select * from medecin ");
         sqlInsertUtilisateur.append("where Med_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -92,15 +92,16 @@ public class DAOMedecin extends DAO<Medecin>{
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Medecin m;
-            return new Medecin(
-                    resultSet.getInt("Med_ID"),
-                    daoPersonne.find(resultSet.getInt("Per_ID")),
-                    resultSet.getInt("Med_Aggrement")
-            );
+            while(resultSet.next()) {
+                return new Medecin(
+                        resultSet.getInt("Med_ID"),
+                        daoPersonne.find(resultSet.getInt("Per_ID")),
+                        resultSet.getString("Med_Aggrement")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -118,13 +119,12 @@ public class DAOMedecin extends DAO<Medecin>{
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 medecin.add(new Medecin(
                         resultSet.getInt("Med_ID"),
                         daoPersonne.find(resultSet.getInt("Per_ID")),
-                        resultSet.getInt("Med_Aggrement")
+                        resultSet.getString("Med_Aggrement")
                 ));
             }
 
@@ -133,6 +133,6 @@ public class DAOMedecin extends DAO<Medecin>{
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
-        return null;
+        return medecin;
     }
 }

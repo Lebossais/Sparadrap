@@ -97,7 +97,7 @@ public class DAOClient extends DAO<Client> {
         DAOMedecin daoMedecin = new DAOMedecin();
         DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from client");
+        sqlInsertUtilisateur.append("select * from client ");
         sqlInsertUtilisateur.append("where Cli_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -105,18 +105,19 @@ public class DAOClient extends DAO<Client> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Client c;
-            return new Client(resultSet.getInt("Cli_ID"),
-                    daoPersonne.find(resultSet.getInt("Per_ID")),
-                    resultSet.getString("Cli_Date_Naissance"),
-                    resultSet.getString("Cli_Numero_Secu"),
-                    daoMutuelle.find(resultSet.getInt("Mut_ID")),
-                    daoMedecin.find(resultSet.getInt("Med_ID")),
-                    daoSpecialiste.find(resultSet.getInt("Spe_ID"))
-            );
+            while(resultSet.next()) {
+                return new Client(resultSet.getInt("Cli_ID"),
+                        daoPersonne.find(resultSet.getInt("Per_ID")),
+                        resultSet.getString("Cli_DateNaissance"),
+                        resultSet.getString("Cli_NumSecu"),
+                        daoMutuelle.find(resultSet.getInt("Mut_ID")),
+                        daoMedecin.find(resultSet.getInt("Med_ID")),
+                        daoSpecialiste.find(resultSet.getInt("Spe_ID"))
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -137,97 +138,28 @@ public class DAOClient extends DAO<Client> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 client.add(new Client(
                         resultSet.getInt("Cli_ID"),
                         daoPersonne.find(resultSet.getInt("Per_ID")),
-                        resultSet.getString("Cli_Date_Naissance"),
-                        resultSet.getString("Cli_Numero_Secu"),
+                        resultSet.getString("Cli_DateNaissance"),
+                        resultSet.getString("Cli_NumSecu"),
                         daoMutuelle.find(resultSet.getInt("Mut_ID")),
                         daoMedecin.find(resultSet.getInt("Med_ID")),
                         daoSpecialiste.find(resultSet.getInt("Spe_ID"))
                 ));
             }
-
+            return client;
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-
         return null;
     }
-    public Client findprenom() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select personne.Per_Prenom from client");
-        sqlInsertUtilisateur.append("inner join personne on client.Per_ID = Personne.Per_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
-    public Client findnom() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select personne.Per_Nom from client");
-        sqlInsertUtilisateur.append("inner join personne on client.Per_ID = Personne.Per_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
-    public Client findnumsecu() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Cli_NumSecu from client");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
-    public Client findtelephone() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select personne.Telephone from client");
-        sqlInsertUtilisateur.append("inner join personne on client.Per_ID = Personne.Per_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
     public boolean deletebyID(int test) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("Delete from client");
+        sqlInsertUtilisateur.append("Delete from client ");
         sqlInsertUtilisateur.append("where Cli_ID = ?");
 
         boolean requeteok = false;

@@ -29,7 +29,7 @@ public class ListeOrdonnance extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-        return daoOrdonnance.findALL().size();
+        return (int) daoOrdonnance.findALL().size();
     }
  
     public int getColumnCount() {
@@ -46,11 +46,11 @@ public class ListeOrdonnance extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		switch(columnIndex){
         case 0:
-        	return daoOrdonnance.findNumOrdonnance();
+        	return daoOrdonnance.find(rowIndex+1).getOrd_Num();
         case 1:
-            return daoOrdonnance.findDateordonnance();
+            return daoOrdonnance.find(rowIndex+1).getMedecin().getPersonne().getPrenom();
         case 2 :
-        	return daoOrdonnance.findmedecinprenom();
+        	return daoOrdonnance.find(rowIndex+1).getOrd_Date();
         default:
             return null; //Ne devrait jamais arriver
 	}

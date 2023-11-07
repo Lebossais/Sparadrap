@@ -6,9 +6,9 @@ public class Categorie {
 	int Cat_ID;
 
 
-public Categorie (int ID, String Categorie) {
+public Categorie (int Cat_ID, String Categorie) {
 	super();
-	this.Cat_ID = ID;
+	this.Cat_ID = Cat_ID;
 	this.Cat_Categorie = Categorie;
 }
 

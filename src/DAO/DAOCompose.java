@@ -89,7 +89,7 @@ public class DAOCompose extends DAO<Compose>{
         DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
         DAOMedicament daoMedicament = new DAOMedicament();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from update");
+        sqlInsertUtilisateur.append("select * from update ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -97,15 +97,16 @@ public class DAOCompose extends DAO<Compose>{
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             Compose c;
 
-            return new Compose(
-                    daoOrdonnance.find(resultSet.getInt("Ord_ID")),
-                    daoMedicament.find(resultSet.getInt("Med_ID")),
-                    resultSet.getInt("Compose_Qte")
-            );
+            while(resultSet.next()) {
+                return new Compose(
+                        daoOrdonnance.find(resultSet.getInt("Ord_ID")),
+                        daoMedicament.find(resultSet.getInt("Med_ID")),
+                        resultSet.getInt("Compose_Qte")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -124,7 +125,6 @@ public class DAOCompose extends DAO<Compose>{
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 compose.add(new Compose(

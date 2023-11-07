@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.border.LineBorder;
 
 import Configuration.SQL.Singleton;
+import DAO.DAOClient;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -27,6 +28,8 @@ public class Outil_Gestion {
 	HistoriqueAchat listeds = null;
 	static Connection con = Singleton.getInstanceDB();
 
+	static DAOClient daoClient = new DAOClient();
+
 	private JFrame PageDacceuil;
 
 	/**
@@ -38,7 +41,7 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
-					Singleton.RequeteTest(con);
+					System.out.println(daoClient.findALL());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

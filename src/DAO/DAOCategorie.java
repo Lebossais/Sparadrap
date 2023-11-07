@@ -84,7 +84,7 @@ public class DAOCategorie extends DAO<Categorie> {
     @Override
     public Categorie find(Integer pId) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from categorie");
+        sqlInsertUtilisateur.append("select * from categorie ");
         sqlInsertUtilisateur.append("where Cat_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -92,14 +92,15 @@ public class DAOCategorie extends DAO<Categorie> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Categorie c;
-            return new Categorie(
-                    resultSet.getInt("Cat_ID"),
-                    resultSet.getString("Cat_Categorie")
-            );
+            while(resultSet.next()) {
+                return new Categorie(
+                        resultSet.getInt("Cat_ID"),
+                        resultSet.getString("Cat_Categorie")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() + "]");
@@ -117,7 +118,6 @@ public class DAOCategorie extends DAO<Categorie> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString()))
         {
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
             categorie.add(new Categorie(
@@ -125,6 +125,7 @@ public class DAOCategorie extends DAO<Categorie> {
                     resultSet.getString("Cat_Categorie")
             ));
             }
+            return categorie;
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

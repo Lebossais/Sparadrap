@@ -2,7 +2,9 @@ package DAO;
 
 import gestion.Achat;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOAchat extends DAO<Achat>{
@@ -84,8 +86,10 @@ public class DAOAchat extends DAO<Achat>{
 
     @Override
     public Achat find(Integer pId) {
+        DAOClient daoClient = new DAOClient();
+        DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from achat");
+        sqlInsertUtilisateur.append("select * from achat ");
         sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -93,8 +97,17 @@ public class DAOAchat extends DAO<Achat>{
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            Achat a;
+            while(resultSet.next()) {
+                return new Achat(
+                        resultSet.getInt("Achat_ID"),
+                        resultSet.getString("Achat_Date"),
+                        daoClient.find(resultSet.getInt("Cli_ID")),
+                        daoOrdonnance.find(resultSet.getInt("Ord_ID"))
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -104,100 +117,29 @@ public class DAOAchat extends DAO<Achat>{
 
     @Override
     public List<Achat> findALL() {
+        DAOClient daoClient = new DAOClient();
+        DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
+        ArrayList<Achat> achat = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("select * from achat");
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                achat.add(new Achat(
+                        resultSet.getInt("Achat_ID"),
+                        resultSet.getString("Achat_Date"),
+                        daoClient.find(resultSet.getInt("Cli_ID")),
+                        daoOrdonnance.find(resultSet.getInt("Ord_ID"))
+                ));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
-        return null;
+        return achat;
     }
-
-    public Achat findprenom() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Per_Prenom from client");
-        sqlInsertUtilisateur.append("inner join achat on client.Cli_ID = achat.Cli_ID");
-        sqlInsertUtilisateur.append("inner join personne on client.Per_ID = personne.Per_ID;");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
-        }
-        return null;
-    }
-
-    public Achat findNumSecu(){
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select client.Cli_NumSecu from client");
-        sqlInsertUtilisateur.append("inner join achat on client.Cli_ID = achat.Cli_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
-        }
-        return null;
-    }
-
-    public Achat findOrdonnance(){
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Ord_ID from achat");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
-        }
-        return null;
-    }
-
-    public Achat findNumOrdonnance(){
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Ord_Num from achat");
-        sqlInsertUtilisateur.append("inner join ordonnance on ordonnance.Ord_ID = achat.Ord_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
-        }
-        return null;
-    }
-
-    public Achat findDate(){
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Achat_Date from achat");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() +"]");
-        }
-        return null;
-    }
-
-
 }

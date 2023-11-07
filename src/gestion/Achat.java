@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Achat {
 
-	Date Achat_Date;
+	String Achat_Date;
 	int Achat_ID;
 
 	Client	Client;
@@ -18,14 +18,14 @@ public class Achat {
 	 * @param Client
 	 * @param Ordonnance
 	 */
-	public Achat(int Achat_ID, Date Achat_Date, Client Client, Ordonnance Ordonnance) {
+	public Achat(int Achat_ID, String Achat_Date, Client Client, Ordonnance Ordonnance) {
 		this.Achat_ID = Achat_ID;
 		this.Achat_Date = Achat_Date;
 		this.Client = Client;
 		this.Ordonnance = Ordonnance;
 	}
 
-	public Date getAchat_Date() {
+	public String getAchat_Date() {
 		return Achat_Date;
 	}
 

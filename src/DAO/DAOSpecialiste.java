@@ -84,7 +84,7 @@ public class DAOSpecialiste extends DAO<Specialiste> {
     public Specialiste find(Integer pId) {
         DAOPersonne daoPersonne = new DAOPersonne();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from specialiste");
+        sqlInsertUtilisateur.append("select * from specialiste ");
         sqlInsertUtilisateur.append("where Spe_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -92,15 +92,16 @@ public class DAOSpecialiste extends DAO<Specialiste> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Specialiste s;
-            return new Specialiste(
-                    resultSet.getInt("Spe_ID"),
-                    resultSet.getString("Spe_Specialite"),
-                    daoPersonne.find(resultSet.getInt("Per_ID"))
-            );
+            while(resultSet.next()) {
+                return new Specialiste(
+                        resultSet.getInt("Spe_ID"),
+                        resultSet.getString("Spe_Specialite"),
+                        daoPersonne.find(resultSet.getInt("Per_ID"))
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -118,7 +119,6 @@ public class DAOSpecialiste extends DAO<Specialiste> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 specialiste.add(new Specialiste(
@@ -132,6 +132,6 @@ public class DAOSpecialiste extends DAO<Specialiste> {
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
-        return null;
+        return specialiste;
     }
 }

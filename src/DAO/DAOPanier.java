@@ -88,7 +88,7 @@ public class DAOPanier extends DAO<Panier>{
         DAOAchat daoAchat = new DAOAchat();
         DAOMedicament daoMedicament = new DAOMedicament();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from panier");
+        sqlInsertUtilisateur.append("select * from panier ");
         sqlInsertUtilisateur.append("where Achat_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -96,15 +96,16 @@ public class DAOPanier extends DAO<Panier>{
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Panier p;
-            return new Panier(
-                    daoAchat.find(resultSet.getInt("Achat_ID")),
-                    daoMedicament.find(resultSet.getInt("Medi_ID")),
-                    resultSet.getInt("Panier_Qte")
-            );
+            while(resultSet.next()) {
+                return new Panier(
+                        daoAchat.find(resultSet.getInt("Achat_ID")),
+                        daoMedicament.find(resultSet.getInt("Medi_ID")),
+                        resultSet.getInt("Panier_Qte")
+                );
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
@@ -124,7 +125,6 @@ public class DAOPanier extends DAO<Panier>{
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 panier.add(new Panier(

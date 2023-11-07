@@ -88,7 +88,7 @@ public class DAOMutuelle extends DAO<Mutuelle> {
     public Mutuelle find(Integer pId) {
         DAOEntreprise daoEntreprise = new DAOEntreprise();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from mutuelle");
+        sqlInsertUtilisateur.append("select * from mutuelle ");
         sqlInsertUtilisateur.append("where Mut_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -96,16 +96,17 @@ public class DAOMutuelle extends DAO<Mutuelle> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Mutuelle m;
-            return new Mutuelle(
-                    resultSet.getInt("Mut_ID"),
-                    daoEntreprise.find(resultSet.getInt("Ent_ID")),
-                    resultSet.getInt("Mut_Departement"),
-                    resultSet.getInt("Mut_Prise_En_Charge")
-            );
+            while(resultSet.next()) {
+                return new Mutuelle(
+                        resultSet.getInt("Mut_ID"),
+                        daoEntreprise.find(resultSet.getInt("Ent_ID")),
+                        resultSet.getInt("Mut_Departement"),
+                        resultSet.getInt("Mut_PriseEnCharge")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -123,14 +124,13 @@ public class DAOMutuelle extends DAO<Mutuelle> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 mutuelle.add(new Mutuelle(
                         resultSet.getInt("Mut_ID"),
                         daoEntreprise.find(resultSet.getInt("Ent_ID")),
                         resultSet.getInt("Mut_Departement"),
-                        resultSet.getInt("Mut_Prise_En_Charge")
+                        resultSet.getInt("Mut_PriseEnCharge")
                 ));
             }
         } catch (SQLException sqle) {
@@ -138,6 +138,6 @@ public class DAOMutuelle extends DAO<Mutuelle> {
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
-        return null;
+        return mutuelle;
     }
 }

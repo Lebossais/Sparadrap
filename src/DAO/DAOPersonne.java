@@ -96,26 +96,27 @@ public class DAOPersonne extends DAO<Personne> {
     public Personne find(Integer pId) {
         DAOAdresse daoAdresse = new DAOAdresse();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from personne");
-        sqlInsertUtilisateur.append("where Cat_ID = ?");
+        sqlInsertUtilisateur.append("select * from personne ");
+        sqlInsertUtilisateur.append("where Per_ID = ?");
 
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Personne p;
-            return new Personne(
-                    resultSet.getInt("Per_ID"),
-                    resultSet.getString("Per_Prenom"),
-                    resultSet.getString("Per_Name"),
-                    daoAdresse.find(resultSet.getInt("Adr_ID")),
-                    resultSet.getString("Per_Telephone"),
-                    resultSet.getString("Per_Email")
-            );
+            while(resultSet.next()) {
+                return new Personne(
+                        resultSet.getInt("Per_ID"),
+                        resultSet.getString("Per_Prenom"),
+                        resultSet.getString("Per_Nom"),
+                        daoAdresse.find(resultSet.getInt("Adr_ID")),
+                        resultSet.getString("Per_Telephone"),
+                        resultSet.getString("Per_Email")
+                );
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
@@ -134,13 +135,12 @@ public class DAOPersonne extends DAO<Personne> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 personne.add(new Personne(
                         resultSet.getInt("Per_ID"),
                         resultSet.getString("Per_Prenom"),
-                        resultSet.getString("Per_Name"),
+                        resultSet.getString("Per_Nom"),
                         daoAdresse.find(resultSet.getInt("Adr_ID")),
                         resultSet.getString("Per_Telephone"),
                         resultSet.getString("Per_Email")

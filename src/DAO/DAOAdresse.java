@@ -93,7 +93,7 @@ public class DAOAdresse extends DAO<Adresse> {
     @Override
     public Adresse find(Integer pId) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from adresse");
+        sqlInsertUtilisateur.append("select * from adresse ");
         sqlInsertUtilisateur.append("where Adr_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -101,17 +101,18 @@ public class DAOAdresse extends DAO<Adresse> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Adresse a;
-            return new Adresse(
-                    resultSet.getInt("Adr_ID"),
-                    resultSet.getInt("Adr_Numero_Rue"),
-                    resultSet.getString("Adr_Nom_Rue"),
-                    resultSet.getInt("Adr_Code_Postal"),
-                    resultSet.getString("Adr_Ville")
-            );
+            while(resultSet.next()) {
+                return new Adresse(
+                        resultSet.getInt("Adr_ID"),
+                        resultSet.getInt("Adr_Numero_Rue"),
+                        resultSet.getString("Adr_Nom_Rue"),
+                        resultSet.getInt("Adr_Code_Postal"),
+                        resultSet.getString("Adr_Ville")
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -128,7 +129,6 @@ public class DAOAdresse extends DAO<Adresse> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 adresse.add(new Adresse(

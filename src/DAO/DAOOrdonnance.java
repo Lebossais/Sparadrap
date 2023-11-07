@@ -97,7 +97,7 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
         DAOMedecin daoMedecin = new DAOMedecin();
         DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from ordonnance");
+        sqlInsertUtilisateur.append("select * from ordonnance ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -105,16 +105,17 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Ordonnance o;
-            return new Ordonnance(resultSet.getInt("Ord_ID"),
-                    resultSet.getString("Ord_Num"),
-                    daoClient.find(resultSet.getInt("Cli_ID")),
-                    daoMedecin.find(resultSet.getInt("Med_ID")),
-                    daoSpecialiste.find(resultSet.getInt("Spe_ID")),
-                    resultSet.getString("Ord_Date"));
+            while(resultSet.next()) {
+                return new Ordonnance(resultSet.getInt("Ord_ID"),
+                        resultSet.getString("Ord_Num"),
+                        daoClient.find(resultSet.getInt("Cli_ID")),
+                        daoMedecin.find(resultSet.getInt("Med_ID")),
+                        daoSpecialiste.find(resultSet.getInt("Spe_ID")),
+                        resultSet.getString("Ord_Date"));
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -134,7 +135,6 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -150,7 +150,7 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-        return null;
+        return ordonnance;
     }
 
     /*ResultSet resultSet = statement.executeQuery(test);
@@ -158,55 +158,4 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
             while (resultSet.next()){
                 System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
             }*/
-
-    public Client findNumOrdonnance() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Ord_Num from ordonnance");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
-    public Client findDateordonnance() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select Ord_Date from ordonnance");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
-    public Client findmedecinprenom() {
-        StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select personne.Per_Prenom from ordonnance");
-        sqlInsertUtilisateur.append("inner join medecin on ordonnance.Med_ID = medecin.Med_ID");
-        sqlInsertUtilisateur.append("inner join personne on medecin.Per_ID = personne.Per_ID");
-
-        try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException sqle) {
-            System.out.println("RelationWithDB erreur" + sqle.getMessage()
-                    + "[SQL error code :" + sqle.getSQLState() + "]");
-        }
-        return null;
-    }
-
 }

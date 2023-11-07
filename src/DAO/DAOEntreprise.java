@@ -88,7 +88,7 @@ public class DAOEntreprise extends DAO<Entreprise> {
     public Entreprise find(Integer pId) {
         DAOAdresse daoAdresse = new DAOAdresse();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from entreprise");
+        sqlInsertUtilisateur.append("select * from entreprise ");
         sqlInsertUtilisateur.append("where Ent_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -96,17 +96,18 @@ public class DAOEntreprise extends DAO<Entreprise> {
 
             preparedStatement.setInt(1, pId);
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
 
             Entreprise e;
-            return new Entreprise(
-                    resultSet.getInt("Ent_ID"),
-                    resultSet.getString("Ent_Raison_Sociale"),
-                    resultSet.getString("Ent_Telephone"),
-                    resultSet.getString("Ent_Email"),
-                    daoAdresse.find(resultSet.getInt("Adr_ID"))
-            );
+            while(resultSet.next()) {
+                return new Entreprise(
+                        resultSet.getInt("Ent_ID"),
+                        resultSet.getString("Ent_Raison_Sociale"),
+                        resultSet.getString("Ent_Telephone"),
+                        resultSet.getString("Ent_Email"),
+                        daoAdresse.find(resultSet.getInt("Adr_ID"))
+                );
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -124,7 +125,6 @@ public class DAOEntreprise extends DAO<Entreprise> {
         try (PreparedStatement preparedStatement =
                      this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
 
-            preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 entreprise.add(new Entreprise(
