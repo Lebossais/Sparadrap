@@ -20,10 +20,11 @@ public class Ordonnance {
 	 * @param Specialiste
 	 * @param Ord_Date
 	 */
-	public Ordonnance(int Ord_ID, String Ord_Num,Client Client, Medecin Medecin, Specialiste Specialiste, String Ord_Date) {
+	public Ordonnance(int Ord_ID, String Ord_Num, Client Client, Medecin Medecin, Specialiste Specialiste, String Ord_Date) {
 		super();
 		this.Ord_ID = Ord_ID;
 		this.Ord_Num = Ord_Num;
+		this.Client = Client;
 		setMedecin(Medecin);
 		this.Specialiste = Specialiste;
 		this.Ord_Date = Ord_Date;

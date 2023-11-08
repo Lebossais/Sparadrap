@@ -40,7 +40,6 @@ public class Medecin {
 			}
 		}
 		catch(Exception exception){
-
 		}
 	}
 	/**

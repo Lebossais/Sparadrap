@@ -59,6 +59,5 @@ public class ListeClient extends AbstractTableModel {
 	     * @param Liste
 	     */
 	    public void Retour(JTable Liste) {
-	    	
 	    }
 }

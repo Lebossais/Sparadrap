@@ -258,26 +258,28 @@ public class Template_Client {
 				Integer CodePostal = Integer.valueOf(TxtCode.getText());
 
 				adr = new Adresse(1, numRue, txtRue.getText(), CodePostal, TxtVille.getText());
-				daoAdresse.create(adr); // faut vérifier si elle existe pas
+				int NewIDAdr = daoAdresse.createAdresse(adr); // faut vérifier si elle existe pas
+				adr.setAdr_ID(NewIDAdr);
 
 				pers = new Personne(1, txtPrenom.getText(), txtNom.getText(), adr, txtPhone.getText(), txtMail.getText());
-				daoPersonne.create(pers); // faut verifier si elle existe pas
+				int NewIDPers = daoPersonne.createPersonne(pers); // faut verifier si elle existe pas
+				pers.setPer_ID(NewIDPers);
 
-				for (i = 0; i < comboBoxMutuelle.getItemCount(); i++) {
+				for (i = 1; i < comboBoxMutuelle.getItemCount(); i++) {
 					Object p = comboBoxMutuelle.getSelectedItem();
 					if (p.equals(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale())) {
 						mut = daoMutuelle.find(i);
 						break;
 					}
 				}
-				for (i = 0; i < comboBoxMed.getItemCount(); i++) {
+				for (i = 1; i < comboBoxMed.getItemCount(); i++) {
 					Object p = comboBoxMed.getSelectedItem();
 					if (p.equals(daoMedecin.find(i).getPersonne().getPrenom())) {
 						med = daoMedecin.find(i);
 						break;
 					}
 				}
-				for (i = 0; i < comboBoxSpe.getItemCount(); i++) {
+				for (i = 1; i < comboBoxSpe.getItemCount(); i++) {
 					Object p = comboBoxSpe.getSelectedItem();
 					if (p == null) {
 						spe = null;
@@ -286,11 +288,17 @@ public class Template_Client {
 						spe = daoSpecialiste.find(i);
 					}
 				}
-				cli = new Client(1, pers, txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe);
-				daoClient.create(cli);
 
+				if (spe == null) {
+					cli = new Client(1, pers, txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe);
+					daoClient.createClient(cli);
+				} else {
+					cli = new Client(1, pers, txtDateNaissance.getText(), txtSecu.getText(), mut, med, spe);
+					daoClient.createClient(cli);
+				}
 				Liste.modele.fireTableDataChanged();
 				JOptionPane.showConfirmDialog(null, "Enregistrement  effectué ", "Validation - Création", JOptionPane.DEFAULT_OPTION);
+				template_frame.dispose();
 			} catch (Exception e2) {
 				JOptionPane.showConfirmDialog(null, "Enregistrement non effectué ", "Erreur - Client", JOptionPane.DEFAULT_OPTION);
 			}

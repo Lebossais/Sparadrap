@@ -8,33 +8,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOClient extends DAO<Client> {
-    @Override
-    public boolean create(Client obj) {
+
+    public Integer createClient(Client obj) {
+        Integer newId = null;
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("insert into client ");
-        sqlInsertUtilisateur.append("(Cli_ID, Cli_DateNaissance, Cli_NumSecu, Per_ID, Med_ID, Spe_ID, Mut_ID) ");
-        sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?, ?, ?)");
+        sqlInsertUtilisateur.append("(Cli_DateNaissance, Cli_NumSecu, Per_ID, Med_ID, Spe_ID, Mut_ID) ");
+        sqlInsertUtilisateur.append("values (?, ?, ?, ?, ?, ?)");
 
         boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString(),PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, obj.getDate_Naissance());
             preparedStatement.setString(2, obj.getNumero_Secu());
             preparedStatement.setInt(3, obj.getPersonne().getPer_ID());
             preparedStatement.setInt(4, obj.getMedecin_Traitant().getMed_ID());
-            preparedStatement.setInt(5, obj.getSpecialiste().getSpe_ID());
             preparedStatement.setInt(6, obj.getMutuelle().getMut_ID());
 
+            if (obj.getSpecialiste() ==  null){
+                preparedStatement.setInt(5, Integer.parseInt("null"));
+            }else {
+                preparedStatement.setInt(5, obj.getSpecialiste().getSpe_ID());
+            }
             preparedStatement.executeUpdate();
+            ResultSet result = preparedStatement.getGeneratedKeys();
+            if (result.next()){
+                newId = result.getInt("Cli_ID");
+            }
             requeteok = true;
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-        return requeteok;
+        return newId;
+    }
+    @Override
+    public boolean create(Client obj) {
+        return false;
     }
 
     @Override

@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOPersonne extends DAO<Personne> {
-    @Override
-    public boolean create(Personne obj) {
+
+    public Integer createPersonne(Personne obj) {
+        Integer newId = null;
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("insert into categorie ");
+        sqlInsertUtilisateur.append("insert into personne ");
         sqlInsertUtilisateur.append("(Per_ID, Per_Prenom, Per_Nom, Per_Telephone, Per_Email, Adr_ID) ");
         sqlInsertUtilisateur.append("values (null, ?, ?, ?, ?, ?)");
 
-        boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString(),PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, obj.getPrenom());
             preparedStatement.setString(2, obj.getName());
@@ -28,14 +28,22 @@ public class DAOPersonne extends DAO<Personne> {
             preparedStatement.setInt(5, obj.getAdresse().getAdr_ID());
 
             preparedStatement.executeUpdate();
-            requeteok = true;
+            ResultSet result = preparedStatement.getGeneratedKeys();
+            if (result.next()){
+                newId = result.getInt(1);
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         } ;
 
-        return requeteok;
+        return newId;
+    }
+
+    @Override
+    public boolean create(Personne obj) {
+        return false;
     }
 
     @Override

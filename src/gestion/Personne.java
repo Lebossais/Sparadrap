@@ -141,6 +141,10 @@ import java.util.regex.Pattern;
             return Per_ID;
         }
 
+        public void setPer_ID(int per_ID) {
+            Per_ID = per_ID;
+        }
+
         /**
          *
          * @return

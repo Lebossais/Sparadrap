@@ -99,7 +99,11 @@ public class Adresse {
             return Adr_ID;
         }
 
-        @Override
+    public void setAdr_ID(int adr_ID) {
+        Adr_ID = adr_ID;
+    }
+
+    @Override
         public String toString() {
             return Adr_Numero_Rue + ", " + Adr_Nom_Rue + ", " + Adr_Code_Postal + ", "+ Adr_Ville;
         }

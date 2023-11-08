@@ -37,8 +37,6 @@ public class Client {
 		setSpecialiste(Specialiste);
 	}
 
-
-	
 	@Override
 	public String toString() {
 		String c = null;
@@ -151,7 +149,6 @@ public class Client {
             }
         }
         catch(Exception exception){
-            
         }
 	}
 	/**

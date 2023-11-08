@@ -106,7 +106,6 @@ public class DAOPanier extends DAO<Panier>{
                         resultSet.getInt("Panier_Qte")
                 );
             }
-
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
@@ -133,12 +132,32 @@ public class DAOPanier extends DAO<Panier>{
                         resultSet.getInt("Panier_Qte")
                 ));
             }
-
+            return panier;
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
 
         return null;
+    }
+    public boolean deletebyID(int test) {
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("Delete from panier ");
+        sqlInsertUtilisateur.append("where achat_ID = ? && Medi_ID = ?");
+
+        boolean requeteok = false;
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.setInt(1, test);
+
+            preparedStatement.executeUpdate();
+            requeteok = true;
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return requeteok;
     }
 }

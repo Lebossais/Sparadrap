@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOAdresse extends DAO<Adresse> {
-    @Override
-    public boolean create(Adresse obj) {
+
+    public Integer createAdresse(Adresse obj) {
+        Integer newId = null;
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("insert into adresse ");
         sqlInsertUtilisateur.append("(Adr_Numero_Rue, Adr_Nom_Rue, Adr_Code_Postal, Adr_Ville, Adr_ID) ");
         sqlInsertUtilisateur.append("values (?, ?, ?, ?, null)");
 
-        boolean requeteok = false;
 
         try (PreparedStatement preparedStatement =
-                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString(),PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setInt(1, obj.getNumero_rue());
             preparedStatement.setString(2, obj.getNom_rue());
@@ -26,13 +26,20 @@ public class DAOAdresse extends DAO<Adresse> {
             preparedStatement.setString(4, obj.getVille());
 
             preparedStatement.executeUpdate();
-            requeteok = true;
+            ResultSet result = preparedStatement.getGeneratedKeys();
+            if (result.next()){
+                newId = result.getInt(1);
+            }
 
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-        return requeteok;
+        return newId;
+    }
+    @Override
+    public boolean create(Adresse obj){
+        return false;
     }
 
     @Override

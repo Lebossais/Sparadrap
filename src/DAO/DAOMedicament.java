@@ -137,6 +137,7 @@ public class DAOMedicament extends DAO<Medicament> {
                         resultSet.getString("Medi_DateMiseService")
                 ));
             }
+            return medicament;
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");

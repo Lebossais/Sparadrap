@@ -24,7 +24,7 @@ public class Liste extends JFrame {
 
 private static final long serialVersionUID = 1L;
 public static ListeClient modele = new ListeClient();
-private JTable tableau = new JTable(modele);;
+private JTable tableau = new JTable(modele);
 public static JFrame frame;
 public DAOClient daoclient = new DAOClient();
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
@@ -56,9 +56,6 @@ public Liste() {
     pack();
  
 }
-
-
-
 
 private class RemoveAction extends AbstractAction {
     /**

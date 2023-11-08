@@ -1,5 +1,8 @@
 package gestion;
 
+import javax.swing.*;
+import javax.swing.table.TableModel;
+
 public class Panier {
 
     Achat Achat;
@@ -22,5 +25,26 @@ public class Panier {
 
     public int getPanier_Qte() {
         return Panier_Qte;
+    }
+
+    public static TableModel getModel() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    /**
+     *
+     * @return
+     */
+    public static int[] getSelectedRows() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    /**
+     *
+     * @return
+     */
+    public static DefaultRowSorter<TableModel, Integer> getRowSorter() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

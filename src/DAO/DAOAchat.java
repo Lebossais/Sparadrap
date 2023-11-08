@@ -135,6 +135,7 @@ public class DAOAchat extends DAO<Achat>{
                         daoOrdonnance.find(resultSet.getInt("Ord_ID"))
                 ));
             }
+            return achat;
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
