@@ -2,7 +2,7 @@ package Frame;
 
 import DAO.DAOPanier;
 import gestion.Panier;
-import javax.swing.JTable;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -10,37 +10,44 @@ import javax.swing.table.TableRowSorter;
 public class ListePanier  extends AbstractTableModel {
 
     private DAOPanier daoPanier = new DAOPanier();
+    private static final long serialVersionUID = 5380417556060869746L;
 
     TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Panier.getModel());
 
-    private final String[] enetes = {"Nom du Medicament", "Catégorie", "Quantité", "Prix Unitaire", "Prix Total"};
+    private final String[] entetes = {"Nom du Medicament", "Catégorie", "Quantité", "Prix Unitaire", "Prix Total"};
+
+    public ListePanier(){
+        super();
+    }
 
     @Override
     public int getRowCount() {
-        return daoPanier.findALL().size();
+        return 7;
     }
 
     @Override
     public int getColumnCount() {
-        return enetes.length;
+        return entetes.length;
     }
-    public String getColumnName(int columnIndex){
-        return enetes[columnIndex];
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        return entetes[columnIndex];
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 0:
-                return daoPanier.find(rowIndex+1).getMedicament().getNom();
-            case 1:
-                return daoPanier.find(rowIndex+1).getMedicament().getCategorie().getCat_Categorie();
-            case 2:
-                return daoPanier.find(rowIndex+1).getPanier_Qte();
-            case 3:
-                return daoPanier.find(rowIndex+1).getMedicament().getPrix();
-            case 4:
-                return null;
+            case 0 :
+                return getColumnName(0);
+            case 1 :
+                return getColumnName(1);
+            case 2 :
+                return getColumnName(2);
+            case 3 :
+                return getColumnName(3);
+            case 4 :
+                return getColumnName(4);
             default:
                 return null; //Ne devrait jamais arriver
         }

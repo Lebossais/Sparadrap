@@ -48,7 +48,6 @@ public HistoriqueOrdonnances() {
     tableau.setRowSorter(sorter);
     sorter.setSortable(2, false);
     sorter.setSortsOnUpdates(true);
-  
     pack();
 }
 

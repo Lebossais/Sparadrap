@@ -1,15 +1,10 @@
 package Frame;
 
-import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import DAO.DAOOrdonnance;
-import DAO.DAOSpecialiste;
-import gestion.Ordonnance;
-import gestion.Specialiste;
 
 public class ListeOrdonnance extends AbstractTableModel {
 
@@ -20,12 +15,10 @@ public class ListeOrdonnance extends AbstractTableModel {
 	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(gestion.Ordonnance.getModel()); 
  
     private final String[] entetes = {"Numéro Ordonnance", "Nom Médecin", "Date de l'ordonnance"};
-    
 
     	public ListeOrdonnance() {
     		super();
     	}
-
 
 	@Override
 	public int getRowCount() {

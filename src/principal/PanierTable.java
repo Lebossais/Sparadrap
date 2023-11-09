@@ -1,10 +1,7 @@
 package principal;
 
-import DAO.DAOMedicament;
 import DAO.DAOPanier;
 import Frame.ListePanier;
-import gestion.Client;
-import gestion.Medicament;
 import gestion.Panier;
 
 import javax.swing.*;
@@ -16,23 +13,17 @@ import java.util.Arrays;
 
 public class PanierTable extends JFrame {
     private static final long serialVersionUID = 1L;
+
     public static ListePanier modele = new ListePanier();
 
     private static JTable tableau = new JTable(modele);
+    static JPanel boutons = new JPanel();
     public static JFrame frame;
     public DAOPanier daoPanier = new DAOPanier();
     TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
-
     public PanierTable() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
-
-        setTitle("Liste des Clients");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-
-        JPanel boutons = new JPanel();
 
         boutons.add(new JButton(new InformationsAction()));
         boutons.add(new JButton(new RemoveAction()));
@@ -100,9 +91,5 @@ public class PanierTable extends JFrame {
                 }
             }
         }
-    }
-
-    public static JTable getTable(){
-        return tableau;
     }
 }
