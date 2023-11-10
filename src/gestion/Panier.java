@@ -6,8 +6,8 @@ import javax.swing.table.TableModel;
 public class Panier {
 
     Achat Achat;
-    Medicament Medicament;
-    int Panier_Qte;
+    static Medicament Medicament;
+    static int Panier_Qte;
 
     public Panier (Achat Achat, Medicament Medicament, int Panier_Qte) {
         this.Achat = Achat;
@@ -19,12 +19,24 @@ public class Panier {
         return Achat;
     }
 
-    public gestion.Medicament getMedicament() {
+    public static gestion.Medicament getMedicament() {
         return Medicament;
     }
 
-    public int getPanier_Qte() {
+    public static int getPanier_Qte() {
         return Panier_Qte;
+    }
+
+
+    public static double prixtotal() {
+    	double var2 = getMedicament().getPrix();
+    	double var1 = getPanier_Qte();
+    	return var1 * var2;
+    }
+
+	@Override
+    public String toString() {
+    	return "\n Quantité : " + getPanier_Qte()  + Medicament + "\n Prix total : " + prixtotal()+"€";
     }
 
     public static TableModel getModel() {

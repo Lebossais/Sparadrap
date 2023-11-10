@@ -5,7 +5,6 @@ import java.awt.*;
 import DAO.*;
 import Frame.ListePanier;
 import gestion.Medicament;
-import gestion.Ordonnance;
 import gestion.Panier;
 
 import java.awt.event.ActionListener;
@@ -235,6 +234,11 @@ public class FrmAchat {
 
 		JButton btnAjouter = new JButton("Ajouter");
 		btnAjouter.setBounds(507, 166, 89, 23);
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ajouter(e);
+			}
+		});
 		panel_1.add(btnAjouter);
 
 		JPanel panel_2 = new JPanel();
@@ -284,6 +288,9 @@ public class FrmAchat {
 					.addContainerGap())
 		);
 		jScrollPane1.setViewportView(tableau);
+		tableau.setAutoCreateRowSorter(true);
+		tableau.setRowSorter(sorter);
+		sorter.setSortsOnUpdates(true);
 		panel_2.setLayout(gl_panel_2);
 	}
 
@@ -342,6 +349,7 @@ public class FrmAchat {
 			Arrays.sort(modelIndexes);
 
 			for(int i = modelIndexes.length - 1; i >= 0; i--){
+				ListePanier.panier.remove(modelIndexes[i]);
 				//daoclient.deletebyID(modelIndexes[i]);
 				// modele.removePanier(modelIndexes[i]);
 			}
@@ -363,6 +371,28 @@ public class FrmAchat {
 		if (sortie == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}
+	}
+
+	private void Ajouter(ActionEvent e) {
+		Medicament m = null;
+		int Qte;
+
+		try {
+			for (int i = 0; i < daoMedicament.findALL().size(); i++) {
+				Object p = comboBoxMedicament.getSelectedItem();
+				if (p.equals(daoMedicament.find(i+1).getNom())) {
+					m = daoMedicament.find(i+1);
+					break;
+				}
+			}
+			Qte = Integer.parseInt(txtQuantite.getText());
+			ListePanier.panier.add(new Panier(null, m, Qte));
+			m = null;
+			System.out.println(ListePanier.getListePanier());
+		} catch (java.lang.NumberFormatException e2) {
+			JOptionPane.showConfirmDialog(null, "Ajout non effectué ", "Erreur", JOptionPane.DEFAULT_OPTION);
+		}
+		modele.fireTableDataChanged();
 	}
 
 	/*private void Valider(ActionEvent e) {

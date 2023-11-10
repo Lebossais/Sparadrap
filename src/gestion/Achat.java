@@ -40,15 +40,4 @@ public class Achat {
 	public gestion.Ordonnance getOrdonnance() {
 		return Ordonnance;
 	}
-
-	//public double prixtotal() {
-	//	double var2 = getMedicament().getPrix();
-	//	double var1 = Quantite;
-	//	return var1 * var2;
-	//}
-
-//	@Override
-	//public String toString() {
-	//	return "\n Quantité : " + Quantite  + Medicament + "\n Prix total : " + prixtotal()+"€";
-	//}
 }

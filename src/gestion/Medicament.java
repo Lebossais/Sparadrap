@@ -24,6 +24,10 @@ public class Medicament {
 		this.Medi_Date_Mise_en_Service = Medi_Date_Mise_en_Service;
 	}
 
+	public Medicament() {
+
+	}
+
 	/**
 	 * 
 	 * @return
@@ -88,7 +92,7 @@ public class Medicament {
 	 */
 	@Override
 	public String toString() {
-		return "\n Nom : " + Medi_Nom + "\n Catégorie : " + Categorie +"\n Prix unitaire : " + Medi_Prix + "€" + "\n Date_Mise_en_Service : " + Medi_Date_Mise_en_Service;
+		return "\n Nom : " + Medi_Nom + "\n Catégorie : " + getCategorie().getCat_Categorie() +"\n Prix unitaire : " + Medi_Prix + "€" + "\n Date_Mise_en_Service : " + Medi_Date_Mise_en_Service;
 	}
 
 }

@@ -41,9 +41,6 @@ public class Singleton {
             new Singleton();
             System.out.println("RelationWithDB infos : Connection etablished");
         }
-        else {
-            System.out.println("RelationWithDB infos : Connection already existing");
-        }
         return getConnection();
     }
 
