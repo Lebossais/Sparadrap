@@ -350,10 +350,8 @@ public class FrmAchat {
 
 			for(int i = modelIndexes.length - 1; i >= 0; i--){
 				ListePanier.panier.remove(modelIndexes[i]);
-				//daoclient.deletebyID(modelIndexes[i]);
-				// modele.removePanier(modelIndexes[i]);
 			}
-			tableau.revalidate();
+			modele.fireTableDataChanged();
 		}
 
 
@@ -387,8 +385,6 @@ public class FrmAchat {
 			}
 			Qte = Integer.parseInt(txtQuantite.getText());
 			ListePanier.panier.add(new Panier(null, m, Qte));
-			m = null;
-			System.out.println(ListePanier.getListePanier());
 		} catch (java.lang.NumberFormatException e2) {
 			JOptionPane.showConfirmDialog(null, "Ajout non effectué ", "Erreur", JOptionPane.DEFAULT_OPTION);
 		}

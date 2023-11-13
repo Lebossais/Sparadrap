@@ -1,23 +1,14 @@
 package principal;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.border.LineBorder;
-
 import Configuration.SQL.Singleton;
 import DAO.DAOClient;
+import utilitaire.FilePDF;
 
-import java.awt.Color;
-import javax.swing.SwingConstants;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 
 public class Outil_Gestion {
@@ -41,6 +32,7 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
+					FilePDF.openPdf();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

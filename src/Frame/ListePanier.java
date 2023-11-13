@@ -7,12 +7,11 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListePanier  extends AbstractTableModel {
 
     private final DAOPanier daoPanier = new DAOPanier();
-    public static final List<Panier> panier = new ArrayList<Panier>();
+    public static final ArrayList<Panier> panier = new ArrayList<>();
     private static final long serialVersionUID = 5380417556060869746L;
 
     TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(Panier.getModel());
@@ -41,34 +40,44 @@ public class ListePanier  extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 0 :
+            case 0:
                 return ListePanier.getPanier(rowIndex).getMedicament().getNom();
-            case 1 :
+            case 1:
                 return panier.get(rowIndex).getMedicament().getCategorie().getCat_Categorie();
-            case 2 :
+            case 2:
                 return panier.get(rowIndex).getPanier_Qte();
-            case 3 :
-                return panier.get(rowIndex).getMedicament().getPrix();
-            case 4 :
-                return Panier.prixtotal()+"€";
+            case 3:
+                return panier.get(rowIndex).getMedicament().getPrix() + " €";
+            case 4:
+                return CalculPrix(rowIndex) + "0 €";
             default:
                 return null; //Ne devrait jamais arriver
         }
     }
+
     public void remove(int rowIndex) {
         panier.remove(rowIndex);
 
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
 
-    public static List<Panier> getListePanier(){
+    private double CalculPrix(int rowIndex){
+
+        double var1 = panier.get(rowIndex).getMedicament().getPrix();
+        double var2 = panier.get(rowIndex).getPanier_Qte();
+        double Prixtotal = var1 * var2;
+        return Prixtotal;
+
+    }
+
+    public static ArrayList<Panier> getListePanier(){
         return panier;
     }
     public static Panier getPanier(int i){
         return panier.get(i);
     }
 
-    public static void setPanier(List<Panier> Panier){
-        Panier = panier;
+    public static void setPanier(){
+        ArrayList<gestion.Panier> Panier = panier;
     }
 }
