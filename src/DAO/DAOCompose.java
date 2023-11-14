@@ -1,7 +1,6 @@
 package DAO;
 
 import gestion.Compose;
-import gestion.Medicament;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,10 +85,15 @@ public class DAOCompose extends DAO<Compose>{
 
     @Override
     public Compose find(Integer pId) {
+        return null;
+    }
+
+    public List<Compose> findwhere(Integer pId) {
         DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
         DAOMedicament daoMedicament = new DAOMedicament();
+        ArrayList<Compose> compose = new ArrayList<>();
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
-        sqlInsertUtilisateur.append("select * from update ");
+        sqlInsertUtilisateur.append("select * from compose ");
         sqlInsertUtilisateur.append("where Ord_ID = ?");
 
         try (PreparedStatement preparedStatement =
@@ -101,17 +105,17 @@ public class DAOCompose extends DAO<Compose>{
             Compose c;
 
             while(resultSet.next()) {
-                return new Compose(
+                compose.add(new Compose(
                         daoOrdonnance.find(resultSet.getInt("Ord_ID")),
-                        daoMedicament.find(resultSet.getInt("Med_ID")),
+                        daoMedicament.find(resultSet.getInt("Medi_ID")),
                         resultSet.getInt("Compose_Qte")
-                );
+                ));
             }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-        return null;
+        return compose;
     }
 
     @Override

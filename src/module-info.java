@@ -4,4 +4,5 @@ module Sparadrap {
     requires itextpdf;
     requires layout;
     requires kernel;
+    requires io;
 }

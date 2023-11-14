@@ -1,24 +1,15 @@
 package principal;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.util.Arrays;
+import DAO.DAOClient;
+import Frame.ListeClient;
+import gestion.Client;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import DAO.DAOClient;
-import gestion.Client;
-import Frame.ListeClient;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.Arrays;
 
 public class Liste extends JFrame {
 
@@ -78,7 +69,6 @@ private class RemoveAction extends AbstractAction {
 
     for(int i = modelIndexes.length - 1; i >= 0; i--){
 		daoclient.deletebyID(modelIndexes[i]);
-       // modele.removeClient(modelIndexes[i]);
     }
 	revalidate();
  }

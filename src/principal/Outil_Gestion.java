@@ -2,7 +2,6 @@ package principal;
 
 import Configuration.SQL.Singleton;
 import DAO.DAOClient;
-import utilitaire.FilePDF;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -32,7 +31,6 @@ public class Outil_Gestion {
 				try {
 					Outil_Gestion window = new Outil_Gestion();
 					window.PageDacceuil.setVisible(true);
-					FilePDF.openPdf();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,24 +1,17 @@
 package principal;
 
-import java.awt.BorderLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.util.Arrays;
+import DAO.DAOOrdonnance;
+import Frame.ListeOrdonnance;
+import com.itextpdf.text.BadElementException;
+import gestion.Ordonnance;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import DAO.DAOOrdonnance;
-import gestion.Ordonnance;
-import Frame.ListeOrdonnance;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class HistoriqueOrdonnances extends JFrame {
 
@@ -39,6 +32,7 @@ public HistoriqueOrdonnances() {
     JPanel boutons = new JPanel();
 
     boutons.add(new JButton(new InformationsAction()));
+	boutons.add(new JButton(new DownloadPDF()));
     boutons.add(new JButton(new FilterAction()));
     boutons.add(new JButton(new RetourAction()));
     boutons.add(new JButton(new QuitterAction()));
@@ -140,5 +134,40 @@ class QuitterAction extends AbstractAction {
 		}
 	}
 	
+}
+
+private class DownloadPDF extends AbstractAction{
+	String name;
+	String date;
+	int id;
+
+	private DownloadPDF(){
+		super("Télécharger PDF");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try {
+
+			int[] selection = tableau.getSelectedRows();
+			int[] modelIndexes = new int[selection.length];
+
+			for(int i = 0 ; i < selection.length; i++){
+				modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
+			}
+			for (Ordonnance c : daoOrdonnance.findALL()) {
+				if (c.getOrd_Num().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+					name = c.getClient().getPersonne().getPrenom();
+					date = c.getOrd_Date();
+					id = c.getOrd_ID();
+				}
+			}
+
+			Arrays.sort(modelIndexes);
+			utilitaire.FilePDF.init(name, date, id);
+		} catch (BadElementException | IOException ex) {
+			throw new RuntimeException(ex);
+		}
+    }
 }
 }

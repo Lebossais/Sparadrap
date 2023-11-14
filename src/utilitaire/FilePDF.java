@@ -1,218 +1,137 @@
 package utilitaire;
 
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.properties.UnitValue;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfFormXObject;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
-import java.io.FileOutputStream;
-import java.util.Date;
+import DAO.DAOCompose;
+import DAO.DAOOrdonnance;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.Style;
+import com.itextpdf.layout.borders.SolidBorder;
+import com.itextpdf.layout.element.Div;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.text.BadElementException;
+import gestion.Compose;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 public class FilePDF {
+    static DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
+    static DAOCompose daoCompose = new DAOCompose();
+    private static String IMG = "sparadrap\\src\\Configuration\\bank\\Logo-removebg-preview.png";
 
-    private static String IMAGE = ".src\\Configuration\\bank\\Logo-removebg-preview.png";
-    private static String FILE = "C:\\PROJET\\JAVA\\Sparadrap\\src\\utilitaire\\PDF\\Ordonnance.pdf";
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
-            Font.BOLD);
-    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
-            Font.NORMAL, BaseColor.RED);
-    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
-            Font.BOLD);
-    private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
-            Font.BOLD);
 
-    // public static final String SRC = "./src/utilitaire/PDF/";
+    public static void init(String name, String date, int id) throws BadElementException, IOException {
 
-//    protected static void manipulatePdf(String Realname) throws Exception {
-//        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(Realname));
-//        Document doc = new Document(pdfDoc);
-//
-//        PdfDocument srcDoc = new PdfDocument(new PdfReader(SRC));
-//        PdfFormXObject header = srcDoc.getFirstPage().copyAsFormXObject(pdfDoc);
-//
-//
-//        Table table = new Table(UnitValue.createPercentArray(3)).useAllAvailableWidth();
-//        Cell cell = new Cell(1, 3).add(new Image(header).setWidth(UnitValue.createPercentValue(100))
-//                .setAutoScale(true));
-//        table.addCell(cell);
-//
-//        for (int row = 1; row <= 50; row++) {
-//            for (int column = 1; column <= 3; column++) {
-//                table.addCell(String.format("row %s, column %s", row, column));
-//            }
-//        }
-//
-//        srcDoc = new PdfDocument(new PdfReader(SRC + "footer_test_file.pdf"));
-//        PdfFormXObject footer = srcDoc.getFirstPage().copyAsFormXObject(pdfDoc);
-//
-//        cell = new Cell(1, 3).add(new Image(footer).setWidth(UnitValue.createPercentValue(100))
-//                .setAutoScale(true));
-//        table.addCell(cell);
-//
-//        doc.add(table);
-//
-//        doc.close();
-//    }
+        String FILE = "C:\\PROJET\\JAVA\\Sparadrap\\src\\utilitaire\\PDF\\" + name + "-" + date + ".pdf";
 
-    public static void openPdf() throws Exception {
+        File file = new File(FILE);
+        file.getParentFile().mkdirs();
 
+        new FilePDF().manipulatePdf(FILE, id);
+    }
+
+    private static void manipulatePdf(String file, int id) {
         try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(FILE));
-            document.open();
-            addMetaData(document);
-            addTitlePage(document);
-            addContent(document);
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+
+            // Création d'un objet PdfWriter pour écrire dans un fichier PDF
+            PdfWriter writer = new PdfWriter(file);
+
+            // Création d'un objet PdfDocument
+            PdfDocument pdf = new PdfDocument(writer);
+
+            // Création d'un objet Document
+            Document document = new Document(pdf);
+
+            // Style pour les titres
+            Style titleStyle = new Style()
+                    .setFont(font)
+                    .setFontSize(18);
+
+            // Style pour le texte principal
+            Style normalStyle = new Style()
+                    .setFont(font)
+                    .setFontSize(12);
+
+            String nomPatient = daoOrdonnance.find(id).getClient().getPersonne().getPrenom() +" "+ daoOrdonnance.find(id).getClient().getPersonne().getName();
+            String dateNaissance = daoOrdonnance.find(id).getClient().getDate_Naissance();
+            String medecin = "Dr " + daoOrdonnance.find(id).getMedecin().getPersonne().getPrenom() +" "+ daoOrdonnance.find(id).getMedecin().getPersonne().getName();
+            String dateOrdonnance = daoOrdonnance.find(id).getOrd_Date();
+
+            //LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+            // Ajout de l'image en haut à droite
+            Image image = new Image(ImageDataFactory.create(IMG));
+            image.setWidth(50);
+            image.setHeight(50);
+            document.add(image.setHorizontalAlignment(HorizontalAlignment.RIGHT));
+
+            // Ajout des détails de l'ordonnance au document
+            document.add(new Paragraph("ORDONNANCE MÉDICALE").addStyle(titleStyle));
+            document.add(new Paragraph("Patient : " + nomPatient).addStyle(normalStyle));
+            document.add(new Paragraph("Date de naissance : " + dateNaissance).addStyle(normalStyle));
+            document.add(new Paragraph("Médecin : " + medecin).addStyle(normalStyle));
+            document.add(new Paragraph("Date de l'ordonnance : " + dateOrdonnance).addStyle(normalStyle));
+            document.add(new Paragraph("\n"));
+
+            // Ajout des prescriptions médicales
+            document.add(new Paragraph("Prescriptions :").addStyle(titleStyle).setMarginBottom(10));
+            for (Compose m : daoCompose.findwhere(id)) {
+                document.add(createPrescription(m.getMedicament().getNom(), m.getCompose_Qte(), m.getMedicament().getCategorie().getCat_Categorie()));
+            }
+            //document.add(createPrescription("Nom du médicament 2", "Posologie 2", "Instructions 2"));
+
+            // Ajout de la signature de la pharmacie en bas de la page
+            Paragraph signature = new Paragraph("La pharmacie Sparadrap vous remercie de votre passage !");
+            signature.setTextAlignment(TextAlignment.CENTER);
+            signature.setFixedPosition(50,50,500);
+            document.add(signature);
+
+            // Fermeture du document
             document.close();
-        } catch (Exception e) {
+
+            System.out.println("L'ordonnance a été générée avec succès !");
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private static void addMetaData(Document document) {
-        document.addTitle("Ordonnance"); // + Num + Nom prénom du client
-        document.addSubject("Using iText");
-        document.addKeywords("Java, PDF, iText");
-        document.addAuthor("Lars Vogel");
-        document.addCreator("Lars Vogel");
-    }
 
-    private static void addTitlePage(Document document)
-            throws DocumentException {
-        Paragraph preface = new Paragraph();
-        // We add one empty line
-        addEmptyLine(preface, 1);
-        // Lets write a big header
-        preface.add(new Paragraph("Ordonnance N°", catFont)); //Numéro Ordonnance + Nom prénom du Client
+    // Méthode pour créer une section de prescription
+    private static Div createPrescription(String nomMedicament, int posologie, String instructions) throws IOException {
+        PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+        Style prescriptionStyle = new Style()
+                .setFont(font)
+                .setFontSize(12);
 
-        addEmptyLine(preface, 1);
-        // Will create: Report generated by: _name, _date
-        preface.add(new Paragraph(
-                "PDF Généré par :" + System.getProperty("user.name") + ", " + new Date(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                smallBold));
-        addEmptyLine(preface, 3);
-        preface.add(new Paragraph(
-                "This document describes something which is very important ",
-                smallBold));
+        Paragraph medication = new Paragraph(nomMedicament).addStyle(prescriptionStyle);
+        medication.setMarginBottom(5);
 
-        document.add(preface);
-        // Start a new page
-        document.newPage();
-    }
+        Paragraph dosage = new Paragraph("Quantité : " + posologie).addStyle(prescriptionStyle);
+        dosage.setMarginBottom(3);
 
-    private static void addContent(Document document) throws DocumentException {
-        Anchor anchor = new Anchor("First Chapter", catFont);
-        anchor.setName("First Chapter");
+        Paragraph instruct = new Paragraph("Catégorie : " + instructions).addStyle(prescriptionStyle);
 
-        // Second parameter is the number of the chapter
-        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+        Div prescriptionDiv = new Div();
+        prescriptionDiv.setBorder(new SolidBorder(1));
+        prescriptionDiv.add(medication);
+        prescriptionDiv.add(instruct);
+        prescriptionDiv.add(dosage);
+        prescriptionDiv.setMarginBottom(15);
 
-        Paragraph subPara = new Paragraph("Subcategory 1", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("Hello"));
-
-        subPara = new Paragraph("Subcategory 2", subFont);
-        subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("Paragraph 1"));
-        subCatPart.add(new Paragraph("Paragraph 2"));
-        subCatPart.add(new Paragraph("Paragraph 3"));
-
-        // add a list
-        createList(subCatPart);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 5);
-        subCatPart.add(paragraph);
-
-        // add a table
-        createTable(subCatPart);
-
-        // now add all this to the document
-        document.add(catPart);
-
-        // Next section
-        anchor = new Anchor("Second Chapter", catFont);
-        anchor.setName("Second Chapter");
-
-        // Second parameter is the number of the chapter
-        catPart = new Chapter(new Paragraph(anchor), 1);
-
-        subPara = new Paragraph("Subcategory", subFont);
-        subCatPart = catPart.addSection(subPara);
-        subCatPart.add(new Paragraph("This is a very important message"));
-
-        // now add all this to the document
-        document.add(catPart);
-
-    }
-
-    private static void createTable(Section subCatPart)
-            throws BadElementException {
-
-        //Table table = new Table(UnitValue.createPercentArray(3)).useAllAvailableWidth();
-        //                table.addCell(String.format("row %s, column %s", row, column));
-        ImageData data = ImageDataFactory.create(IMAGE);
-        PdfPTable table = new PdfPTable(3);
-
-        // t.setBorderColor(BaseColor.GRAY);
-        // t.setPadding(4);
-        // t.setSpacing(4);
-        // t.setBorderWidth(1);
-
-        PdfPCell c1 = new PdfPCell(new Phrase("Table Header 1"));
-
-        Cell cell = new Cell(1, 3).add(new Image(header).setWidth(UnitValue.createPercentValue(100))
-                .setAutoScale(true));
-        table.addCell(cell);
-
-        for (int row = 1; row <= 50; row++) {
-            for (int column = 1; column <= 3; column++) {
-                table.addCell(String.format("row %s, column %s", row, column));
-
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(c1);
-
-                c1 = new PdfPCell(new Phrase("Table Header 2"));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(c1);
-
-                c1 = new PdfPCell(new Phrase("Table Header 3"));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                table.addCell(c1);
-                table.setHeaderRows(1);
-
-                table.addCell("1.0");
-                table.addCell("1.1");
-                table.addCell("1.2");
-                table.addCell("2.1");
-                table.addCell("2.2");
-                table.addCell("2.3");
-
-                subCatPart.add(table);
-
-            }
-
-            private static void createList (Section subCatPart){
-                List list = new List(true, false, 10);
-                list.add(new ListItem("First point"));
-                list.add(new ListItem("Second point"));
-                list.add(new ListItem("Third point"));
-                subCatPart.add(list);
-            }
-
-            private static void addEmptyLine (Paragraph paragraph,int number){
-                for (int i = 0; i < number; i++) {
-                    paragraph.add(new Paragraph(" "));
-                }
-//        String Realname = "\\src\\utilitaire\\PDF\\"+name+"-"+date+".pdf";
-//        File test = new File(Realname);
-//        test.getParentFile().mkdirs();
-//        manipulatePdf(Realname);
-//        // ouvre aussi les pdf des anciennes ordonnance
-//        Desktop.getDesktop().open(test);
-            }
-        }
+        return prescriptionDiv;
     }
 }

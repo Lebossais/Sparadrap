@@ -1,6 +1,5 @@
 package DAO;
 
-import gestion.Client;
 import gestion.Ordonnance;
 
 import java.sql.PreparedStatement;
@@ -153,9 +152,36 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
         return ordonnance;
     }
 
-    /*ResultSet resultSet = statement.executeQuery(test);
+    public List<Ordonnance> findALLwhere(Integer pId) {
+        DAOClient daoClient = new DAOClient();
+        DAOMedecin daoMedecin = new DAOMedecin();
+        DAOSpecialiste daoSpecialiste = new DAOSpecialiste();
+        ArrayList<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("select * from ordonnance ");
+        sqlInsertUtilisateur.append("inner join compose on ordonnance.Ord_ID = compose.Ord_ID ");
+        sqlInsertUtilisateur.append("where Ord_ID = ?");
 
-            while (resultSet.next()){
-                System.out.println("Resultat : " + resultSet.getInt("Per_ID") + "-" + resultSet.getString("Per_Prenom"));
-            }*/
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())){
+
+            preparedStatement.setInt(1, pId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ordonnance.add(new Ordonnance(
+                        resultSet.getInt("Ord_ID"),
+                        resultSet.getString("Ord_Num"),
+                        daoClient.find(resultSet.getInt("Cli_ID")),
+                        daoMedecin.find(resultSet.getInt("Med_ID")),
+                        daoSpecialiste.find(resultSet.getInt("Spe_ID")),
+                        resultSet.getString("Ord_Date")));
+            }
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return ordonnance;
+    }
 }
