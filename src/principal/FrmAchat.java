@@ -2,8 +2,7 @@ package principal;
 
 import DAO.*;
 import Frame.ListePanier;
-import gestion.Medicament;
-import gestion.Panier;
+import gestion.*;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
@@ -15,13 +14,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Date;
 
 public class FrmAchat {
 	JFrame Achat;
 	private JTextField txtDateOrdonnance;
 	private JTextField txtNumOrdonnance;
-	private JTextField txtDate;
+	static JLabel txtDate = new JLabel();
 	boolean b = false;
 	JComboBox comboBoxCategorie;
 	JComboBox comboBoxClient;
@@ -39,17 +43,22 @@ public class FrmAchat {
 	public JFrame frame;
 	public static ListePanier modele = new ListePanier();
 	private JTable tableau = new JTable(modele);
+	private Thread n = new Thread(new traitement_heur());
 	TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
+
 	/**
 	 * Create the application.
 	 */
 	public FrmAchat() {
+		n.start();
 		initialize();
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		Achat = new JFrame();
 		Achat.setTitle("Achat");
 		Achat.setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAchat.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
@@ -114,9 +123,7 @@ public class FrmAchat {
 		NumOrdonnance.setBounds(269, 428, 139, 20);
 		panel_1.add(NumOrdonnance);
 
-		txtDate = new JTextField();
-		txtDate.setText("Now()");
-		txtDate.setColumns(10);
+		txtDate.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtDate.setBounds(462, 40, 151, 29);
 		panel_1.add(txtDate);
 
@@ -213,7 +220,7 @@ public class FrmAchat {
 		panel.add(ValideButton);
 		ValideButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Valider(e);
+				Valider(e);
 			}
 		});
 
@@ -272,21 +279,21 @@ public class FrmAchat {
 			}
 		});
 		panel_3.add(Retirer);
-		
+
 		JScrollPane jScrollPane1 = new JScrollPane();
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-				.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+				gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+						.addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
 		);
 		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+				gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())
 		);
 		jScrollPane1.setViewportView(tableau);
 		tableau.setAutoCreateRowSorter(true);
@@ -319,41 +326,68 @@ public class FrmAchat {
 	}
 
 	private void btnInformations(ActionEvent e) {
+		try {
 			int[] selection = tableau.getSelectedRows();
 			int[] modelIndexes = new int[selection.length];
 
-			for(int i = 0; i < selection.length; i++){
+			for (int i = 0; i < selection.length; i++) {
 				modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
 			}
 
 			Arrays.sort(modelIndexes);
 
-			for (Medicament m: daoMedicament.findALL()) {
-				if (m.getNom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
+			for (Medicament m : daoMedicament.findALL()) {
+				if (m.getNom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))) {
 					JOptionPane.showMessageDialog(null, "Voici les informations :" + m.toString());
 				}
 			}
+		} catch (Exception ex) {
+			ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(HistoriqueOrdonnances.class.getResource("/Configuration/bank/Warning.gif")));
+			Image image = icon.getImage();
+			Image newimg = image.getScaledInstance(120, 120, Image.SCALE_REPLICATE);
+			icon = new ImageIcon(newimg);
+			JOptionPane.showMessageDialog(frame,
+					"Veuillez sélectionner au moins une case",
+					"Erreur",
+					JOptionPane.PLAIN_MESSAGE,
+					icon);
+			ex.printStackTrace();
 		}
+	}
 
-		private void reinitPanier(ActionEvent e){
+	private void reinitPanier(ActionEvent e) {
+		ListePanier.panier.clear();
+		modele.fireTableDataChanged();
+	}
 
-		}
-
-		private void Retirer(ActionEvent e) {
+	private void Retirer(ActionEvent e) {
+		try {
 			int[] selection = tableau.getSelectedRows();
 			int[] modelIndexes = new int[selection.length];
 
-			for(int i = 0; i < selection.length; i++){
+			for (int i = 0; i < selection.length; i++) {
 				modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
 			}
 
 			Arrays.sort(modelIndexes);
 
-			for(int i = modelIndexes.length - 1; i >= 0; i--){
+			for (int i = modelIndexes.length - 1; i >= 0; i--) {
 				ListePanier.panier.remove(modelIndexes[i]);
 			}
 			modele.fireTableDataChanged();
+		} catch (Exception ex) {
+			ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(HistoriqueOrdonnances.class.getResource("/Configuration/bank/Warning.gif")));
+			Image image = icon.getImage();
+			Image newimg = image.getScaledInstance(120, 120, Image.SCALE_REPLICATE);
+			icon = new ImageIcon(newimg);
+			JOptionPane.showMessageDialog(frame,
+					"Veuillez sélectionner au moins une case",
+					"Erreur",
+					JOptionPane.PLAIN_MESSAGE,
+					icon);
+			ex.printStackTrace();
 		}
+	}
 
 
 	private void Retour(ActionEvent e) {
@@ -379,8 +413,8 @@ public class FrmAchat {
 		try {
 			for (int i = 0; i < daoMedicament.findALL().size(); i++) {
 				Object p = comboBoxMedicament.getSelectedItem();
-				if (p.equals(daoMedicament.find(i+1).getNom())) {
-					m = daoMedicament.find(i+1);
+				if (p.equals(daoMedicament.find(i + 1).getNom())) {
+					m = daoMedicament.find(i + 1);
 					break;
 				}
 			}
@@ -392,78 +426,98 @@ public class FrmAchat {
 		modele.fireTableDataChanged();
 	}
 
-	/*private void Valider(ActionEvent e) {
+	private void Valider(ActionEvent e) {
 		DAOClient daoClient = new DAOClient();
 		DAOOrdonnance daoOrdonnance = new DAOOrdonnance();
+		DAOCompose daoCompose = new DAOCompose();
+		DAOAchat daoAchat = new DAOAchat();
+		DAOPanier daoPanier = new DAOPanier();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
 		int i;
 		Client client = null;
 		Ordonnance ord = null;
 		Specialiste spe = null;
-		Mutuelle mut = null;
+		Achat achat = null;
 		String Date = null;
-		String Secu = null;
 		Medecin med = null;
-		Medicament medi = null;
 
 		try {
-			for(i = 0; i < comboBoxClient.getItemCount();i++) {
-				 Object p = comboBoxClient.getSelectedItem();
-			if (p.equals(daoClient.find(i).getPersonne().getPrenom())) {
-				client = daoClient.find(i);
-			Secu = daoClient.find(i).getNumero_Secu();
-		break;
-		}
-		}
-			for(i = 0; i < comboBoxMutuelle.getItemCount();i++) {
-				 Object p = comboBoxMutuelle.getSelectedItem();
-			if (p.equals(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale())) {
-			mut = daoMutuelle.find(i);
-			break;
-		}
-		}
+			for (i = 0; i < comboBoxClient.getItemCount(); i++) {
+				Object p = comboBoxClient.getSelectedItem();
+				if (p.equals(daoClient.find(i).getPersonne().getPrenom())) {
+					client = daoClient.find(i);
+					break;
+				}
+			}
+			for (i = 0; i < comboBoxMutuelle.getItemCount(); i++) {
+				Object p = comboBoxMutuelle.getSelectedItem();
+				if (p.equals(daoMutuelle.find(i).getEntreprise().getEnt_Raison_Sociale())) {
+					break;
+				}
+			}
 			Date = txtDate.getText();
 
-		if(b == true) {
-			for(i =0; i<comboBoxMed.getItemCount();i++) {
-				Object p = comboBoxMed.getSelectedItem();
-				if (p.equals(daoMedecin.find(i).getPersonne().getPrenom())) {
-				med = daoMedecin.find(i);
-				break;
+			if (b == true) {
+				for (i = 0; i < comboBoxMed.getItemCount(); i++) {
+					Object p = comboBoxMed.getSelectedItem();
+					if (p.equals(daoMedecin.find(i).getPersonne().getPrenom())) {
+						med = daoMedecin.find(i);
+						break;
+					}
 				}
-			}
-			for(i =0; i<comboBoxSpe.getItemCount();i++) {
-				Object p = comboBoxSpe.getSelectedItem();
-				 if (p == null) {
-					spe = null;
-					break;
-				 }else if (p.equals(daoSpecialiste.find(i).getPersonne().getPrenom())) {
+				for (i = 0; i < comboBoxSpe.getItemCount(); i++) {
+					Object p = comboBoxSpe.getSelectedItem();
+					if (p == null) {
+						spe = null;
+						break;
+					} else if (p.equals(daoSpecialiste.find(i).getPersonne().getPrenom())) {
 						spe = daoSpecialiste.find(i);
-				break;
+						break;
+					}
+				}
+				ord = new Ordonnance(1, txtNumOrdonnance.getText(), client, med, spe, Date);
+				int NewIDOrd = daoOrdonnance.createOrdonnance(ord);
+				ord.setOrd_ID(NewIDOrd);
+				for (i = 0; i < ListePanier.panier.size(); i++) {
+					daoCompose.create(new Compose(ord, ListePanier.getPanier(i).getMedicament(), ListePanier.getPanier(i).getPanier_Qte()));
+				}
+				daoAchat.create(new Achat(1, dtf.format(now), client, ord));
+			} else if (b == false) {
+				achat = new Achat(1, dtf.format(now), client, ord);
+				int NewIDAchat = daoAchat.createAchatPanier(achat);
+				achat.setAchat_ID(NewIDAchat);
+				for (i = 0; i < ListePanier.panier.size(); i++) {
+					daoPanier.create(new Panier(achat, ListePanier.getPanier(i).getMedicament(), ListePanier.getPanier(i).getPanier_Qte()));
 				}
 			}
-			daoOrdonnance.create(new Ordonnance(1,txtNumOrdonnance.getText(),client,med, spe, Date));
+			Achat.dispose();
+			int input = JOptionPane.showConfirmDialog(null,
+					"Nouvel achat effectué", "Validation", JOptionPane.DEFAULT_OPTION);
+		} catch (java.lang.NumberFormatException e2) {
+			JOptionPane.showConfirmDialog(null, "Achat non effectué ", "Erreur", JOptionPane.DEFAULT_OPTION);
 		}
-
-		for (i = 0; i<comboBoxMedicament.getItemCount();i++) {
-			Object p = comboBoxMedicament.getSelectedItem();
-			if (p.equals(daoMedicament.find(i).getNom()));
-			medi = daoMedicament.find(i);
-		}
-		Integer nombre = Integer.valueOf(txtQuantite.getText());
-		Declaration.achatMedicament.add(new Achat(m, nombre));
-
-		if (b == false) {
-		Declaration.achats.add(new Compose(c, a ,n , t, null, Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1)));
-		} else if ( b == true ) {
-			Declaration.achats.add(new Compose(c, a ,n , t, Declaration.getOrdonnance(Declaration.ordonnances.size()-1),Declaration.getAchatMedicament(Declaration.achatMedicament.size()-1) ));
-		}
-	Achat.dispose();
-	int input = JOptionPane.showConfirmDialog(null,
-            "Nouvel achat effectué", "Validation", JOptionPane.DEFAULT_OPTION);
-		}catch (java.lang.NumberFormatException e2){
-			JOptionPane.showConfirmDialog(null, "Achat non effectué ","Erreur",JOptionPane.DEFAULT_OPTION);
-		}
+	}
 
 
-	}*/
+	class traitement_heur implements Runnable {
+		public void run() {
+			Boolean bool = true;
+			while (bool) {
+				SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+				Date date = new Date();
+				Time heure;
+				heure = new Time(0);
+				heure.setTime(System.currentTimeMillis());
+				FrmAchat.txtDate.setText(s.format(date)+ " " + heure);
+
+				try {
+					n.sleep(1000);
+				}catch (Exception e){
+
+				}
+			}
+		}
+	}
 }
+

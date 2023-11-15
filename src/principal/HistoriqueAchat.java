@@ -91,11 +91,10 @@ private class InformationsAction extends AbstractAction {
         super("Informations");
     }
 
- public void actionPerformed(ActionEvent e) { 
+ public void actionPerformed(ActionEvent e) {
+	 try {
     int[] selection = tableau.getSelectedRows();
     int[] modelIndexes = new int[selection.length];
-    
-    try {
     for(int i = 0; i < selection.length; i++){
         modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
     }

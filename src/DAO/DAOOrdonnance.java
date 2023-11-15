@@ -10,8 +10,8 @@ import java.util.List;
 
 public class DAOOrdonnance extends DAO<Ordonnance> {
 
-    @Override
-    public boolean create(Ordonnance obj) {
+    public Integer createOrdonnance(Ordonnance obj) {
+        Integer newId = null;
         StringBuilder sqlInsertUtilisateur = new StringBuilder();
         sqlInsertUtilisateur.append("insert into ordonnance ");
         sqlInsertUtilisateur.append("Ord_ID, Ord_Num, Ord_Date, Cli_ID, Med_ID, Spe_ID ");
@@ -30,13 +30,20 @@ public class DAOOrdonnance extends DAO<Ordonnance> {
 
 
             preparedStatement.executeUpdate();
-            requeteok = true;
-
+            ResultSet result = preparedStatement.getGeneratedKeys();
+            if (result.next()){
+                newId = result.getInt(1);
+            }
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
         }
-        return requeteok;
+        return newId;
+    }
+
+    @Override
+    public boolean create(Ordonnance obj) {
+        return false;
     }
 
     @Override

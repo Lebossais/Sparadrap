@@ -35,7 +35,6 @@ public class PanierTable extends JFrame {
         sorter.setSortsOnUpdates(true);
 
         pack();
-
     }
 
     private class RemoveAction extends AbstractAction {

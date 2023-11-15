@@ -29,6 +29,10 @@ public class Ordonnance {
 		this.Specialiste = Specialiste;
 		this.Ord_Date = Ord_Date;
 	}
+
+	public void setOrd_ID(int ord_ID) {
+		Ord_ID = ord_ID;
+	}
 	/**
 	 * 
 	 * @return

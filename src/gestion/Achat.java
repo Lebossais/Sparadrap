@@ -1,7 +1,5 @@
 package gestion;
 
-import java.util.Date;
-
 public class Achat {
 
 	String Achat_Date;
@@ -23,6 +21,10 @@ public class Achat {
 		this.Achat_Date = Achat_Date;
 		this.Client = Client;
 		this.Ordonnance = Ordonnance;
+	}
+
+	public void setAchat_ID(int achat_ID) {
+		Achat_ID = achat_ID;
 	}
 
 	public String getAchat_Date() {

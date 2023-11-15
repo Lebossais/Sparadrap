@@ -8,6 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOAchat extends DAO<Achat>{
+
+    public Integer createAchatPanier(Achat obj) {
+        Integer newId = null;
+        StringBuilder sqlInsertUtilisateur = new StringBuilder();
+        sqlInsertUtilisateur.append("insert into achat ");
+        sqlInsertUtilisateur.append("Achat_ID, Achat_Date, Cli_ID, Ord_ID ");
+        sqlInsertUtilisateur.append("values (null, ?, ?, ?)");
+
+        boolean requeteok = false;
+
+        try (PreparedStatement preparedStatement =
+                     this.connect.prepareStatement(sqlInsertUtilisateur.toString())) {
+
+            preparedStatement.setString(1, String.valueOf(obj.getAchat_Date()));
+            preparedStatement.setInt(2, obj.getClient().getCli_ID());
+            preparedStatement.setInt(3, obj.getOrdonnance().getOrd_ID());
+
+            preparedStatement.executeUpdate();
+            ResultSet result = preparedStatement.getGeneratedKeys();
+            if (result.next()){
+                newId = result.getInt(1);
+            }
+
+
+        } catch (SQLException sqle) {
+            System.out.println("RelationWithDB erreur" + sqle.getMessage()
+                    + "[SQL error code :" + sqle.getSQLState() +"]");
+        }
+        return newId;
+    }
+
     @Override
     public boolean create(Achat obj) {
         StringBuilder sqlInsertUtilisateur = new StringBuilder();

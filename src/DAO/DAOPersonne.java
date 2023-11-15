@@ -36,8 +36,7 @@ public class DAOPersonne extends DAO<Personne> {
         } catch (SQLException sqle) {
             System.out.println("RelationWithDB erreur" + sqle.getMessage()
                     + "[SQL error code :" + sqle.getSQLState() +"]");
-        } ;
-
+        }
         return newId;
     }
 
