@@ -52,7 +52,7 @@ public class Outil_Gestion {
 	private void initialize() {
 		PageDacceuil = new JFrame();
 		PageDacceuil.setTitle("Page d'acceuil");
-		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\Configuration\\bank\\Logo-removebg-preview.png"));
+		PageDacceuil.setIconImage(Toolkit.getDefaultToolkit().getImage(Outil_Gestion.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
 		PageDacceuil.setBounds(100, 100, 470, 330);
 		PageDacceuil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

@@ -22,8 +22,7 @@ TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getMo
 
 
 public Liste() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\src\\swing\\bank\\Logo-removebg-preview.png"));
-
+	setIconImage(Toolkit.getDefaultToolkit().getImage(Liste.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
     setTitle("Liste des Clients");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -49,30 +48,44 @@ public Liste() {
 }
 
 private class RemoveAction extends AbstractAction {
-    /**
-	 * 
+	/**
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private RemoveAction() {
-        super("Supprimmer");
-    }
+		super("Supprimmer");
+	}
+
 	public void actionPerformed(ActionEvent e) {
-    int[] selection = tableau.getSelectedRows();
-    int[] modelIndexes = new int[selection.length];
+		try {
+			int[] selection = tableau.getSelectedRows();
+			int[] modelIndexes = new int[selection.length];
 
-    for(int i = 0; i < selection.length; i++){
-        modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
-    }
+			for (int i = 0; i < selection.length; i++) {
+				modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
+			}
 
-    Arrays.sort(modelIndexes);
+			Arrays.sort(modelIndexes);
 
-    for(int i = modelIndexes.length - 1; i >= 0; i--){
-		daoclient.deletebyID(modelIndexes[i]);
-    }
-	revalidate();
- }
+			for (int i = modelIndexes.length - 1; i >= 0; i--) {
+				daoclient.deletebyID(modelIndexes[i]);
+			}
+			revalidate();
+		} catch (Exception e2) {
+			ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(HistoriqueOrdonnances.class.getResource("/Configuration/bank/Warning.gif")));
+			Image image = icon.getImage();
+			Image newimg = image.getScaledInstance(120,120, Image.SCALE_REPLICATE);
+			icon = new ImageIcon(newimg);
+			JOptionPane.showMessageDialog(frame,
+					"Veuillez sélectionner au moins une case",
+					"Erreur",
+					JOptionPane.PLAIN_MESSAGE,
+					icon);
+			e2.printStackTrace();e2.printStackTrace();
+		}
 
+	}
 }
 class FilterAction extends AbstractAction {
 /**
@@ -87,7 +100,7 @@ private FilterAction() {
 }
 public void actionPerformed(ActionEvent e) {
 	try {
-    String regex = JOptionPane.showInputDialog("Regex de filtre : ");
+    String regex = JOptionPane.showInputDialog("Filtre : ");
     
     sorter.setRowFilter(RowFilter.regexFilter(regex,0,1,2,3 ));
 	// capture sur le Boutton annuler
@@ -111,31 +124,45 @@ class RetourAction extends AbstractAction {
 	}	
 	}
 private class InformationsAction extends AbstractAction {
-    /**
-	 * 
+	/**
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private InformationsAction() {
-        super("Informations");
-    }
+		super("Informations");
+	}
 
- public void actionPerformed(ActionEvent e) {
-    int[] selection = tableau.getSelectedRows();
-    int[] modelIndexes = new int[selection.length];
+	public void actionPerformed(ActionEvent e) {
+		try {
+			int[] selection = tableau.getSelectedRows();
+			int[] modelIndexes = new int[selection.length];
 
-    for(int i = 0; i < selection.length; i++){
-        modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
-    }
+			for (int i = 0; i < selection.length; i++) {
+				modelIndexes[i] = tableau.getRowSorter().convertRowIndexToModel(selection[i]);
+			}
 
-    Arrays.sort(modelIndexes);
+			Arrays.sort(modelIndexes);
 
-    for (Client c : daoclient.findALL()) {
-    	if (c.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))){
-    		JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
-    	}
-    }
-}
+			for (Client c : daoclient.findALL()) {
+				if (c.Personne.getPrenom().equals(tableau.getModel().getValueAt(modelIndexes[0], 0))) {
+					JOptionPane.showMessageDialog(null, "Voici les informations :" + c.toString());
+				}
+			}
+
+		} catch (Exception e2) {
+			ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(HistoriqueOrdonnances.class.getResource("/Configuration/bank/Warning.gif")));
+			Image image = icon.getImage();
+			Image newimg = image.getScaledInstance(120,120, Image.SCALE_REPLICATE);
+			icon = new ImageIcon(newimg);
+			JOptionPane.showMessageDialog(frame,
+					"Veuillez sélectionner au moins une case",
+					"Erreur",
+					JOptionPane.PLAIN_MESSAGE,
+					icon);
+			e2.printStackTrace();e2.printStackTrace();
+		}
+	}
 }
 class QuitterAction extends AbstractAction {
 	

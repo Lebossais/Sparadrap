@@ -1,25 +1,15 @@
 package principal;
 
-import java.awt.BorderLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.util.Arrays;
+import DAO.DAOAchat;
+import Frame.ListeAchat;
+import gestion.Achat;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.RowFilter;
+import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
-import DAO.DAOAchat;
-import gestion.Achat;
-import gestion.Compose;
-import Frame.ListeAchat;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.Arrays;
 
 public class HistoriqueAchat extends JFrame {
 
@@ -31,8 +21,7 @@ private DAOAchat daoAchat = new DAOAchat();
 TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableau.getModel());
 
 public HistoriqueAchat() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
-
+	setIconImage(Toolkit.getDefaultToolkit().getImage(HistoriqueAchat.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
     setTitle("Historique des Achat");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -65,13 +54,11 @@ private FilterAction() {
     super("Filtrer");
 }
 
-
-
 public void actionPerformed(ActionEvent e) {
 	try {
     String regex = JOptionPane.showInputDialog("Indiquer la Date : ");
     
-    sorter.setRowFilter(RowFilter.regexFilter(regex, 3 ));
+    sorter.setRowFilter(RowFilter.regexFilter(regex,1,2,5));
 	} 
 	// capture sur le Boutton annuler
 	catch (NullPointerException e2) {	}
@@ -121,8 +108,16 @@ private class InformationsAction extends AbstractAction {
         }
     }
     } catch (Exception e2) {
-			// TODO: handle exception
-    		e2.printStackTrace();
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(HistoriqueOrdonnances.class.getResource("/Configuration/bank/Warning.gif")));
+		Image image = icon.getImage();
+		Image newimg = image.getScaledInstance(120,120, Image.SCALE_REPLICATE);
+		icon = new ImageIcon(newimg);
+		JOptionPane.showMessageDialog(frame,
+				"Veuillez sélectionner au moins une case",
+				"Erreur",
+				JOptionPane.PLAIN_MESSAGE,
+				icon);
+		e2.printStackTrace();
     	}
 }
 }

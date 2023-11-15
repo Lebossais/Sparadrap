@@ -1,20 +1,12 @@
 package principal;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import DAO.*;
 import gestion.*;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Template_Client {
 
@@ -124,7 +116,7 @@ public class Template_Client {
 		panel.add(lblNom);
 
 		JLabel lblPersonne = new JLabel("Personne");
-		lblPersonne.setBounds(240, 118, 53, 20);
+		lblPersonne.setBounds(240, 118, 70, 20);
 		panel.add(lblPersonne);
 
 		JLabel lblNTelephone = new JLabel("N° Telephone :");
@@ -132,7 +124,7 @@ public class Template_Client {
 		panel.add(lblNTelephone);
 
 		txtPhone = new JTextField();
-		txtPhone.setText("XX.XX.XX.XX.XX");
+		txtPhone.setText("XXXXXXXXXX");
 		txtPhone.setColumns(10);
 		txtPhone.setBounds(279, 174, 114, 20);
 		panel.add(txtPhone);
@@ -219,7 +211,7 @@ public class Template_Client {
 		panel_1.add(QuitterButton);
 
 		txtDateNaissance = new JTextField();
-		txtDateNaissance.setText("JJ/MM/AAAA");
+		txtDateNaissance.setText("AAAA-MM-JJ");
 		txtDateNaissance.setColumns(10);
 		txtDateNaissance.setBounds(134, 235, 114, 20);
 		panel.add(txtDateNaissance);

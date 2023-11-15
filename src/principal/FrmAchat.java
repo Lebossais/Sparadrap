@@ -1,20 +1,21 @@
 package principal;
 
-import javax.swing.*;
-import java.awt.*;
 import DAO.*;
 import Frame.ListePanier;
 import gestion.Medicament;
 import gestion.Panier;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.table.*;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.util.Arrays;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
 
 public class FrmAchat {
 	JFrame Achat;
@@ -51,7 +52,7 @@ public class FrmAchat {
 	private void initialize() {
 		Achat = new JFrame();
 		Achat.setTitle("Achat");
-		Achat.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\PROJET\\JAVA\\Sparadrap\\bin\\swing\\bank\\Logo-removebg-preview.png"));
+		Achat.setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAchat.class.getResource("/Configuration/bank/Logo-removebg-preview.png")));
 		Achat.setBounds(100, 100, 639, 641);
 		Achat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
